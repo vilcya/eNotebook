@@ -4,33 +4,67 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class Menu extends ListActivity {
-	String documents[] = {"eDailies", "eTecNotes", "257"}; 
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setListAdapter(new ArrayAdapter<String>(Menu.this, 
-			android.R.layout.simple_list_item_1, documents));
-	} 
+public class Menu extends ListActivity implements View.OnClickListener{
+    String documents[] = {"eDailies", "eTecNotes", "257"}; 
+    String name;
+    
+    TextView intro;
+    Button eDaily;
+    Button eTecNotes;
+    Button twofiftyseven;
+    
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.menu);
+        
+        assignedObjects();
+        
+        eDaily.setOnClickListener(this);
+        eTecNotes.setOnClickListener(this);
+        twofiftyseven.setOnClickListener(this);
+            
+    } 
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		
-		String clickedItem = documents[position];
-		// Look up class given the path
-		try 
-		{ 	
-			Class ourClass = Class.forName
-				("com.eNotebook.SATE2012." + clickedItem);
-			Intent ourIntent = new Intent(Menu.this, ourClass);
-			startActivity(ourIntent);
-		}
-		catch(ClassNotFoundException e)
-		{	e.printStackTrace();  }
-	}
+    private void assignedObjects() {
+        // TODO Auto-generated method stub
+        intro = (TextView) findViewById(R.id.tvMenuIntro);
+        eDaily = (Button) findViewById(R.id.bEDaily);
+        eTecNotes = (Button) findViewById(R.id.bETecNotes);
+        twofiftyseven = (Button) findViewById(R.id.b257);
+    }
+    
+    public void onClick(View view) {
+        // TODO Auto-generated method stub
+        switch(view.getId()){
+        case R.id.bEDaily:
+            
+            name = documents[0];
+            
+            break;
+        
+        case R.id.bETecNotes:
+            
+            name = documents[1];
+            
+            break;
+        
+        case R.id.b257:
+            
+            name = documents[2];
+            
+            break;
+        
+        }
+        
+        Intent ourIntent = new Intent("com.eNotebook.SATE2012." + name.toUpperCase());
+        startActivity(ourIntent);
+
+        
+    }
+    
 }

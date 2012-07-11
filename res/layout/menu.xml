@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvMenuIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="eNotebook\nby Vilcya and Smartypants" 
@@ -15,36 +15,34 @@
 
     <LinearLayout 
         android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:orientation="vertical">
- 
-    	<Button
-        	android:id="@+id/button1"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="eDailies" 
-	        android:layout_marginBottom="10dp"
-	        android:typeface="serif" 
-	        android:onClick="edailies_onClick" />"
 
-        <Button
-	        android:id="@+id/button2"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="eTecNotes" 
-	        android:layout_marginBottom="10dp"
-	        android:typeface="serif"  
-	        android:onClick="etecnotes_onClick"/>
         
         <Button
-	        android:id="@+id/button2"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="2 5 7" 
-	        android:typeface="serif"  
-	        android:onClick="twofiftyseven_onClick" />
+            android:id="@+id/bEDaily"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="eDailies" 
+            android:layout_marginBottom="10dp"
+            android:typeface="serif" />"
+
+        <Button
+            android:id="@+id/bETecNotes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="eTecNotes" 
+            android:layout_marginBottom="10dp"
+            android:typeface="serif" />
+        
+        <Button
+            android:id="@+id/b257"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="2 5 7" 
+            android:typeface="serif" />
     
     </LinearLayout>
     

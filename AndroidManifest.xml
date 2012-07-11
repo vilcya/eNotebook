@@ -33,6 +33,11 @@
         <activity
             android:name=".eDailies"
             android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.EDAILIES" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             
         </activity>
         
