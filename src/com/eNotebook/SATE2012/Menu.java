@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class Menu extends ListActivity {
-	String documents[] = {"eDailies", "eTecNotes", "257s"}; 
+	String documents[] = {"eDailies", "eTecNotes", "257"}; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
