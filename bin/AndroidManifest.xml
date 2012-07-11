@@ -17,7 +17,6 @@
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,10 +25,17 @@
             android:name=".Menu"
             android:label="@string/title_activity_main" >
             <intent-filter>
-                <action android:name="com.eNotebook.SATE2012.MAIN" />
+                <action android:name="com.eNotebook.SATE2012.MENU" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".eDailies"
+            android:label="@string/title_activity_main" >
+            
+        </activity>
+        
     </application>
 
 </manifest>
