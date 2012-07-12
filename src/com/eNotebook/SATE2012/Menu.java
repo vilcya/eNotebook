@@ -30,35 +30,27 @@ public class Menu extends ListActivity implements View.OnClickListener{
             
     } 
 
+    /* Assign layout objects to respective variables  */
     private void assignedObjects() {
-        // TODO Auto-generated method stub
         intro = (TextView) findViewById(R.id.tvMenuIntro);
         eDaily = (Button) findViewById(R.id.bEDaily);
         eTecNotes = (Button) findViewById(R.id.bETecNotes);
         twofiftyseven = (Button) findViewById(R.id.b257);
     }
     
+    /* Triggered when user clicks a view */
     public void onClick(View view) {
-        // TODO Auto-generated method stub
+    	
         switch(view.getId()){
-        case R.id.bEDaily:
-            
-            name = documents[0];
-            
-            break;
-        
-        case R.id.bETecNotes:
-            
-            name = documents[1];
-            
-            break;
-        
-        case R.id.b257:
-            
-            name = documents[2];
-            
-            break;
-        
+	        case R.id.bEDaily:
+	            name = documents[0];
+	            break;
+	        case R.id.bETecNotes:
+	            name = documents[1];
+	            break;
+	        case R.id.b257:
+	            name = documents[2];	            
+	            break;
         }
         
         Intent ourIntent = new Intent("com.eNotebook.SATE2012." + name.toUpperCase());
