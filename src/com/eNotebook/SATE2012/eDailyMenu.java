@@ -17,7 +17,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
 	File edailypath;
 	// List of all the edaily files
 	File[] edailies;
-	 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,20 +29,20 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
 		
 		// Get the file path of the edailies
 		edailypath = new File(getFilesDir(), "eDailies");
+		
 		// If the directory does not exist, make it
-		if (!edailypath.exists())
-			mydummytext.setText("Sorry, you have no eDailies");
-		
-
-		// Go through each edaily and display them
-		edailies = edailypath.listFiles();
-		
-		for (File edaily : edailies)
+		if(!edailypath.exists())
+			mydummytext.setText("Sorry, you have no eDailies. I'm at " + edailypath.toString());
+		else
 		{
-			mydummytext.setText("Welcome to edailies! We are at path" + edaily.toString());
+			edailies = edailypath.listFiles();
+			if(edailies!= null)
+			{
+				// Go through each edaily and display them
+				for (File edaily: edailies)
+					mydummytext.setText("" + edaily.toString());	
+			}
 		}
-		
-		
 	}
 	
 	private void assignedObjects() {

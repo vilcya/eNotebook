@@ -11,8 +11,9 @@ import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class eDaily extends Activity{
+public class eDaily extends Activity implements View.OnClickListener{
 
 	Button save;
 	
@@ -39,19 +40,22 @@ public class eDaily extends Activity{
 		
 		/* Find the path to save and create a directory if one
 		   does not exist */
-		File edailypath = new File(getFilesDir(), "eDailies/test1");
+		File edailypath = new File(getFilesDir(), "eDailies");
 		if (!edailypath.exists())
-		{
-			try { edailypath.createNewFile(); }
-			catch(IOException e) 
-			{ e.printStackTrace(); }
-			
 			edailypath.mkdir();
-		}
+
+		// Create a new file for the new eDaily
+		File newedaily = new File(edailypath, "test1.png");
+		try { newedaily.createNewFile(); }
+		catch(IOException e) 
+		{ e.printStackTrace(); }
 		
+		// Open the file stream and copy the image into the file
 		try
 		{
-			FileOutputStream ostream = new FileOutputStream(edailypath);
+			TextView dummytxt = (TextView) findViewById(R.id.tvDisplayPath);
+			dummytxt.setText("I'm saving the picture at " + newedaily.toString());
+			FileOutputStream ostream = new FileOutputStream(newedaily);
 			neweDaily.compress(CompressFormat.PNG, 100, (OutputStream)ostream);
 		}
 		catch (Exception e)
