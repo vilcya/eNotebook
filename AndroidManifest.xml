@@ -31,10 +31,20 @@
         </activity>
         
         <activity
-            android:name=".eDailies"
+            android:name=".eDailyMenu"
             android:label="@string/sDaily" >
             <intent-filter>
-                <action android:name="com.eNotebook.SATE2012.EDAILIES" />
+                <action android:name="com.eNotebook.SATE2012.EDAILYMENU" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
+                <activity
+            android:name=".eDaily"
+            android:label="@string/sDaily" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.EDAILY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             
