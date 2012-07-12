@@ -31,18 +31,18 @@ public class eDailies extends Activity{
 			edailypath.mkdir();
 		}
 		
-		TextView mydummytext = (TextView) findViewById(R.id.tvedaily); 
+		TextView mydummytext = (TextView) findViewById(R.id.tvedaily);
 		
-		mydummytext.setText("Hello, the edaily path is " + edailypath.toString());
-		
-		/*// Go through each edaily and display them
+		/**
+		Go through each edaily and display them
 		edailies = edailypath.listFiles();
 		
 		for (File edaily : edailies)
 		{
 			mydummytext.setText("Welcome to edailies! We are at path" + edaily.toString());
-		} */
-		
+		}
+		**/
+
 	}
 	
 }
