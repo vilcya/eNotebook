@@ -15,7 +15,7 @@
         
         <activity
             android:name=".Splash"
-            android:label="@string/title_activity_main" >
+            android:label="@string/sSplash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +24,7 @@
         
         <activity
             android:name=".Menu"
-            android:label="@string/title_activity_main" >
+            android:label="@string/sMenu" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.MENU" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -33,7 +33,7 @@
         
         <activity
             android:name=".eDailies"
-            android:label="@string/title_activity_main" >
+            android:label="@string/sDaily" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.EDAILIES" />
                 <category android:name="android.intent.category.DEFAULT" />

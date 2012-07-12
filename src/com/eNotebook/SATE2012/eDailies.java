@@ -40,6 +40,7 @@ public class eDailies extends Activity{
 		{
 			mydummytext.setText("Welcome to edailies! We are at path" + edaily.toString());
 		}
+		
 	}
 	
 }
