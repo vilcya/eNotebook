@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Menu extends Activity implements View.OnClickListener{
-    String documents[] = {"eDailies", "eTecNotes", "257"}; 
+    String documents[] = {"eDailyMenu", "eTecNote", "257"}; 
     String name;
     
     TextView intro;
     Button eDaily;
-    Button eTecNotes;
+    Button eTecNote;
     Button twofiftyseven;
     
     @Override
@@ -24,7 +24,7 @@ public class Menu extends Activity implements View.OnClickListener{
         assignedObjects();
         
         eDaily.setOnClickListener(this);
-        eTecNotes.setOnClickListener(this);
+        eTecNote.setOnClickListener(this);
         twofiftyseven.setOnClickListener(this);
             
     } 
@@ -33,7 +33,7 @@ public class Menu extends Activity implements View.OnClickListener{
     private void assignedObjects() {
         intro = (TextView) findViewById(R.id.tvMenuIntro);
         eDaily = (Button) findViewById(R.id.bEDaily);
-        eTecNotes = (Button) findViewById(R.id.bETecNotes);
+        eTecNote = (Button) findViewById(R.id.bETecNote);
         twofiftyseven = (Button) findViewById(R.id.b257);
     }
     
@@ -44,7 +44,7 @@ public class Menu extends Activity implements View.OnClickListener{
 	        case R.id.bEDaily:
 	            name = documents[0];
 	            break;
-	        case R.id.bETecNotes:
+	        case R.id.bETecNote:
 	            name = documents[1];
 	            break;
 	        case R.id.b257:
