@@ -3,6 +3,10 @@
     <string name="app_name">eNotebook</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">MainActivity</string><string name="sMenu">Menu</string>
+    <string name="sSplash">Splash</string>
+    <string name="sDaily">eDailies</string>
+    <string name="sTecNotes">eTecNotes</string>
+    <string name="s257">2 5 7</string>
 
 </resources>
