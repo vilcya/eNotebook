@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class eDailyMenu extends Activity{
-
+	
 	// Folder with all the edailies
 	File edailypath;
 	// List of all the edaily files
@@ -17,7 +17,7 @@ public class eDailyMenu extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.edaily);
+		setContentView(R.layout.edailymenu);
 		
 		// Get the file path of the edailies
 		edailypath = new File(getFilesDir(), "eDailies");
@@ -42,7 +42,7 @@ public class eDailyMenu extends Activity{
 			mydummytext.setText("Welcome to edailies! We are at path" + edaily.toString());
 		}
 		**/
-
+		
 	}
 	
 }
