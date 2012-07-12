@@ -20,7 +20,7 @@ public class eDailies extends Activity{
 		setContentView(R.layout.edaily);
 		
 		// Get the file path of the edailies
-		edailypath = new File(getFilesDir(),"eDailies");
+		edailypath = new File(getFilesDir(), "eDailies");
 		// If the directory does not exist, make it
 		if (!edailypath.exists())
 		{

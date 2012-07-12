@@ -16,7 +16,6 @@ public class Menu extends Activity implements View.OnClickListener{
     Button eTecNotes;
     Button twofiftyseven;
     
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
