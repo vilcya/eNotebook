@@ -1,7 +1,6 @@
 package com.eNotebook.SATE2012;
 
 import java.io.File;
-import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +16,8 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
 	// Folder with all the edailies
 	File edailypath;
 	// List of all the edaily files
-	//File[] edailies;
-	 
+	File[] edailies;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,26 +29,20 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
 		
 		// Get the file path of the edailies
 		edailypath = new File(getFilesDir(), "eDailies");
+		
 		// If the directory does not exist, make it
-		if (!edailypath.exists())
+		if(!edailypath.exists())
+			mydummytext.setText("Sorry, you have no eDailies. I'm at " + edailypath.toString());
+		else
 		{
-			try { edailypath.createNewFile(); }
-			catch(IOException e) 
-			{ e.printStackTrace(); }
-			
-			edailypath.mkdir();
+			edailies = edailypath.listFiles();
+			if(edailies!= null)
+			{
+				// Go through each edaily and display them
+				for (File edaily: edailies)
+					mydummytext.setText("" + edaily.toString());	
+			}
 		}
-		
-		/**
-		Go through each edaily and display them
-		edailies = edailypath.listFiles();
-		
-		for (File edaily : edailies)
-		{
-			mydummytext.setText("Welcome to edailies! We are at path" + edaily.toString());
-		}
-		**/
-		
 	}
 	
 	private void assignedObjects() {
