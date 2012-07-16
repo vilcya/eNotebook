@@ -6,6 +6,7 @@
     android:weightSum="100" >
 
 	 <RelativeLayout
+	     android:id="@+id/rledailymenu"
 	     android:layout_width="fill_parent"
 	     android:layout_height="wrap_content"
 	     android:orientation="vertical"
@@ -16,6 +17,15 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="Hello world!" />
+
+	  <!-- <ImageView
+	        android:id="@+id/ivedailyimg"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/tvedaily"
+	        android:layout_marginTop="25dp"
+	        android:src="@drawable/edaily_template" /> -->  
 
     </RelativeLayout>
 
