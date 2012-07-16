@@ -4,7 +4,6 @@
     android:orientation="vertical" 
     android:weightSum="100">
 	<RelativeLayout
-        android:id="@+id/leDaily"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -27,10 +26,10 @@
         android:background="@drawable/edaily_template" 
         android:layout_gravity="center"
         >
+
     </RelativeLayout>
     
 	<RelativeLayout
-        android:id="@+id/leDaily"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -44,21 +43,28 @@
 	    android:gravity="bottom"
 	    android:orientation="vertical" >
 
-	   	<Button
-	        android:id="@id/bEDaily"
-	        android:layout_width="40dp"
-	        android:layout_height="40dp"
-	        android:layout_centerHorizontal="true"
+	    <LinearLayout
+	        android:layout_height = "40dp"
+	        android:layout_width="fill_parent"
+	       	android:layout_centerHorizontal="true"
 	        android:layout_centerInParent="true"
-	        android:background="@drawable/stars" />
+	        android:layout_marginLeft="110dp"
+	        android:layout_marginRight="110dp">
+	    <Button
+	        android:id="@+id/bEDailyBack"
+	        android:layout_width="40dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="10dp"
+	        android:text="Bk"/>
+
 	    <Button
 	        android:id="@+id/bSave"
 	        android:layout_width="40dp"
-	        android:layout_height="40dp"
-	        android:layout_centerHorizontal="true"
-	        android:layout_centerInParent="true"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
 	        android:background="@drawable/stars" />
-
+		
+	    </LinearLayout>
 	</RelativeLayout>
     
 </LinearLayout>
