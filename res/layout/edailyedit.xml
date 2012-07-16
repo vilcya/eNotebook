@@ -19,6 +19,7 @@
 		    android:text="TextView" />
 
     </RelativeLayout>
+    
     <RelativeLayout
         android:id="@+id/leDaily"
         android:layout_width="320dp"
