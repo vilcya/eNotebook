@@ -20,7 +20,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="TextView" />
-
     </RelativeLayout>
     
     <RelativeLayout
@@ -44,7 +43,7 @@
             android:layout_width="140dp"
             android:layout_height="210dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="20dp"
             android:layout_toLeftOf="@+id/tvAccTomorrow"
             android:ems="10" />
 
@@ -67,44 +66,12 @@
             android:ems="10" />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="47" >
 
-        <TextView
-            android:id="@+id/tvDirec"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/etEdit"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Something Something " />
-        
-        <EditText
-            android:id="@+id/etEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:inputType="textMultiLine" >
-            
-        </EditText>
-
-        <Button
-            android:id="@+id/bNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/etEdit"
-            android:layout_alignBottom="@+id/etEdit"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/etEdit"
-            android:text="Button" />
-
-        
-
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="47" >
     </RelativeLayout>
 
     <RelativeLayout

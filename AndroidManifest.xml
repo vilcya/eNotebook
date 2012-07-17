@@ -40,11 +40,21 @@
             
         </activity>
         
-                <activity
+        <activity
             android:name=".eDaily"
             android:label="@string/sDaily" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.EDAILY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
+        <activity
+            android:name=".Email"
+            android:label="@string/sDaily" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.EMAIL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             
