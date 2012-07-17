@@ -5,46 +5,46 @@
     android:orientation="vertical"
     android:weightSum="100" >
 
-	 <RelativeLayout
-	     android:id="@+id/rledailymenu"
-	     android:layout_width="fill_parent"
-	     android:layout_height="wrap_content"
-	     android:orientation="vertical"
-	     android:layout_weight="97">
-    	
-	    <TextView
-	        android:id="@+id/tvedaily"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Hello world!" />
+     <RelativeLayout
+         android:id="@+id/rledailymenu"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_weight="97">
+        
+        <TextView
+            android:id="@+id/tvedaily"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello world!" />
 
-	  <!-- <ImageView
-	        android:id="@+id/ivedailyimg"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
-	        android:layout_below="@+id/tvedaily"
-	        android:layout_marginTop="25dp"
-	        android:src="@drawable/edaily_template" /> -->  
+        <Gallery
+            android:id="@+id/gedailies"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvedaily"
+            android:gravity="center" 
+            android:layout_centerVertical="true"
+            android:spacing="50dp" />
 
     </RelativeLayout>
 
-	 <RelativeLayout
-	     android:layout_width="fill_parent"
-	     android:layout_height="wrap_content"
-	     android:gravity="bottom"
-	     android:orientation="vertical" 
-	     android:layout_weight="3">
+     <RelativeLayout
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:gravity="bottom"
+         android:orientation="vertical" 
+         android:layout_weight="3">
 
-	     <Button
-	         android:id="@+id/ibAdd"
-	         android:background="@drawable/stars"
-	         android:layout_width="40dp"
-	         android:layout_height="40dp"
-	         android:layout_centerHorizontal="true"
-	         android:layout_centerInParent="true"/>
+         <Button
+             android:id="@+id/ibAdd"
+             android:background="@drawable/stars"
+             android:layout_width="40dp"
+             android:layout_height="40dp"
+             android:layout_centerHorizontal="true"
+             android:layout_centerInParent="true"/>
 
-	     
-	 </RelativeLayout>
+         
+     </RelativeLayout>
 
 </LinearLayout>

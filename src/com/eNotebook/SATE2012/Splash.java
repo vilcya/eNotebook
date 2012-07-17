@@ -7,15 +7,15 @@ import android.os.Bundle;
 
 public class Splash extends Activity {
 
-	MediaPlayer ourSong;
+	//MediaPlayer ourSong;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
-		ourSong = MediaPlayer.create(Splash.this, R.raw.burnitdown);
-		ourSong.start();
+		//ourSong = MediaPlayer.create(Splash.this, R.raw.burnitdown);
+		//ourSong.start();
 		Thread timer = new Thread(){
 			
 			public void run(){
@@ -40,7 +40,7 @@ public class Splash extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		ourSong.release();
+		//ourSong.release();
 		finish();
 	}
 

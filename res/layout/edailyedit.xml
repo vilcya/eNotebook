@@ -1,73 +1,149 @@
-<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:weightSum="100">
-	<RelativeLayout
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="50"
         >
 
-		<TextView
-		    android:id="@+id/tvDisplayPath"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerHorizontal="true"
-		    android:layout_centerVertical="true"
-		    android:text="TextView" />
+        <TextView
+            android:id="@+id/tvDisplayPath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="TextView" />
 
     </RelativeLayout>
-    
+    
     <RelativeLayout
         android:id="@+id/leDaily"
         android:layout_width="320dp"
         android:layout_height="240dp"
-        android:background="@drawable/edaily_template" 
         android:layout_gravity="center"
-        >
+        android:background="@drawable/edaily_template" >
+
+        <EditText
+            android:id="@+id/etAccTomorrow"
+            android:layout_width="140dp"
+            android:layout_height="210dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/etAccToday"
+            android:layout_width="140dp"
+            android:layout_height="210dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/tvAccTomorrow"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="50dp"
+            android:layout_height="10dp"
+            android:layout_alignLeft="@+id/tvAccToday"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="50dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="32dp"
+            android:ems="10" />
 
     </RelativeLayout>
-    
-	<RelativeLayout
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="47"
-        >
+        android:layout_weight="47" >
+
+        <TextView
+            android:id="@+id/tvDirec"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etEdit"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Something Something " />
+        
+        <EditText
+            android:id="@+id/etEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:inputType="textMultiLine" >
+            
+        </EditText>
+
+        <Button
+            android:id="@+id/bNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/etEdit"
+            android:layout_alignBottom="@+id/etEdit"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/etEdit"
+            android:text="Button" />
+
+        
+
     </RelativeLayout>
-	<RelativeLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_weight="3"
-	    android:gravity="bottom"
-	    android:orientation="vertical" >
 
-	    <LinearLayout
-	        android:layout_height = "40dp"
-	        android:layout_width="fill_parent"
-	       	android:layout_centerHorizontal="true"
-	        android:layout_centerInParent="true"
-	        android:layout_marginLeft="110dp"
-	        android:layout_marginRight="110dp">
-	    <Button
-	        android:id="@+id/bEDailyBack"
-	        android:layout_width="40dp"
-	        android:layout_height="wrap_content"
-	        android:layout_marginRight="10dp"
-	        android:text="Bk"/>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="bottom"
+        android:orientation="vertical" >
 
-	    <Button
-	        android:id="@+id/bSave"
-	        android:layout_width="40dp"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="10dp"
-	        android:background="@drawable/stars" />
-		
-	    </LinearLayout>
-	</RelativeLayout>
+        <LinearLayout
+            android:layout_height = "50dp"
+            android:layout_width="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp">
+	        <Button
+	            android:id="@+id/bEDailyBack"
+	            android:layout_width="50dp"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="10dp"
+	            android:text="Back"/>
+	
+	        <Button
+	            android:id="@+id/bSave"
+	            android:layout_width="50dp"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/stars" />
+	        
+	        <Button
+	            android:id="@+id/bEMail"
+	            android:layout_width="50dp"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:text="Email"/>
+        
+        </LinearLayout>
+    </RelativeLayout>
     
 </LinearLayout>
-
-
