@@ -58,13 +58,12 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
             edailygall.setAdapter(new ImageAdapter(this));
         edailygall.setOnItemClickListener(new OnItemClickListener()
         {
-            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String eDailyData = readTextfromFile(edailytextpaths[(int)id]);
                 String[] eDailyComponents = eDailyData.split("*****");
-                setContentView(R.layout.edailyedit);
                 
+                /*
                 EditText date = (EditText) findViewById(R.id.etDate);
                 EditText name = (EditText) findViewById(R.id.etName);
                 EditText accomplishedtoday = (EditText) findViewById(R.id.etAccToday);
@@ -73,7 +72,9 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
                 date.setText(eDailyComponents[0]);
                 name.setText(eDailyComponents[1]);
                 accomplishedtoday.setText(eDailyComponents[2]);
-                accomplishedtomorrow.setText(eDailyComponents[3]);
+                accomplishedtomorrow.setText(eDailyComponents[3]);*/
+                Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
+                startActivity(ourIntent);
             }
             
         });
