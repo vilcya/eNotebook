@@ -17,17 +17,16 @@ import android.widget.TextView;
 
 public class eDaily extends Activity implements View.OnClickListener{
 
-    Button save;
-    Button back;
+    Button save, back;
     TextView description;
     RelativeLayout layoutedaily;
     
     
     // Text views inside the template
-    EditText date;
-    EditText name;
-    EditText accomplishedtoday;
-    EditText accomplishedtomorrow;
+    EditText date, name, accomplishedtoday, accomplishedtomorrow;
+    
+    //Text for Email option
+    Button email;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     
         save.setOnClickListener(this);
         back.setOnClickListener(this);
+        email.setOnClickListener(this);
     }
     
     private void assignedObjects()
@@ -51,6 +51,9 @@ public class eDaily extends Activity implements View.OnClickListener{
         name = (EditText) findViewById(R.id.etName);
         accomplishedtoday = (EditText) findViewById(R.id.etAccToday);
         accomplishedtomorrow = (EditText) findViewById(R.id.etAccTomorrow);
+        
+        email = (Button) findViewById(R.id.bEMail);
+        
     }
 
     
@@ -113,6 +116,15 @@ public class eDaily extends Activity implements View.OnClickListener{
                 }
                 catch (Exception e)
                 { e.printStackTrace(); }
+            
+                if (view.getId() == R.id.bEMail){
+                	
+                	Intent startEmail = new Intent("com.eNotebook.SATE2012." + "EMAIL");
+                    startActivity(startEmail);
+                	
+                	
+                }
+            
             }
         }
     
@@ -120,3 +132,4 @@ public class eDaily extends Activity implements View.OnClickListener{
     
     
 }
+

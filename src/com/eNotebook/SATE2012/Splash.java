@@ -2,7 +2,7 @@ package com.eNotebook.SATE2012;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
+//import android.media.MediaPlayer;
 import android.os.Bundle;
 
 public class Splash extends Activity {
