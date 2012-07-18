@@ -1,13 +1,20 @@
+/* 
+ * eDaily.java
+ * Activity for creating a new eDaily
+ */
+
+
 package com.eNotebook.SATE2012;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,117 +24,104 @@ import android.widget.TextView;
 
 public class eDaily extends Activity implements View.OnClickListener{
 
-    Button save, back;
-    TextView description;
-    RelativeLayout layoutedaily;
-    
+	// Buttons for saving 
+    Button save;
     
     // Text views inside the template
-    EditText date, name, accomplishedtoday, accomplishedtomorrow;
+    EditText accomplishedtoday, accomplishedtomorrow;
     
-    //Text for Email option
-    Button email;
-    
+    // Contains today's date in the format MM.dd.yyyy
+    String datetoday;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edailyedit);
+        // Sets the xml layout
+        setContentView(R.layout.edaily);
         
+        // Assigns views and variables
         assignedObjects();
     
+        // Set the on click listener
         save.setOnClickListener(this);
-        back.setOnClickListener(this);
-        email.setOnClickListener(this);
     }
     
+    /* Function that assigns views and variables */
     private void assignedObjects()
     {
+    	// Button for saving
         save = (Button) findViewById(R.id.bSave);
-        back = (Button) findViewById(R.id.bEDailyBack);
-        description = (TextView) findViewById(R.id.tvDisplayPath);
-        layoutedaily = (RelativeLayout) findViewById(R.id.leDaily);
         
-        date = (EditText) findViewById(R.id.etDate);
-        name = (EditText) findViewById(R.id.etName);
-        accomplishedtoday = (EditText) findViewById(R.id.etAccToday);
-        accomplishedtomorrow = (EditText) findViewById(R.id.etAccTomorrow);
+        // Find today's date
+        datetoday = getDateToday();
         
-        email = (Button) findViewById(R.id.bEMail);
-        
+        // Views for eDaily template
+        accomplishedtoday = (EditText) findViewById(R.id.etToday);
+        accomplishedtomorrow = (EditText) findViewById(R.id.etTmrw);
     }
 
-    
-    
+    /* Event triggered on a button click */
     public void onClick(View view)
     {
-        if (view.getId() == R.id.bEDailyBack){
-            Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
-            startActivity(ourIntent);
-        }
+
+        // Finds the text directory and creates one if none exists
+        File textpath = new File(getFilesDir(), "Text");
+        if (!textpath.exists())
+            textpath.mkdir();
         
-        else{
-            
-            // Create a bitmap out of the view
-            layoutedaily.setDrawingCacheEnabled(true);
-            Bitmap bmpedaily = layoutedaily.getDrawingCache();
-            
-            /* Find the path to save and create a directory if one
-               does not exist */
-            // For the image path
-            File edailypath = new File(getFilesDir(), "eDailies");
-            if (!edailypath.exists())
-                edailypath.mkdir();
-            
-            // For the text path 
-            File textpath = new File(getFilesDir(), "Text");
-            if (!textpath.exists())
-                textpath.mkdir();
-            
-            // Create a new file for the new eDaily
-            if (date.getText().toString().length() == 0)
-                description.setText("The date was not specified, please specify the date and try again.");
-            else
+        // Check if the calendar returned correctly
+        if (datetoday.length() == 0)
+        	return;
+            //description.setText("FATAL: The date returned wrong.");
+        else
+        {
+        	// Create a new file for the new eDaily
+            File newtext = new File(textpath, datetoday);
+            try 
+            { newtext.createNewFile(); }
+            catch(IOException e) 
+            { e.printStackTrace(); } 
+
+            try
             {
-                File newedaily = new File(edailypath, date.getText().toString());
-                File newtext = new File(textpath, date.getText().toString());
-                try 
-                { 
-                    newedaily.createNewFile();
-                    newtext.createNewFile();
-                }
-                catch(IOException e) 
-                { e.printStackTrace(); } 
-                 
+                // Find all of the text from the views
+                String myacctoday = accomplishedtoday.getText().toString();
+                String myacctom = accomplishedtomorrow.getText().toString();
                 
-                // Open the file stream and copy the image into the file
-                try
-                {
-                    description.setText("I'm saving the picture at " + newedaily.toString());
-                    FileOutputStream ostream = new FileOutputStream(newedaily);
-                    bmpedaily.compress(CompressFormat.PNG, 100, (OutputStream)ostream);
-                    
-                    FileOutputStream ostream2 = new FileOutputStream(newtext);
-                    String edailytext = date.getText().toString() + "*****" + 
-                                        name.getText().toString() + "*****" +
-                                        accomplishedtoday.getText().toString() + "*****" +
-                                        accomplishedtomorrow.getText().toString();
-                    ostream2.write(edailytext.getBytes());
-                    ostream2.close();
-                }
-                catch (Exception e)
-                { e.printStackTrace(); }
-            
-                if (view.getId() == R.id.bEMail){
-                	
-                	Intent startEmail = new Intent("com.eNotebook.SATE2012." + "EMAIL");
-                    startActivity(startEmail);
-                	
-                	
-                }
-            
+                // Check that none of the fields are empty
+                if (myacctoday.length() == 0 || myacctom.length() == 0)
+                	return;
+                
+                // Create the string for going into the file
+                String edailytext = myacctoday + "|||" + myacctom;
+
+                // Open the file stream and copy the text into the file
+                FileOutputStream ostream = new FileOutputStream(newtext);
+                ostream.write(edailytext.getBytes());
+                ostream.close();
+                
+                // Start the preview activity
+                Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
+                previewIntent.putExtra("filename", datetoday);
+                startActivity(previewIntent);
             }
-        }
+            catch (Exception e)
+            { e.printStackTrace(); }
+
+            
+        }    
+    }
     
+    /* Return today's date in string format MM.dd.yyyy */
+    private String getDateToday()
+    {
+    	// Create the format and calendar instance
+    	SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+    	Calendar cal = Calendar.getInstance();
+    	
+    	// Set the format and return
+    	Date today = cal.getTime();
+    	return sdf.format(today);
     }
     
     

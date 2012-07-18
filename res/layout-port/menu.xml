@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvMenuIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" 
+        android:textSize="20dp"
+        android:text="Vertical"/>
+        
+    <Button
+        android:id="@+id/bEDaily"
+	    android:layout_width="250dp"
+	    android:layout_height="45dp"
+	    android:layout_gravity="center"
+	    android:textSize="20dp" 
+	    android:text="@string/sDaily"
+	 	android:background="@drawable/b_red"
+	 	android:typeface="serif" />
+
+    <Button
+        android:id="@+id/bETecNote"
+        android:layout_width="250dp"
+	    android:layout_height="45dp"
+	    android:layout_gravity="center"
+	    android:textSize="20dp" 
+	    android:text="@string/sTecNote"
+	    android:background="@drawable/b_blue"
+	    android:typeface="serif"/>
+    
+    <Button
+        android:id="@+id/b257"
+        android:layout_width="250dp"
+	    android:layout_height="45dp"
+	    android:layout_gravity="center"
+	    android:textSize="20dp" 
+	    android:text="@string/s257"
+	    android:background="@drawable/b_green"
+	    android:typeface="serif"/>
+    
+    <Button
+        android:id="@+id/bOptions"
+        android:layout_width="250dp"
+	    android:layout_height="45dp"
+	    android:layout_gravity="center"
+	    android:textSize="20dp" 
+	    android:text="@string/sOption"
+	    android:background="@drawable/b_orange"
+	    android:typeface="serif"/>
+
+
+</LinearLayout>

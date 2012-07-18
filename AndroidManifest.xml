@@ -60,6 +60,16 @@
             
         </activity>
         
+        <activity
+            android:name=".eDailyPreview"
+            android:label="@string/sDaily" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.EDAILYPREVIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
     </application>
 
 </manifest>

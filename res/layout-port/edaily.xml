@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="@string/sDaily"
+	    android:textColor="@android:color/black"
+	    android:textSize="20dp"
+	    android:typeface="serif" />
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/sToday"
+	    android:layout_gravity="center"
+	    android:textSize="16dp"
+	    android:textColor="@android:color/black"
+	    android:typeface="serif" />
+	<EditText
+	    android:id="@+id/etToday"
+	    android:layout_width="match_parent"
+	    android:layout_height="180dp"
+	    android:ems="10"
+	    android:inputType="textMultiLine" />
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/sTmrw"
+	    android:layout_gravity="center"
+	    android:textSize="16dp"
+	    android:textColor="@android:color/black"
+	    android:typeface="serif" />
+	<EditText
+	    android:id="@+id/etTmrw"
+	    android:layout_width="match_parent"
+	    android:layout_height="180dp"
+	    android:ems="10"
+	    android:inputType="textMultiLine" />
+	<Button
+	    android:id="@+id/bSave"
+	    android:layout_width="260dp"
+	    android:layout_height="50dp"
+	    android:layout_gravity="center"
+	    android:background="@drawable/b_red"
+	    android:text="@string/sSave"
+	    android:textSize="18dp"
+	    android:typeface="serif"/>
+</LinearLayout>
