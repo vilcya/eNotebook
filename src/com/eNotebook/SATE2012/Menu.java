@@ -8,13 +8,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Menu extends Activity implements View.OnClickListener{
-    String documents[] = {"eDailyMenu", "eTecNote", "257"}; 
+    String documents[] = {"eDailyMenu", "eTecNote", "257", "Option"}; 
     String name;
     
     TextView intro;
     Button eDaily;
     Button eTecNote;
     Button twofiftyseven;
+    Button option;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class Menu extends Activity implements View.OnClickListener{
         eDaily.setOnClickListener(this);
         eTecNote.setOnClickListener(this);
         twofiftyseven.setOnClickListener(this);
+        option.setOnClickListener(this);
             
     } 
 
@@ -35,6 +37,7 @@ public class Menu extends Activity implements View.OnClickListener{
         eDaily = (Button) findViewById(R.id.bEDaily);
         eTecNote = (Button) findViewById(R.id.bETecNote);
         twofiftyseven = (Button) findViewById(R.id.b257);
+        option = (Button) findViewById(R.id.bOptions);
     }
     
     /* Triggered when user clicks a view */
@@ -50,6 +53,9 @@ public class Menu extends Activity implements View.OnClickListener{
 	        case R.id.b257:
 	            name = documents[2];	            
 	            break;
+	        case R.id.bOptions:
+	        	name = documents[3];
+	        	break;
         }
         
         Intent ourIntent = new Intent("com.eNotebook.SATE2012." + name.toUpperCase());

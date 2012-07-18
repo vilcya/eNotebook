@@ -27,7 +27,7 @@
 	    android:ems="10" 
 	    android:hint="@string/setNameLast"/>
 	<Button
-	    android:id="@+id/doneButton"
+	    android:id="@+id/bdoneButton"
 	    android:layout_width="260dp"
 	    android:layout_height="50dp"
 	    android:layout_gravity="center"

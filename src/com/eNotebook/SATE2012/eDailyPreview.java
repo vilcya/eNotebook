@@ -83,10 +83,11 @@ public class eDailyPreview extends Activity {
     		return;
     	
     	File textpath = new File(getFilesDir(), "Text/" + extras.getString("filename"));
+    	File namepath = new File(getFilesDir(), "UserInformation/name");
     	
     	// Error handling for non-existent paths 
     	//  problem with code if this occurs
-    	if (!textpath.exists())
+    	if (!textpath.exists() || !namepath.exists())
     	{
             description.setText("FATAL: I could not find the path!" );
             return;
@@ -94,7 +95,8 @@ public class eDailyPreview extends Activity {
     	
     	// Read the file, parse the string, and set the correct views
     	String mystring = readTextfromFile(textpath.toString());
-    	parseTextFile(mystring);
+    	String myname = readTextfromFile(namepath.toString());
+    	parseText(mystring, myname);
     	
     }    
     
@@ -138,7 +140,7 @@ public class eDailyPreview extends Activity {
     /* Parses a given string read from a text file into 
      *  components and sets the correct views
      */
-    private void parseTextFile(String textfromfile)
+    private void parseText(String textfromfile, String name)
     {
     	// Split the string given the regular expression
     	String[] components = textfromfile.split("\\|\\|\\|");
@@ -152,6 +154,7 @@ public class eDailyPreview extends Activity {
     	}
     	
     	// Set the respective views on the eDaily
+    	tvname.setText(name);
     	tvacctoday.setText(components[0]);
     	tvacctom.setText(components[1]);
     }
