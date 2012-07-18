@@ -14,4 +14,8 @@
 	<string name="sTmrw">Plans for Tomorrow:</string>
 	<string name="sSave">Save</string>
 	<string name="setSearch">Search</string>
+	<string name="sName">Name:</string>
+	<string name="sDone">Done</string>
+	<string name="setNameFirst">First Name</string>
+	<string name="setNameLast">Last Name</string>
 </resources>

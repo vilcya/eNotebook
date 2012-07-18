@@ -26,7 +26,8 @@
 	    android:layout_height="45dp"
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
-	    android:text="@string/sDaily"/>
+	    android:text="@string/sDaily"
+	    android:background="@drawable/b_red"/>
 
     <Button
         android:id="@+id/bETecNote"
@@ -34,7 +35,8 @@
 	    android:layout_height="45dp"
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
-	    android:text="@string/sTecNote"/>
+	    android:text="@string/sTecNote"
+	    android:background="@drawable/b_blue"/>
     
     <Button
         android:id="@+id/b257"
@@ -42,7 +44,8 @@
 	    android:layout_height="45dp"
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
-	    android:text="@string/s257"/>
+	    android:text="@string/s257"
+	    android:background="@drawable/b_green"/>
     
     <Button
         android:id="@+id/bOptions"
@@ -50,7 +53,8 @@
 	    android:layout_height="45dp"
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
-	    android:text="@string/sOption"/>
+	    android:text="@string/sOption"
+	    android:background="@drawable/b_orange"/>
 
     </LinearLayout>
 
