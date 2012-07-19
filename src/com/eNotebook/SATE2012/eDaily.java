@@ -19,8 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class eDaily extends Activity implements View.OnClickListener{
 
@@ -32,6 +31,9 @@ public class eDaily extends Activity implements View.OnClickListener{
     
     // Contains today's date in the format MM.dd.yyyy
     String datetoday;
+    
+    // Pop up a toast if there is something wrong
+    Toast errormessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,6 @@ public class eDaily extends Activity implements View.OnClickListener{
         // Check if the calendar returned correctly
         if (datetoday.length() == 0)
         	return;
-            //description.setText("FATAL: The date returned wrong.");
         else
         {
         	// Create a new file for the new eDaily
@@ -90,7 +91,13 @@ public class eDaily extends Activity implements View.OnClickListener{
                 
                 // Check that none of the fields are empty
                 if (myacctoday.length() == 0 || myacctom.length() == 0)
+                {
+                	errormessage = Toast.makeText(getApplicationContext(),
+                				"Please fill in all the blanks or Dr. Williams will hunt you down!!! (with three exclamation marks)", 
+                				Toast.LENGTH_LONG);
+                	errormessage.show();
                 	return;
+                }
                 
                 // Create the string for going into the file
                 String edailytext = myacctoday + "|||" + myacctom;

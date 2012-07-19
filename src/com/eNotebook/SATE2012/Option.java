@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Option extends Activity implements View.OnClickListener {
 	
@@ -19,6 +20,9 @@ public class Option extends Activity implements View.OnClickListener {
 	// Edittext views for inputting name
 	EditText firstname;
 	EditText lastname;
+	
+    // Pop up a toast if there is something wrong
+    Toast errormessage;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,13 @@ public class Option extends Activity implements View.OnClickListener {
 	    	String lname = lastname.getText().toString();
 	        // Check that none of the fields are empty
 	        if (fname.length() == 0 || lname.length() == 0)
-	        	// PUT ERROR HERE
+	        {
+	        	errormessage = Toast.makeText(getApplicationContext(),
+        				"One or more fields are blank. If you do not have a first or last name, please make one up.", 
+        				Toast.LENGTH_LONG);
+	        	errormessage.show();
 	        	return;
+	        }
 	        
 	        // Create the string for going into the file
 	        String fullname = fname + " " + lname;
