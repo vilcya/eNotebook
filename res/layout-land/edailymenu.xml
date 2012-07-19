@@ -3,87 +3,77 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="horizontal"
-	    android:gravity="center">    
+	    android:gravity="center">
 
-    <LinearLayout android:layout_width="256dp"
-	    android:layout_height="fill_parent"
-	    android:orientation="vertical">
-   	<TextView
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
-	    android:text="@string/sDaily"
-	    android:textColor="@android:color/black"
-	    android:textSize="20dp"
-	    android:typeface="serif" 
-	    android:layout_marginTop="10dp"/>
-   	
-   	<LinearLayout android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal"
-	    android:gravity="center"
-	    android:layout_marginTop="10dp"
-	    android:layout_marginBottom="10dp">
-   	    
-   	    <EditText android:id="@+id/etSearch"
-		    android:layout_width="175dp"
-		    android:layout_height="30dp"
-		    android:ems="10"
-		    android:hint="@string/setSearch"
-		    android:textSize="10dp"/>
+    <LinearLayout
+        android:layout_width="256dp"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:padding="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
 
-   	    <Button
-   	        android:id="@+id/bAdd"
-   	        android:layout_width="30dp"
-   	        android:layout_height="30dp"
-   	        android:textSize="18dp"
-   	        android:typeface="serif" 
-   	        android:layout_marginLeft="10dp"/>
-   	    
-   	    <Button
-   	        android:id="@+id/bBack"
-   	        android:layout_width="30dp"
-   	        android:layout_height="30dp"
-   	        android:textSize="18dp"
-   	        android:typeface="serif" 
-   	        android:text="@string/sBack"
-   	        android:layout_marginLeft="5dp"/>
-   	    
-   	</LinearLayout>
-    
-	    <ListView
-	        android:id="@+id/lvDaily"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"/>
-	    
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/sDaily"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:typeface="serif" 
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:ems="10"
+            android:hint="@string/setSearch"
+            android:textSize="10dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/bBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:text="@string/sBack"
+                android:textSize="18dp"
+                android:typeface="serif" />
+
+            <Button
+                android:id="@+id/bAdd"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"
+                android:typeface="serif" />
+
+        </LinearLayout>
+
     </LinearLayout>
 	    
 	 <LinearLayout android:layout_width="275dp"
 		 android:layout_height="fill_parent"
-		 android:orientation="vertical">
-	    
-	 <LinearLayout android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal"
-	    android:gravity="right"
-	    android:layout_marginTop="10dp"
-	    android:layout_marginBottom="10dp">
-   	    
+		 android:orientation="vertical"
+		 android:padding="5dp">
 
-   	    <Button
-   	        android:id="@+id/bDelete"
-   	        android:layout_width="30dp"
-   	        android:layout_height="30dp"
-   	        android:textSize="18dp"
-   	        android:typeface="serif" 
-   	        android:layout_marginLeft="10dp"/>
-   	    
-   	</LinearLayout>
-	     
-		 <Gallery
-		     android:id="@+id/gDaily"
-		     android:layout_width="0dp"
-		     android:layout_height="wrap_content" />
+	     <ListView
+	         android:id="@+id/lvDaily"
+	         android:layout_width="fill_parent"
+	         android:layout_height="wrap_content" >
+	     </ListView>
 		    
 	</LinearLayout>
     
