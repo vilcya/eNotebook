@@ -101,6 +101,15 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp">
 
+            <Button
+		    android:id="@+id/bSavePicture"
+		    android:layout_width="150dp"
+		    android:layout_height="50dp"
+		    android:layout_gravity="center"
+		    android:background="@drawable/b_red"
+		    android:text="@string/sSave"
+		    android:textSize="18dp"
+		    android:typeface="serif"/>
         </LinearLayout>
     </RelativeLayout>
     

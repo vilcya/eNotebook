@@ -3,26 +3,38 @@ package com.eNotebook.SATE2012;
 import java.io.File;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class eDailyMenu extends Activity implements View.OnClickListener{
     
 	
-    Button newedaily;
+    Button newedaily, backtomenu;
     ListView list;
     
     // List of all the edaily files with their text counterpart
     File[] edailies;
     String[] edailytextpaths;
 
-    String[] tmp = {"hai", "hello"};
+    // Default list that shows up 
+    String[] tmp = {"Sorry, there are currently no eDailies!"};
+    
+    // Gallery for horizontal view
+    Gallery edailygall;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +43,10 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         assignedObjects();
         getPath();
         newedaily.setOnClickListener(this);
+        backtomenu.setOnClickListener(this);
         
         ArrayAdapter<String> adapter;
-        if (edailytextpaths == null)
+        if (edailytextpaths != null)
         {
         	 adapter = new ArrayAdapter<String> 
         			(this, android.R.layout.simple_list_item_1, tmp);
@@ -59,7 +72,6 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     private void getPath() {
 
         // Get the file path of the edailies
-        File edailypath = new File(getFilesDir(), "eDailies");
         File edailytextpath = new File(getFilesDir(), "Text");
         
         // Check if directory exists
@@ -67,23 +79,25 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
             return;
         else
             edailytextpaths = edailytextpath.list();
-
-        if(!edailypath.exists())
-        	return;
-        else
-        	edailies = edailypath.listFiles();
-        
     }
     
     private void assignedObjects() {
         newedaily = (Button) findViewById(R.id.sAdd);
+        backtomenu = (Button) findViewById(R.id.bBack);
         list = (ListView) findViewById(R.id.lvDaily);
     }
     
     public void onClick(View view) {
-        Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
-        startActivity(ourIntent);
+    	Intent ourIntent;
+    	
+    	if(view.getId() == R.id.bBack)    
+    		ourIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+    	else
+	        ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
+    	
+    	startActivity(ourIntent);
     }
+    
     
 }
 

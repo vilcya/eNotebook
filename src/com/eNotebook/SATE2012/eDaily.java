@@ -14,11 +14,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class eDaily extends Activity implements View.OnClickListener{
@@ -82,6 +88,14 @@ public class eDaily extends Activity implements View.OnClickListener{
                 // Find all of the text from the views
                 String myacctoday = accomplishedtoday.getText().toString();
                 String myacctom = accomplishedtomorrow.getText().toString();
+                
+                if(myacctoday.contains(" "))
+                {
+                	errormessage = Toast.makeText(getApplicationContext(),
+            				"You submitted invalid characters! If this is actually your name, please tell us.", 
+            				Toast.LENGTH_LONG);
+                	errormessage.show();
+                }
                 
                 // Check that none of the fields are empty
                 if (myacctoday.length() == 0 || myacctom.length() == 0)
