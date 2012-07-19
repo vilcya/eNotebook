@@ -1,11 +1,14 @@
 package com.eNotebook.SATE2012;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Menu extends Activity implements View.OnClickListener{
     String documents[] = {"eDailyMenu", "eTecNote", "257", "Option"}; 
@@ -20,6 +23,15 @@ public class Menu extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Finds the user information directory and creates one if none exists
+		File userpath = new File(getFilesDir(), "UserInformation/name");
+        if (!userpath.exists())
+        {
+        	Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "OPTION");
+            startActivity(ourIntent);
+        }
+        	
         setContentView(R.layout.menu);
         
         assignedObjects();

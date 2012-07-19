@@ -56,37 +56,6 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         });
     }
     
-    /*
-    private String readTextfromFile(String path)
-    {
-        File edailyfile = new File(path);
-        FileInputStream instream;
-        InputStreamReader instreamread;
-        BufferedReader buf;
-        String data = "";
-        String tmp = "";
-        
-        try 
-        { 
-            instream = new FileInputStream(edailyfile);
-            instreamread = new InputStreamReader (instream);
-            buf = new BufferedReader(instreamread);
-
-            try
-            {
-                while((tmp = buf.readLine()) != null)
-                    data += tmp;
-            }
-            catch(IOException e)
-            { e.printStackTrace(); }
-            
-        }
-        catch(FileNotFoundException e)
-        { e.printStackTrace(); }
-        
-        return data;
-    }*/
-    
     private void getPath() {
 
         // Get the file path of the edailies

@@ -105,51 +105,80 @@ public class Option extends Activity implements View.OnClickListener {
     	}
     	
     	else
-    	{
-		// Finds the user information directory and creates one if none exists
-		File textpath = new File(getFilesDir(), "UserInformation");
-        if (!textpath.exists())
-            textpath.mkdir();
-        
-		// Create a new file for saving the user's name
-	    File newtext = new File(textpath, "name");
-	    try 
-	    { newtext.createNewFile(); }
-	    catch(IOException e)
-	    { e.printStackTrace(); } 
-	
-	    try
-	    {
-	    	String fname = firstname.getText().toString();
-	    	String lname = lastname.getText().toString();
-	        // Check that none of the fields are empty
-	        if (fname.length() == 0 || lname.length() == 0)
-	        {
-	        	errormessage = Toast.makeText(getApplicationContext(),
-        				"One or more fields are blank. If you do not have a first or last name, please make one up.", 
-        				Toast.LENGTH_LONG);
-	        	errormessage.show();
-	        	return;
-	        }
-	        
-	        // Create the string for going into the file
-	        String fullname = fname + " " + lname;
-	
-	        // Open the file stream and copy the text into the file
-	        FileOutputStream ostream = new FileOutputStream(newtext);
-	        ostream.write(fullname.getBytes());
-	        ostream.close();
-	        
-	        // Start the preview activity
-	        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
-	        startActivity(previewIntent);
-	    }
-	    catch (Exception e)
-	    { e.printStackTrace(); }
-	    
+    	{	
+		    try
+		    {
+		    	String fname = firstname.getText().toString();
+		    	String lname = lastname.getText().toString();
+
+		    	
+		    	// Check for invalid characters
+				if(!notOnlySpaces(fname) || !notOnlySpaces(lname))
+				{
+					errormessage = Toast.makeText(getApplicationContext(),
+							"You submitted invalid characters! If this is actually your name, please tell us.", 
+							Toast.LENGTH_LONG);
+			    	errormessage.show();
+					return;
+				}
+
+		    	
+		        // Check that none of the fields are empty
+		        if (fname.length() == 0 || lname.length() == 0)
+		        {
+		        	errormessage = Toast.makeText(getApplicationContext(),
+	        				"One or more fields are blank. If you do not have a first or last name, please make one up.", 
+	        				Toast.LENGTH_LONG);
+		        	errormessage.show();
+		        	return;
+		        }
+		        
+		        // Finds the user information directory and creates one if none exists
+				File textpath = new File(getFilesDir(), "UserInformation");
+		        if (!textpath.exists())
+		            textpath.mkdir();
+		        
+				// Create a new file for saving the user's name
+			    File newtext = new File(textpath, "name");
+			    try 
+			    { newtext.createNewFile(); }
+			    catch(IOException e)
+			    { e.printStackTrace(); } 
+		        
+		        // Create the string for going into the file
+		        String fullname = fname + " " + lname;
+		
+		        // Open the file stream and copy the text into the file
+		        FileOutputStream ostream = new FileOutputStream(newtext);
+		        ostream.write(fullname.getBytes());
+		        ostream.close();
+		        
+		        // Start the preview activity
+		        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+		        startActivity(previewIntent);
+		    }
+		    catch (Exception e)
+		    { e.printStackTrace(); }
     	}
 	}
-	
+
+	private boolean notOnlySpaces(String mytext)
+    {
+    	int count = 0;
+    	
+    	for (char c : mytext.toCharArray())
+    	{
+    		 int x = Character.toUpperCase(c);
+    		 if (x < 'A' || x > 'Z')
+    			 count++;
+    	}
+    	
+    	// If we only have spaces and symbols
+    	if (count == mytext.length())
+    		return false;
+    	return true; 
+    }
+    
 	protected void assignObjects()
 	{
 		done = (Button) findViewById(R.id.bdoneButton);

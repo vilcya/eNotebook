@@ -124,7 +124,7 @@ public class eDailyPreview extends Activity {
             {
             	// Read the line until end of file and add to data
                 while((lineofdata = buf.readLine()) != null)
-                    data += lineofdata;
+                    data += lineofdata + "\n";
             }
             catch(IOException e)
             { e.printStackTrace(); }
