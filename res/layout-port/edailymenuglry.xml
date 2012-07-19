@@ -54,7 +54,7 @@
 	    android:layout_marginBottom="10dp">
    	    
    	    <EditText android:id="@+id/etSearchGlry"
-		    android:layout_width="250dp"
+		    android:layout_width="200dp"
 		    android:layout_height="30dp"
 		    android:ems="10"
 		    android:hint="@string/setSearch"
@@ -66,6 +66,15 @@
    	        android:layout_height="30dp"
    	        android:textSize="18dp"
    	        android:typeface="serif" 
+   	        android:layout_marginLeft="10dp"/>
+   	    
+	    <Button
+   	        android:id="@+id/bBack"
+   	        android:layout_width="50dp"
+   	        android:layout_height="30dp"
+   	        android:textSize="18dp"
+   	        android:typeface="serif" 
+   	        android:text="@string/sBack"
    	        android:layout_marginLeft="10dp"/>
    	    
    	</LinearLayout>
