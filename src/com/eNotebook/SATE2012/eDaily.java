@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class eDaily extends Activity implements View.OnClickListener{
 
 	// Buttons for saving 
-    Button save;
+    Button save, back;
     
     // Text views inside the template
     EditText accomplishedtoday, accomplishedtomorrow;
@@ -46,6 +46,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     
         // Set the on click listener
         save.setOnClickListener(this);
+        back.setOnClickListener(this);
     }
     
     /* Function that assigns views and variables */
@@ -53,7 +54,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     {
     	// Button for saving
         save = (Button) findViewById(R.id.bSave);
-        
+        back = (Button) findViewById(R.id.bDailyBack);
         // Find today's date
         datetoday = getDateToday();
         
@@ -65,58 +66,65 @@ public class eDaily extends Activity implements View.OnClickListener{
     /* Event triggered on a button click */
     public void onClick(View view)
     {
-
-        // Finds the text directory and creates one if none exists
-        File textpath = new File(getFilesDir(), "Text");
-        if (!textpath.exists())
-            textpath.mkdir();
-        
-        // Check if the calendar returned correctly
-        if (datetoday.length() == 0)
-        	return;
-        else
-        {
-        	// Create a new file for the new eDaily
-            File newtext = new File(textpath, datetoday);
-            try 
-            { newtext.createNewFile(); }
-            catch(IOException e) 
-            { e.printStackTrace(); } 
-
-            try
-            {
-                // Find all of the text from the views
-                String myacctoday = accomplishedtoday.getText().toString();
-                String myacctom = accomplishedtomorrow.getText().toString();
-                
-                // Check that none of the fields are empty
-                if (myacctoday.length() == 0 || myacctom.length() == 0)
-                {
-                	errormessage = Toast.makeText(getApplicationContext(),
-                				"Please fill in all the blanks or Dr. Williams will hunt you down!!! (with three exclamation marks)", 
-                				Toast.LENGTH_LONG);
-                	errormessage.show();
-                	return;
-                }
-                
-                // Create the string for going into the file
-                String edailytext = myacctoday + "|||" + myacctom;
-
-                // Open the file stream and copy the text into the file
-                FileOutputStream ostream = new FileOutputStream(newtext);
-                ostream.write(edailytext.getBytes());
-                ostream.close();
-                
-                // Start the preview activity
-                Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
-                previewIntent.putExtra("filename", datetoday);
-                startActivity(previewIntent);
-            }
-            catch (Exception e)
-            { e.printStackTrace(); }
-
-            
-        }    
+    	if(view.getId() == R.id.bDailyBack)
+    	{
+    		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
+            startActivity(backIntent);
+    	}
+    	
+    	else{
+	        // Finds the text directory and creates one if none exists
+	        File textpath = new File(getFilesDir(), "Text");
+	        if (!textpath.exists())
+	            textpath.mkdir();
+	        
+	        // Check if the calendar returned correctly
+	        if (datetoday.length() == 0)
+	        	return;
+	        else
+	        {
+	        	// Create a new file for the new eDaily
+	            File newtext = new File(textpath, datetoday);
+	            try 
+	            { newtext.createNewFile(); }
+	            catch(IOException e) 
+	            { e.printStackTrace(); } 
+	
+	            try
+	            {
+	                // Find all of the text from the views
+	                String myacctoday = accomplishedtoday.getText().toString();
+	                String myacctom = accomplishedtomorrow.getText().toString();
+	                
+	                // Check that none of the fields are empty
+	                if (myacctoday.length() == 0 || myacctom.length() == 0)
+	                {
+	                	errormessage = Toast.makeText(getApplicationContext(),
+	                				"Please fill in all the blanks or Dr. Williams will hunt you down!!! (with three exclamation marks)", 
+	                				Toast.LENGTH_LONG);
+	                	errormessage.show();
+	                	return;
+	                }
+	                
+	                // Create the string for going into the file
+	                String edailytext = myacctoday + "|||" + myacctom;
+	
+	                // Open the file stream and copy the text into the file
+	                FileOutputStream ostream = new FileOutputStream(newtext);
+	                ostream.write(edailytext.getBytes());
+	                ostream.close();
+	                
+	                // Start the preview activity
+	                Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
+	                previewIntent.putExtra("filename", datetoday);
+	                startActivity(previewIntent);
+	            }
+	            catch (Exception e)
+	            { e.printStackTrace(); }
+	
+	            
+	        }
+    	}
     }
     
     /* Return today's date in string format MM.dd.yyyy */
