@@ -14,6 +14,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +28,7 @@ import android.widget.TextView;
 public class eDailyPreview extends Activity implements View.OnClickListener{
 	
 	// Navigation buttons
-	Button menu;
+	Button edit, menu;
 	
 	// TextViews to create the eDaily image
 	TextView tvdate, tvname, tvacctoday, tvacctom;
@@ -82,6 +85,7 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
         
         // Set navigation buttons
         menu = (Button) findViewById(R.id.bPreviewMenu);
+        edit = (Button) findViewById(R.id.bEdit);
         
     }
     
@@ -94,6 +98,10 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	
     	File textpath = new File(getFilesDir(), "Text/" + date);
     	File namepath = new File(getFilesDir(), "UserInformation/name");
+    	
+    	// Check if the edaily is today's, and hide the edit button if it is not
+    	if(!date.equalsIgnoreCase(getDateToday()))
+    		edit.setWidth(0);
     	
     	// Error handling for non-existent paths 
     	//  problem with code if this occurs
@@ -171,9 +179,30 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     
     public void onClick(View view)
     {
-    	Intent ourintent = new Intent("com.eNotebook.SATE2012." + "MENU");
+    	Intent ourintent;
+    	
+    	if(view.getId() == R.id.bPreviewEdit)
+    	{
+    		ourintent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
+    		ourintent.putExtra("loadInitialText", true);
+    		ourintent.putExtra("acctoday", tvacctoday.getText());
+    		ourintent.putExtra("acctomorrow", tvacctom.getText());
+    	}
+    	else
+    		ourintent = new Intent("com.eNotebook.SATE2012." + "MENU");
+    	
     	startActivity(ourintent);
     }
     
-    
+    /* Return today's date in string format MM.dd.yyyy */
+    private String getDateToday()
+    {
+    	// Create the format and calendar instance
+    	SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMM dd, yyyy");
+    	Calendar cal = Calendar.getInstance();
+    	
+    	// Set the format and return
+    	Date today = cal.getTime();
+    	return sdf.format(today);
+    }
 }
