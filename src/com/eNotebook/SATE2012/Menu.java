@@ -44,7 +44,10 @@ public class Menu extends Activity implements View.OnClickListener{
 
     /* Assign layout objects to respective variables  */
     private void assignedObjects() {
+    	// Title
         intro = (TextView) findViewById(R.id.tvMenuIntro);
+        
+        // Navigation
         eDaily = (Button) findViewById(R.id.bEDaily);
         eTecNote = (Button) findViewById(R.id.bETecNote);
         twofiftyseven = (Button) findViewById(R.id.b257);

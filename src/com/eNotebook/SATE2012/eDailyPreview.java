@@ -55,6 +55,7 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
 		
 		// Set on click listeners
 		menu.setOnClickListener(this);
+		edit.setOnClickListener(this);
 		
 		// Set the introduction
 		description.setText("eDaily Preview");
@@ -181,15 +182,15 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     {
     	Intent ourintent;
     	
-    	if(view.getId() == R.id.bPreviewEdit)
+    	if(view.getId() == R.id.bPreviewMenu)
+    		ourintent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
+    	else
     	{
     		ourintent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
     		ourintent.putExtra("loadInitialText", true);
     		ourintent.putExtra("acctoday", tvacctoday.getText());
     		ourintent.putExtra("acctomorrow", tvacctom.getText());
     	}
-    	else
-    		ourintent = new Intent("com.eNotebook.SATE2012." + "MENU");
     	
     	startActivity(ourintent);
     }

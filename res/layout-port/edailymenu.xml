@@ -54,6 +54,8 @@
 	        android:background="@android:color/transparent" />
 	     <TextView
 	         android:id="@+id/tvEmptyElement" 
+	         android:layout_width="0dp"
+	         android:layout_height="wrap_content"
 	         android:text="You have no eDailies." >
 	     </TextView>
 
