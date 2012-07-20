@@ -27,14 +27,16 @@
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
 	    android:ems="10" 
-	    android:hint="@string/setNameFirst"/>
+	    android:hint="@string/setNameFirst"
+	    android:inputType="textCapWords" />
 	<EditText
 	    android:id="@+id/etNameLast"
 	    android:layout_width="260dp"
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
 	    android:ems="10" 
-	    android:hint="@string/setNameLast"/>
+	    android:hint="@string/setNameLast"
+	    android:inputType="textCapWords"/>
 	<Button
 	    android:id="@+id/bdoneButton"
 	    android:layout_width="260dp"
