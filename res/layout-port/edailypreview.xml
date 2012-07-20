@@ -61,7 +61,8 @@
 				    android:layout_gravity="center"
 				    android:textColor="@android:color/black"
 				    android:textSize="8dp"
-				    android:typeface="serif" />
+				    android:typeface="serif" 
+				    android:background="@drawable/outline"/>
             
         </LinearLayout>
         
@@ -97,7 +98,8 @@
 				    android:id="@+id/tvAccTomorrow"
 				    android:textColor="@android:color/black"
 				    android:textSize="8dp"
-				    android:typeface="serif" />
+				    android:typeface="serif" 
+				    android:background="@drawable/outline"/>
             
         </LinearLayout>
         
@@ -110,11 +112,20 @@
 
 		<Button
 		    android:id="@+id/bPreviewMenu"
-		    android:layout_width="300dp"
+		    android:layout_width="150dp"
 		    android:layout_height="50dp"
 		    android:layout_gravity="center"
 		    android:background="@drawable/b_red"
 		    android:text="@string/sMenu"
+		    android:textSize="18dp"
+		    android:typeface="serif"/>
+		<Button
+		    android:id="@+id/bEdit"
+		    android:layout_width="150dp"
+		    android:layout_height="50dp"
+		    android:layout_gravity="center"
+		    android:background="@drawable/b_red"
+		    android:text="@string/sEdit"
 		    android:textSize="18dp"
 		    android:typeface="serif"/>
 	</LinearLayout>
