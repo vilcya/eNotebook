@@ -33,7 +33,7 @@
 		    android:textSize="10dp"/>
 
    	    <Button
-   	        android:id="@+id/sAdd"
+   	        android:id="@+id/bAdd"
    	        android:layout_width="30dp"
    	        android:layout_height="30dp"
    	        android:textSize="18dp"

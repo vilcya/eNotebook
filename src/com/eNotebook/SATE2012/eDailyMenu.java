@@ -77,7 +77,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     }
     
     private void assignedObjects() {
-        newedaily = (Button) findViewById(R.id.sAdd);
+        newedaily = (Button) findViewById(R.id.bAdd);
         backtomenu = (Button) findViewById(R.id.bBack);
         list = (ListView) findViewById(R.id.lvDaily);
     }
