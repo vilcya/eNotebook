@@ -107,22 +107,14 @@
 	    android:layout_height="50dp"
 	    android:orientation="horizontal"
 	    android:gravity="center">
+
 		<Button
-		    android:id="@+id/bPreviewSave"
-		    android:layout_width="150dp"
+		    android:id="@+id/bPreviewMenu"
+		    android:layout_width="300dp"
 		    android:layout_height="50dp"
 		    android:layout_gravity="center"
 		    android:background="@drawable/b_red"
-		    android:text="@string/sSave"
-		    android:textSize="18dp"
-		    android:typeface="serif"/>
-		<Button
-		    android:id="@+id/bPreviewBack"
-		    android:layout_width="150dp"
-		    android:layout_height="50dp"
-		    android:layout_gravity="center"
-		    android:background="@drawable/b_red"
-		    android:text="@string/sBack"
+		    android:text="@string/sMenu"
 		    android:textSize="18dp"
 		    android:typeface="serif"/>
 	</LinearLayout>
