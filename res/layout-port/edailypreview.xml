@@ -106,7 +106,7 @@
 	    android:orientation="horizontal"
 	    android:gravity="center">
 		<Button
-		    android:id="@+id/bSave"
+		    android:id="@+id/bPreviewSave"
 		    android:layout_width="150dp"
 		    android:layout_height="50dp"
 		    android:layout_gravity="center"
@@ -115,7 +115,7 @@
 		    android:textSize="18dp"
 		    android:typeface="serif"/>
 		<Button
-		    android:id="@+id/bDailyBack"
+		    android:id="@+id/bPreviewBack"
 		    android:layout_width="150dp"
 		    android:layout_height="50dp"
 		    android:layout_gravity="center"

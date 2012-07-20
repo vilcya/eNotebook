@@ -14,15 +14,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class eDailyPreview extends Activity {
+public class eDailyPreview extends Activity implements View.OnClickListener{
+	
+	// Navigation buttons
+	Button menu;
 	
 	// TextViews to create the eDaily image
 	TextView tvdate, tvname, tvacctoday, tvacctom;
@@ -30,9 +33,8 @@ public class eDailyPreview extends Activity {
 	// Gives the user descriptions on what is happening
 	TextView description;
 	
-	// Contains today's date in the format MM.dd.yyyy
-	// Also acts as a file name
-	String datetoday;
+	// Serves as the filename
+	String date;
 	
 	// Extras from previous page
 	Bundle extras;
@@ -48,6 +50,9 @@ public class eDailyPreview extends Activity {
 		// Assign the views and variables
 		assignedObjects();
 		
+		// Set on click listeners
+		menu.setOnClickListener(this);
+		
 		// Set the introduction
 		description.setText("eDaily Preview");
 		
@@ -60,8 +65,6 @@ public class eDailyPreview extends Activity {
     {
     	// Sets the date to today's date
         tvdate = (TextView) findViewById(R.id.tvDate);
-        datetoday = getDateToday();
-        tvdate.setText(datetoday);
         
         // Find the other views on the eDaily image
         tvname = (TextView) findViewById(R.id.tvName);
@@ -73,6 +76,13 @@ public class eDailyPreview extends Activity {
         
         // Bundle of extras
         extras = getIntent().getExtras(); 
+        // Get the filename, which is the date
+        date = extras.getString("filename");
+        tvdate.setText("Today's Date: " + date);
+        
+        // Set navigation buttons
+        menu = (Button) findViewById(R.id.bPreviewMenu);
+        
     }
     
     /* Sets the layout for the eDaily image */
@@ -82,7 +92,7 @@ public class eDailyPreview extends Activity {
     	if(extras == null)
     		return;
     	
-    	File textpath = new File(getFilesDir(), "Text/" + extras.getString("filename"));
+    	File textpath = new File(getFilesDir(), "Text/" + date);
     	File namepath = new File(getFilesDir(), "UserInformation/name");
     	
     	// Error handling for non-existent paths 
@@ -154,21 +164,16 @@ public class eDailyPreview extends Activity {
     	}
     	
     	// Set the respective views on the eDaily
-    	tvname.setText(name);
+    	tvname.setText("Student's Name: " + name);
     	tvacctoday.setText(components[0]);
     	tvacctom.setText(components[1]);
     }
     
-    /* Return today's date in string format MM.dd.yyyy */
-    private String getDateToday()
+    public void onClick(View view)
     {
-    	// Create the format and calendar instance
-    	SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
-    	Calendar cal = Calendar.getInstance();
-    	
-    	// Set the format and return
-    	Date today = cal.getTime();
-    	return sdf.format(today);
+    	Intent ourintent = new Intent("com.eNotebook.SATE2012." + "MENU");
+    	startActivity(ourintent);
     }
+    
     
 }

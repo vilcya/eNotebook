@@ -1,8 +1,6 @@
 package com.eNotebook.SATE2012;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -76,11 +74,6 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
             return;
         else
             edailytextpaths = edailytextpath.list();
-        /*
-        for (int i = 0; i < edailytextpaths.length; i++)
-        {
-        	edailydates[i] = changeFormat(edailytextpaths[i]);
-        }*/
     }
     
     private void assignedObjects() {
@@ -88,23 +81,6 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         backtomenu = (Button) findViewById(R.id.bBack);
         list = (ListView) findViewById(R.id.lvDaily);
     }
-    
-    /*
-    private String changeFormat(String dotformat) {
-    	String[] datecomponent = dotformat.split("\\.");
-    	
-    	if (datecomponent.length < 3)
-    		return "merp";
-    
-    	Calendar cal = Calendar.getInstance();
-    	cal.set(Calendar.MONTH, Integer.parseInt(datecomponent[0]));
-    	SimpleDateFormat month_date = new SimpleDateFormat("MMMMMMMMM");
-    	String month_name = month_date.format(cal.getTime());
-    
-    	String regformat = month_name + " " + datecomponent[1] + " " + datecomponent[2];
-    	
-    	return regformat;
-    }*/
     
     public void onClick(View view) {
     	Intent ourIntent;

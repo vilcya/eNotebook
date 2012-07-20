@@ -73,6 +73,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     	}
     	
     	else{
+    		
 	        // Check if the calendar returned correctly
 	        if (datetoday.length() == 0)
 	        	return;
@@ -126,7 +127,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     private String getDateToday()
     {
     	// Create the format and calendar instance
-    	SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+    	SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMM dd, yyyy");
     	Calendar cal = Calendar.getInstance();
     	
     	// Set the format and return
