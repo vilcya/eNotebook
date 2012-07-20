@@ -74,6 +74,11 @@
 	         android:layout_height="wrap_content"
 	         android:background="@android:color/transparent" >
 	     </ListView>
+	     
+	     <TextView
+	         android:id="@+id/tvEmptyElement" 
+	         android:text="You have no eDailies." >
+	     </TextView>
 		    
 	</LinearLayout>
     

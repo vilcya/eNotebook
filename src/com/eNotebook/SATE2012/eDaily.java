@@ -35,6 +35,9 @@ public class eDaily extends Activity implements View.OnClickListener{
     // Pop up a toast if there is something wrong
     Toast errormessage;
 
+    // Get bundle of extras
+    Bundle extras;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,12 @@ public class eDaily extends Activity implements View.OnClickListener{
         
         // Assigns views and variables
         assignedObjects();
+        
+        if(extras.getBoolean("loadInitialText"))
+        {
+        	accomplishedtoday.setText(extras.getString("acctoday"));
+        	accomplishedtomorrow.setText(extras.getString("acctomorrow"));
+        }
     
         // Set the on click listener
         save.setOnClickListener(this);
@@ -61,6 +70,9 @@ public class eDaily extends Activity implements View.OnClickListener{
         // Views for eDaily template
         accomplishedtoday = (EditText) findViewById(R.id.etToday);
         accomplishedtomorrow = (EditText) findViewById(R.id.etTmrw);
+        
+        // Get bundle
+        extras = getIntent().getExtras();
     }
 
     /* Event triggered on a button click */
