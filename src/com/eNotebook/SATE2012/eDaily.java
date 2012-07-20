@@ -53,7 +53,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     private void assignedObjects()
     {
     	// Button for saving
-        save = (Button) findViewById(R.id.bSave);
+        save = (Button) findViewById(R.id.bPreview);
         back = (Button) findViewById(R.id.bDailyBack);
         // Find today's date
         datetoday = getDateToday();
