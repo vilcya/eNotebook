@@ -43,19 +43,18 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/bBack"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="5dp"
-                android:text="@string/sBack"
-                android:textSize="18dp"
-                android:typeface="serif" />
-
-            <Button
                 android:id="@+id/bAdd"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:textSize="18dp"
+                android:typeface="serif" />
+                        
+            <Button
+                android:id="@+id/bBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
+                android:text="@string/sBack"
                 android:textSize="18dp"
                 android:typeface="serif" />
 
@@ -79,7 +78,7 @@
 	         android:id="@+id/tvEmptyElement" 
 	         android:layout_width="0dp"
 	         android:layout_height="wrap_content"
-	         android:text="You have no eDailies." >
+	         android:text="@string/sNoEDailies" >
 	     </TextView>
 		    
 	</LinearLayout>

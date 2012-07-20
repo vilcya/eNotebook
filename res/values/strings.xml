@@ -22,4 +22,5 @@
 	<string name="setNameLast">Last Name</string>
 	<string name="sPreviewToday">What I Accomplished today: </string>
 	<string name="sPreviewTmrw">What I Plan to Accomplish Tomorrow: </string>
+	<string name="sNoEDailies">You have no eDailies.</string>
 </resources>

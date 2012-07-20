@@ -56,7 +56,7 @@
 	         android:id="@+id/tvEmptyElement" 
 	         android:layout_width="0dp"
 	         android:layout_height="wrap_content"
-	         android:text="You have no eDailies." >
+	         android:text="@string/sNoEDailies"  >
 	     </TextView>
 
 </LinearLayout>
