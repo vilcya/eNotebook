@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100" 
-    android:background="#ffffff">
+    android:background="@drawable/bg_redh">
 
     <RelativeLayout
         android:layout_width="fill_parent"

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100" 
-    android:background="#ffffff">
+    android:background="@drawable/bg_red">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -28,7 +28,8 @@
         android:layout_width="325dp"
         android:layout_height="244dp"
         android:layout_gravity="center"
-        android:background="@drawable/edaily_template" >
+        android:background="@drawable/edaily_template" 
+        >
 
         <TextView
             android:id="@+id/tvAccTomorrow"
@@ -101,15 +102,6 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp">
 
-            <Button
-		    android:id="@+id/bSavePicture"
-		    android:layout_width="150dp"
-		    android:layout_height="50dp"
-		    android:layout_gravity="center"
-		    android:background="@drawable/b_red"
-		    android:text="@string/sSave"
-		    android:textSize="18dp"
-		    android:typeface="serif"/>
         </LinearLayout>
     </RelativeLayout>
     

@@ -1,22 +1,18 @@
 package com.eNotebook.SATE2012;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 public class eDailyMenu extends Activity implements View.OnClickListener{
@@ -28,6 +24,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     // List of all the edaily files with their text counterpart
     File[] edailies;
     String[] edailytextpaths;
+    String[] edailydates;
 
     // Default list that shows up 
     String[] tmp = {"Sorry, there are currently no eDailies!"};
@@ -46,7 +43,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         backtomenu.setOnClickListener(this);
         
         ArrayAdapter<String> adapter;
-        if (edailytextpaths != null)
+        if (edailytextpaths == null)
         {
         	 adapter = new ArrayAdapter<String> 
         			(this, android.R.layout.simple_list_item_1, tmp);
@@ -79,6 +76,11 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
             return;
         else
             edailytextpaths = edailytextpath.list();
+        /*
+        for (int i = 0; i < edailytextpaths.length; i++)
+        {
+        	edailydates[i] = changeFormat(edailytextpaths[i]);
+        }*/
     }
     
     private void assignedObjects() {
@@ -86,6 +88,23 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         backtomenu = (Button) findViewById(R.id.bBack);
         list = (ListView) findViewById(R.id.lvDaily);
     }
+    
+    /*
+    private String changeFormat(String dotformat) {
+    	String[] datecomponent = dotformat.split("\\.");
+    	
+    	if (datecomponent.length < 3)
+    		return "merp";
+    
+    	Calendar cal = Calendar.getInstance();
+    	cal.set(Calendar.MONTH, Integer.parseInt(datecomponent[0]));
+    	SimpleDateFormat month_date = new SimpleDateFormat("MMMMMMMMM");
+    	String month_name = month_date.format(cal.getTime());
+    
+    	String regformat = month_name + " " + datecomponent[1] + " " + datecomponent[2];
+    	
+    	return regformat;
+    }*/
     
     public void onClick(View view) {
     	Intent ourIntent;
