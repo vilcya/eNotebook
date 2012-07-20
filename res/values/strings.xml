@@ -19,4 +19,6 @@
 	<string name="sDone">Done</string>
 	<string name="setNameFirst">First Name</string>
 	<string name="setNameLast">Last Name</string>
+	<string name="sPreviewToday">What I Accomplished today: </string>
+	<string name="sPreviewTmrw">What I Plan to Accomplish Tomorrow: </string>	
 </resources>
