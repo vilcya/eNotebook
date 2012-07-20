@@ -5,9 +5,6 @@
 	    android:orientation="vertical"
 	    android:background="@drawable/bg_red">    
 
-    <LinearLayout android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="vertical">
    	<TextView
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
@@ -53,37 +50,11 @@
 	    <ListView
 	        android:id="@+id/lvDaily"
 	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content" />
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/transparent" />
 	    
-    </LinearLayout>
 	    
-	<LinearLayout android:layout_width="0dp"
-		 android:layout_height="fill_parent"
-		 android:orientation="vertical">
 	    
-	 <LinearLayout android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal"
-	    android:gravity="right"
-	    android:layout_marginTop="10dp"
-	    android:layout_marginBottom="10dp">
    	    
-
-   	    <Button
-   	        android:id="@+id/bDelete"
-   	        android:layout_width="0dp"
-   	        android:layout_height="0dp"
-   	        android:textSize="18dp"
-   	        android:typeface="serif" 
-   	        android:layout_marginLeft="10dp"/>
-   	    
-   	</LinearLayout>
-	     
-		 <Gallery
-		     android:id="@+id/gDaily"
-		     android:layout_width="0dp"
-		     android:layout_height="wrap_content" />
-		    
-	</LinearLayout>
     
 </LinearLayout>
