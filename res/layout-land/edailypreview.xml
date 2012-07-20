@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="100" 
     android:background="#ffffff">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="50"
         >
 
         <TextView
@@ -20,88 +18,110 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="TextView" />
-    </RelativeLayout>
+    </LinearLayout>
     
-
-    <RelativeLayout
-        android:id="@+id/leDailyPreview"
-        android:layout_width="325dp"
-        android:layout_height="244dp"
-        android:layout_gravity="center"
-        android:background="@drawable/edaily_template" >
-
-        <TextView
-            android:id="@+id/tvAccTomorrow"
-            android:layout_width="140dp"
-            android:layout_height="210dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:ems="10" 
-            android:text="What to accomplish tomorrow."
-            android:textSize="11dp"/>
-
-        <TextView
-            android:id="@+id/tvAccToday"
-            android:layout_width="140dp"
-            android:layout_height="210dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toLeftOf="@+id/tvAccTomorrow"
-            android:ems="10" 
-            android:text="Today's accomplishments."
-            android:textSize="11dp"/>
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="60dp"
-            android:layout_height="10dp"
-            android:layout_alignLeft="@+id/tvAccToday"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:text="Date" 
-            android:textSize="10dp"/>
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="60dp"
-            android:layout_height="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="32dp"
-            android:ems="10"
-            android:text="Name" 
-            android:textSize="10dp" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="47" >
-    </RelativeLayout>
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_weight="3"
-        android:gravity="bottom"
-        android:orientation="vertical" >
-
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        
         <LinearLayout
-            android:layout_height = "50dp"
-            android:layout_width="fill_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp">
-	
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginRight="5dp">
+        
+               	<TextView
+				    android:layout_width="fill_parent"
+				    android:layout_height="20dp"
+				    android:layout_gravity="center"
+				    android:text="@string/sDaily"
+				    android:textColor="@android:color/black"
+				    android:textSize="12dp"
+				    android:typeface="serif" />
+               	
+               	<TextView
+				    android:layout_width="fill_parent"
+				    android:layout_height="20dp"
+				    android:layout_gravity="center"
+				    android:text="@string/sDaily"
+				    android:textColor="@android:color/black"
+				    android:textSize="12dp"
+				    android:typeface="serif" />
+               	
+               	<TextView
+				    android:layout_width="fill_parent"
+				    android:layout_height="160dp"
+				    android:layout_gravity="center"
+				    android:text="@string/sDaily"
+				    android:textColor="@android:color/black"
+				    android:textSize="20dp"
+				    android:typeface="serif" />
+            
         </LinearLayout>
-    </RelativeLayout>
+        
+        <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        
+            <TextView
+				    android:layout_width="fill_parent"
+				    android:layout_height="20dp"
+				    android:layout_gravity="center"
+				    android:text="@string/sDaily"
+				    android:textColor="@android:color/black"
+				    android:textSize="12dp"
+				    android:typeface="serif" />
+               	
+               	<TextView
+				    android:layout_width="fill_parent"
+				    android:layout_height="20dp"
+				    android:layout_gravity="center"
+				    android:text="@string/sDaily"
+				    android:textColor="@android:color/black"
+				    android:textSize="12dp"
+				    android:typeface="serif" />
+               	
+               	<TextView
+				    android:layout_width="fill_parent"
+				    android:layout_height="160dp"
+				    android:layout_gravity="center"
+				    android:text="@string/sDaily"
+				    android:textColor="@android:color/black"
+				    android:textSize="20dp"
+				    android:typeface="serif" />
+            
+        </LinearLayout>
+        
+    </LinearLayout>
     
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:orientation="horizontal"
+	    android:gravity="center">
+		<Button
+		    android:id="@+id/bSave"
+		    android:layout_width="150dp"
+		    android:layout_height="50dp"
+		    android:layout_gravity="center"
+		    android:background="@drawable/b_red"
+		    android:text="@string/sSave"
+		    android:textSize="18dp"
+		    android:typeface="serif"/>
+		<Button
+		    android:id="@+id/bDailyBack"
+		    android:layout_width="160dp"
+		    android:layout_height="40dp"
+		    android:layout_gravity="center"
+		    android:background="@drawable/b_red"
+		    android:text="@string/sBack"
+		    android:textSize="18dp"
+		    android:typeface="serif"/>
+	</LinearLayout>
+
 </LinearLayout>
