@@ -38,7 +38,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     
     // List of all the edaily files with their text counterpart
     File[] edailies;
-    String[] edailytextpaths;
+    String[] edailytextpaths = {};
     String[] edailydates;
 
     
@@ -60,14 +60,12 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
        
         // Set the adapter for the listview
         ArrayAdapter<String> adapter;
-        if (edailytextpaths == null)
+        if (edailytextpaths.length == 0)
         	empty.setVisibility(TextView.VISIBLE);
-        else
-        {
-        	adapter = new ArrayAdapter<String> 
-        			(this, R.layout.simple_list, edailytextpaths);
-        	list.setAdapter(adapter);
-        }
+        
+    	adapter = new ArrayAdapter<String> 
+    			(this, R.layout.simple_list, edailytextpaths);
+    	list.setAdapter(adapter);
 
         
         list.setOnItemClickListener(new OnItemClickListener()

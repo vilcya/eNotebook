@@ -60,7 +60,6 @@
 	         android:layout_height="wrap_content"
 	         android:visibility="invisible"
 	         android:gravity="center"
-	         android:text="@string/sNoEDailies"  >
-	     </TextView>
+	         android:text="@string/sNoEDailies"  />
 
 </LinearLayout>
