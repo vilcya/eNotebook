@@ -42,8 +42,8 @@
    	        android:layout_height="30dp"
    	        android:textSize="18dp"
    	        android:typeface="serif" 
-   	        android:text="@string/sBack"
-   	        android:layout_marginLeft="10dp"/>
+   	        android:layout_marginLeft="10dp"
+   	        android:background="@drawable/b_back"/>
    	    
    	</LinearLayout>
     
@@ -54,8 +54,10 @@
 	        android:background="@android:color/transparent" />
 	     <TextView
 	         android:id="@+id/tvEmptyElement" 
-	         android:layout_width="0dp"
+	         android:layout_width="fill_parent"
 	         android:layout_height="wrap_content"
+	         android:visibility="invisible"
+	         android:gravity="center"
 	         android:text="You have no eDailies." >
 	     </TextView>
 
