@@ -29,7 +29,8 @@
 		    android:ems="10"
 		    android:hint="@string/setSearch"
 		    android:textSize="10dp"
-		    android:background="@drawable/outline"/>
+		    android:paddingLeft="8dp"
+		    android:background="@drawable/outline2"/>
 
    	    <Button
    	        android:id="@+id/bAdd"
