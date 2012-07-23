@@ -65,7 +65,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         else
         {
         	adapter = new ArrayAdapter<String> 
-        			(this, android.R.layout.simple_list_item_1, edailytextpaths);
+        			(this, R.layout.simple_list, edailytextpaths);
         	list.setAdapter(adapter);
         }
 

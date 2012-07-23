@@ -3,7 +3,8 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical"
-	    android:background="@drawable/bg_red">    
+	    android:background="@drawable/bg_red"
+	    android:padding="5dp">    
 
    	<TextView
 	    android:layout_width="wrap_content"
@@ -51,14 +52,15 @@
 	        android:id="@+id/lvDaily"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:background="@android:color/transparent" />
+	        android:background="@android:color/transparent"
+	        android:cacheColorHint="@android:color/transparent" />
 	     <TextView
 	         android:id="@+id/tvEmptyElement" 
 	         android:layout_width="fill_parent"
 	         android:layout_height="wrap_content"
 	         android:visibility="invisible"
 	         android:gravity="center"
-	         android:text="You have no eDailies." >
+	         android:text="@string/sNoEDailies"  >
 	     </TextView>
 
 </LinearLayout>

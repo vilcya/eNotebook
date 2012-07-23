@@ -49,7 +49,8 @@
 				    android:layout_height="12dp"
 				    android:layout_gravity="center"
 				    android:text="@string/sPreviewToday"
-				    android:textColor="@android:color/black"
+				    android:textColor="#9c3029"
+				    android:textStyle="bold"
 				    android:textSize="8dp"
 				    android:typeface="serif" />
                	
@@ -60,6 +61,7 @@
 				    android:layout_gravity="center"
 				    android:textColor="@android:color/black"
 				    android:textSize="8dp"
+				    android:padding="5dp"
 				    android:typeface="serif" 
 				    android:background="@drawable/outline"/>
             
@@ -86,7 +88,8 @@
 				    android:layout_height="12dp"
 				    android:layout_gravity="center"
 				    android:text="@string/sPreviewTmrw"
-				    android:textColor="@android:color/black"
+				    android:textStyle="bold"
+				    android:textColor="#9c3029"
 				    android:textSize="8dp"
 				    android:typeface="serif" />
                	
@@ -97,6 +100,7 @@
 				    android:id="@+id/tvAccTomorrow"
 				    android:textColor="@android:color/black"
 				    android:textSize="8dp"
+				    android:padding="5dp"
 				    android:typeface="serif" 
 				    android:background="@drawable/outline"/>
             

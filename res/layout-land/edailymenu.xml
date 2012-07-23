@@ -4,7 +4,8 @@
 	    android:layout_height="fill_parent"
 	    android:orientation="horizontal"
 	    android:gravity="center"
-	    android:background="@drawable/bg_redh">
+	    android:background="@drawable/bg_redh"
+	    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="256dp"
@@ -43,19 +44,19 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/bBack"
+                android:id="@+id/bAdd"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:textSize="18dp"
-                android:typeface="serif" 
-                android:background="@drawable/b_back"/>
-
+                android:typeface="serif" />
+                       
             <Button
-                android:id="@+id/bAdd"
+                android:id="@+id/bBack"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/b_back"
                 android:textSize="18dp"
                 android:typeface="serif" />
 
@@ -72,7 +73,8 @@
 	         android:id="@+id/lvDaily"
 	         android:layout_width="fill_parent"
 	         android:layout_height="wrap_content"
-	         android:background="@android:color/transparent" >
+	         android:background="@android:color/transparent"
+	         android:cacheColorHint="@android:color/transparent" >
 	     </ListView>
 	     
 	      <TextView
@@ -81,7 +83,8 @@
 	         android:layout_height="wrap_content"
 	         android:visibility="invisible"
 	         android:gravity="center"
-	         android:text="You have no eDailies." >
+	         android:text="@string/sNoEDailies" >
+
 	     </TextView>
 	     
 	</LinearLayout>
