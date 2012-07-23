@@ -38,7 +38,7 @@
    	        android:layout_marginLeft="10dp"/>
    	    <Button
    	        android:id="@+id/bBack"
-   	        android:layout_width="50dp"
+   	        android:layout_width="30dp"
    	        android:layout_height="30dp"
    	        android:textSize="18dp"
    	        android:typeface="serif" 
