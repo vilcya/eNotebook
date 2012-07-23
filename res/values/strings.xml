@@ -6,6 +6,8 @@
     <string name="sMenu">Menu</string>
     <string name="sSplash">Splash</string>
     <string name="sDaily">eDaily</string>
+    <string name="sDailyPreview">eDaily Preview</string>
+    <string name="sDailyMenu">eDaily Menu</string>
     <string name="sTecNote">eTecNote</string>
     <string name="s257">2 5 7</string>
     <string name="sOption">Options</string>

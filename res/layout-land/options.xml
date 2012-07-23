@@ -29,7 +29,7 @@
 	    android:layout_gravity="center"
 	    android:ems="10" 
 	    android:hint="@string/setNameFirst"
-	    android:inputType="textCapWords" />"
+	    android:inputType="textCapWords" />
 	<EditText
 	    android:id="@+id/etNameLast"
 	    android:layout_width="260dp"
