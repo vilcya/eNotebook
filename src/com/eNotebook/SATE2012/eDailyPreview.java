@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class eDailyPreview extends Activity implements View.OnClickListener{
 	
@@ -33,14 +34,14 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
 	// TextViews to create the eDaily image
 	TextView tvdate, tvname, tvacctoday, tvacctom;
 	
-	// Gives the user descriptions on what is happening
-	TextView description;
-	
 	// Serves as the filename
 	String date;
 	
 	// Extras from previous page
 	Bundle extras;
+	
+	// User description
+	Toast errormessage;
 	
     @Override
     /* Upon creation of the activity (after user saves) */
@@ -57,9 +58,6 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
 		menu.setOnClickListener(this);
 		edit.setOnClickListener(this);
 		
-		// Set the introduction
-		description.setText("eDaily Preview");
-		
 		// Create the layout
 		setLayout();
 	}
@@ -74,9 +72,6 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
         tvname = (TextView) findViewById(R.id.tvName);
         tvacctoday = (TextView) findViewById(R.id.tvAccToday);
         tvacctom = (TextView) findViewById(R.id.tvAccTomorrow);
-        
-        // Initializes the text description
-        description = (TextView) findViewById(R.id.tvPreviewText);
         
         // Bundle of extras
         extras = getIntent().getExtras(); 
@@ -108,7 +103,10 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	//  problem with code if this occurs
     	if (!textpath.exists() || !namepath.exists())
     	{
-            description.setText("FATAL: I could not find the path!" );
+    		errormessage = Toast.makeText(getApplicationContext(),
+    				"FATAL: I could not find the path", 
+    				Toast.LENGTH_LONG);
+    		errormessage.show();
             return;
     	}
     	
@@ -168,7 +166,10 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	//  problem with code if this happens
     	if (components.length == 0 || components.length > 2)
     	{
-    		description.setText("FATAL: Nothing was inputted.");
+    		errormessage = Toast.makeText(getApplicationContext(),
+    				"FATAL: Nothing was inputted.", 
+    				Toast.LENGTH_LONG);
+    		errormessage.show();
     		return;
     	}
     	
