@@ -32,7 +32,7 @@
         
         <activity
             android:name=".eDailyMenu"
-            android:label="@string/sDaily" >
+            android:label="@string/sDailyMenu" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.EDAILYMENU" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -62,7 +62,7 @@
         
         <activity
             android:name=".eDailyPreview"
-            android:label="@string/sDaily" >
+            android:label="@string/sDailyPreview" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.EDAILYPREVIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -72,7 +72,7 @@
         
         <activity
             android:name=".Option"
-            android:label="@string/sDaily" >
+            android:label="@string/sOption" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.OPTION" />
                 <category android:name="android.intent.category.DEFAULT" />
