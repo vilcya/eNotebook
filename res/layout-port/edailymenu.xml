@@ -28,7 +28,8 @@
 		    android:layout_height="30dp"
 		    android:ems="10"
 		    android:hint="@string/setSearch"
-		    android:textSize="10dp"/>
+		    android:textSize="10dp"
+		    android:background="@drawable/outline"/>
 
    	    <Button
    	        android:id="@+id/bAdd"
@@ -36,7 +37,8 @@
    	        android:layout_height="30dp"
    	        android:textSize="18dp"
    	        android:typeface="serif" 
-   	        android:layout_marginLeft="10dp"/>
+   	        android:layout_marginLeft="10dp"
+   	        android:background="@drawable/b_add"/>
    	    <Button
    	        android:id="@+id/bBack"
    	        android:layout_width="30dp"

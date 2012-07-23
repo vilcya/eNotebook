@@ -44,16 +44,17 @@
 
             <Button
                 android:id="@+id/bAdd"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="5dp"
                 android:textSize="18dp"
-                android:typeface="serif" />
+                android:typeface="serif" 
+                android:background="@drawable/b_add"/>
                        
             <Button
                 android:id="@+id/bBack"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/b_back"
                 android:textSize="18dp"
