@@ -4,6 +4,6 @@
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:minHeight="30dp"
-        android:background="@drawable/lvoutline" 
+        android:minHeight="50dp"
+        android:background="@drawable/lvoutline"
         /> 
