@@ -97,7 +97,8 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	
     	// Check if the edaily is today's, and hide the edit button if it is not
     	if(!date.equalsIgnoreCase(getDateToday()))
-    		edit.setWidth(0);
+    		edit.getLayoutParams().width = 0;
+    		
     	
     	// Error handling for non-existent paths 
     	//  problem with code if this occurs

@@ -8,6 +8,7 @@ package com.eNotebook.SATE2012;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,16 +32,13 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     
     // For Search bar
     EditText searchbar;
-    int textlength = 0;
-    ArrayList<String> arraysort = new ArrayList<String>();
+    ArrayList<String> arraysort;
     
+    // View for when list is empty
     TextView empty;
     
-    // List of all the edaily files with their text counterpart
-    File[] edailies;
+    // List of all the edaily text files
     String[] edailytextpaths = {};
-    String[] edailydates;
-
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,54 +57,57 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         backtomenu.setOnClickListener(this);
        
         // Set the adapter for the listview
-        ArrayAdapter<String> adapter;
         if (edailytextpaths.length == 0)
         	empty.setVisibility(TextView.VISIBLE);
         
-    	adapter = new ArrayAdapter<String> 
+        // Set the adapter for the listview
+        ArrayAdapter<String> adapter = new ArrayAdapter<String> 
     			(this, R.layout.simple_list, edailytextpaths);
     	list.setAdapter(adapter);
 
+    	// Set the arraylist to the contents of the main list
+        arraysort = new ArrayList(Arrays.asList(edailytextpaths));
         
+        // Set on click listener (when an item on the list is pressed, go to preview)
         list.setOnItemClickListener(new OnItemClickListener()
         {
         	public void onItemClick(AdapterView<?> a, View v, int position, long id)
         	{
     			Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
-    			previewIntent.putExtra("filename", edailytextpaths[position]);
+    			previewIntent.putExtra("filename", arraysort.get(position));
     			startActivity(previewIntent);
         	}
         });
         
+        // For the search bar
         searchbar.addTextChangedListener(new TextWatcher() {
         	public void afterTextChanged(Editable s) {}
         	
         	public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
         	
+        	// Reset the adapter to the sorted list if the user searches for something  
         	public void onTextChanged(CharSequence s, int start, int before, int count) {
-        		textlength = searchbar.getText().length();
+        		int textlength = searchbar.getText().length();
         		arraysort.clear();
         		
         		for(int i =0; i < edailytextpaths.length; i++)
         		{
         			if(textlength <= edailytextpaths[i].length())
         			{
-        				if(searchbar.getText().toString().equalsIgnoreCase((String) 
-        								edailytextpaths[i].subSequence(0, textlength)))
-        				{
+        				if((edailytextpaths[i].toLowerCase()).contains(
+        							(searchbar.getText().toString().toLowerCase())))
         					arraysort.add(edailytextpaths[i]);
-        				}
         			}
         		}
-        		
         		list.setAdapter(new ArrayAdapter<String>(eDailyMenu.this, 
-        												 android.R.layout.simple_list_item_1, arraysort));
+        												 R.layout.simple_list, arraysort));        	
         	}
         	
         	
         });
     }
     
+    // Find the file path and set the global
     private void getPath() {
 
         // Get the file path of the edailies
@@ -119,6 +120,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
             edailytextpaths = edailytextpath.list();
     }
     
+    // Assign globals (views)
     private void assignedObjects() {
         newedaily = (Button) findViewById(R.id.bAdd);
         backtomenu = (Button) findViewById(R.id.bBack);
@@ -128,17 +130,21 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         empty = (TextView) findViewById(R.id.tvEmptyElement);
     }
     
+    // If a button is pressed
     public void onClick(View view) {
     	Intent ourIntent;
     	
+    	// Back button is pressed
     	if(view.getId() == R.id.bBack)    
     		ourIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+    	// New button is pressed
     	else
     	{
 	        ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
 	        ourIntent.putExtra("loadInitialText", false);
     	}
     	
+    	// Start the correct activity
     	startActivity(ourIntent);
     }
 
