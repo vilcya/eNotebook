@@ -1,3 +1,7 @@
+/* Menu.java
+ * Class for the main menu of the application
+ */
+
 package com.eNotebook.SATE2012;
 
 import java.io.File;
@@ -10,10 +14,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Menu extends Activity implements View.OnClickListener{
-    String documents[] = {"eDailyMenu", "eTecNote", "257", "Option"}; 
-    String name;
     
+	// Different options of the menu
+	String documents[] = {"eDailyMenu", "eTecNote", "257", "Option"}; 
+    
+	// Title
     TextView intro;
+    
+    // Navigation buttons
     Button eDaily;
     Button eTecNote;
     Button twofiftyseven;
@@ -31,10 +39,11 @@ public class Menu extends Activity implements View.OnClickListener{
             startActivity(ourIntent);
         }
         	
+        // Set the layout and assign views
         setContentView(R.layout.menu);
-        
         assignedObjects();
         
+        // Set the onclick listeners
         eDaily.setOnClickListener(this);
         eTecNote.setOnClickListener(this);
         twofiftyseven.setOnClickListener(this);
@@ -57,6 +66,9 @@ public class Menu extends Activity implements View.OnClickListener{
     /* Triggered when user clicks a view */
     public void onClick(View view) {
     	
+    	String name = "";
+    	
+    	// Checks which button was clicked
         switch(view.getId()){
 	        case R.id.bEDaily:
 	            name = documents[0];
@@ -72,6 +84,7 @@ public class Menu extends Activity implements View.OnClickListener{
 	        	break;
         }
         
+        // Start intent for the corresponding button being clicked
         Intent ourIntent = new Intent("com.eNotebook.SATE2012." + name.toUpperCase());
         startActivity(ourIntent);
 

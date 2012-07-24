@@ -39,6 +39,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     Bundle extras;
     
     @Override
+    /* Called when the activity begins */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Sets the xml layout

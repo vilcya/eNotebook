@@ -65,14 +65,15 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     			(this, R.layout.simple_list, edailytextpaths);
     	list.setAdapter(adapter);
 
-    	// Set the arraylist to the contents of the main list
-        arraysort = new ArrayList(Arrays.asList(edailytextpaths));
+    	// Set the arraylist to the contents of the main list, for searching later
+        arraysort = new ArrayList<String>(Arrays.asList(edailytextpaths));
         
         // Set on click listener (when an item on the list is pressed, go to preview)
         list.setOnItemClickListener(new OnItemClickListener()
         {
         	public void onItemClick(AdapterView<?> a, View v, int position, long id)
         	{
+        		// Start the preview page with the corresponding filename
     			Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
     			previewIntent.putExtra("filename", arraysort.get(position));
     			startActivity(previewIntent);
@@ -87,18 +88,20 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         	
         	// Reset the adapter to the sorted list if the user searches for something  
         	public void onTextChanged(CharSequence s, int start, int before, int count) {
-        		int textlength = searchbar.getText().length();
+        		
+        		// Clear the new array
         		arraysort.clear();
         		
+        		// Create the new array filtered through the searchbar
         		for(int i =0; i < edailytextpaths.length; i++)
         		{
-        			if(textlength <= edailytextpaths[i].length())
-        			{
-        				if((edailytextpaths[i].toLowerCase()).contains(
-        							(searchbar.getText().toString().toLowerCase())))
-        					arraysort.add(edailytextpaths[i]);
-        			}
+        			if((edailytextpaths[i].toLowerCase()).contains(
+        					(searchbar.getText().toString().toLowerCase())))
+        				arraysort.add(edailytextpaths[i]);
+        			
         		}
+        		
+        		// Set the adapter to the new list that contains filtered material 
         		list.setAdapter(new ArrayAdapter<String>(eDailyMenu.this, 
         												 R.layout.simple_list, arraysort));        	
         	}
@@ -122,11 +125,17 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     
     // Assign globals (views)
     private void assignedObjects() {
+    	// Navigation
         newedaily = (Button) findViewById(R.id.bAdd);
         backtomenu = (Button) findViewById(R.id.bBack);
-        list = (ListView) findViewById(R.id.lvDaily);
-        searchbar = (EditText) findViewById(R.id.etSearch);
         
+        // The list display
+        list = (ListView) findViewById(R.id.lvDaily);
+        
+        // For searching through the eDailies
+        searchbar = (EditText) findViewById(R.id.etSearch);
+  
+        // Place holder in case there are no eDailies to display
         empty = (TextView) findViewById(R.id.tvEmptyElement);
     }
     

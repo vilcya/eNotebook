@@ -184,10 +184,12 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     {
     	Intent ourintent;
     	
+    	// Check which button was pressed
     	if(view.getId() == R.id.bPreviewMenu)
     		ourintent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
     	else
     	{
+    		// Add extra variables into the intent (for editting purposes)
     		ourintent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
     		ourintent.putExtra("loadInitialText", true);
     		ourintent.putExtra("acctoday", tvacctoday.getText());

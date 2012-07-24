@@ -1,3 +1,7 @@
+/* Option.java
+ * Class for changing your name. 
+ */
+
 package com.eNotebook.SATE2012;
 
 import java.io.BufferedReader;
@@ -44,6 +48,18 @@ public class Option extends Activity implements View.OnClickListener {
 		
 	}
 
+
+	// Assigns globals
+	protected void assignObjects()
+	{
+		done = (Button) findViewById(R.id.bdoneButton);
+		back = (Button) findViewById(R.id.bOptionBack);
+		CurName = (TextView) findViewById(R.id.tvCurrentName);
+		firstname = (EditText) findViewById(R.id.etNameFirst);
+		lastname = (EditText) findViewById(R.id.etNameLast);
+	}
+	
+	// Sets the current name view if one exists
 	public void CurrentName(){
 		
 		File namepath = new File(getFilesDir(), "UserInformation/name");
@@ -60,7 +76,7 @@ public class Option extends Activity implements View.OnClickListener {
 		}
 	}
 
-	  /* Takes in a file path name and returns the text
+	/* Takes in a file path name and returns the text
      *  read in from that file 
      */
     private String readTextfromFile(String path)
@@ -96,18 +112,23 @@ public class Option extends Activity implements View.OnClickListener {
         // Return final result
         return data;
     }
+    
+    // On click function
     public void onClick(View v){
 		
+    	// If back is pressed
     	if(v.getId() == R.id.bOptionBack)
     	{
     		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
             startActivity(backIntent);
     	}
     	
+    	// If submit is pressed 
     	else
     	{	
 		    try
 		    {
+		    	// Gets the new names
 		    	String fname = firstname.getText().toString();
 		    	String lname = lastname.getText().toString();
 
@@ -122,7 +143,6 @@ public class Option extends Activity implements View.OnClickListener {
 					return;
 				}
 
-		    	
 		        // Check that none of the fields are empty
 		        if (fname.length() == 0 || lname.length() == 0)
 		        {
@@ -162,10 +182,12 @@ public class Option extends Activity implements View.OnClickListener {
     	}
 	}
 
+    // Function that checks the characters are not blank
 	private boolean notOnlySpaces(String mytext)
     {
     	int count = 0;
     	
+    	// Add to counter if all of the text is bogus
     	for (char c : mytext.toCharArray())
     	{
     		 int x = Character.toUpperCase(c);
@@ -179,13 +201,5 @@ public class Option extends Activity implements View.OnClickListener {
     	return true; 
     }
     
-	protected void assignObjects()
-	{
-		done = (Button) findViewById(R.id.bdoneButton);
-		back = (Button) findViewById(R.id.bOptionBack);
-		CurName = (TextView) findViewById(R.id.tvCurrentName);
-		firstname = (EditText) findViewById(R.id.etNameFirst);
-		lastname = (EditText) findViewById(R.id.etNameLast);
-	}
 	
 }
