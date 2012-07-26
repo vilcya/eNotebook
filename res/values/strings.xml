@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">eNotebook</string>
+    <string name="sNames">Vilcya Wirantana \n Maulik Patel</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="sMenu">Menu</string>

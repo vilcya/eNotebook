@@ -3,15 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@drawable/bg_menu">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@drawable/b_red" />
+    
     <TextView
         android:id="@+id/tvMenuIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" 
-        android:textSize="20dp"
-        android:text="Vertical"/>
+        android:textSize="70dp"
+        android:text="@string/app_name"
+        android:typeface="serif" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" 
+        android:textSize="16dp"
+        android:text="@string/sNames"
+        android:typeface="serif" 
+        android:paddingBottom="30dp"/>
         
     <Button
         android:id="@+id/bEDaily"

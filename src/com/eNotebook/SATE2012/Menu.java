@@ -8,6 +8,7 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +55,9 @@ public class Menu extends Activity implements View.OnClickListener{
     /* Assign layout objects to respective variables  */
     private void assignedObjects() {
     	// Title
+    	Typeface tf = Typeface.createFromAsset(getAssets(), "Arr.TTF");
         intro = (TextView) findViewById(R.id.tvMenuIntro);
+        intro.setTypeface(tf);
         
         // Navigation
         eDaily = (Button) findViewById(R.id.bEDaily);
