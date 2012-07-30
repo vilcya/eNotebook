@@ -14,11 +14,7 @@
     	android:gravity = "center"
     	android:paddingRight="20dp">
     	
-	    <ImageView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:src="@drawable/b_red" />
+	    
 	    
 	    <TextView
 	        android:id="@+id/tvMenuIntro"
@@ -32,11 +28,18 @@
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center" 
+	        android:layout_gravity="center"
+	        android:paddingBottom="10dp"
 	        android:textSize="16dp"
 	        android:text="@string/sNames"
 	    	android:typeface="serif" />
     
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:src="@drawable/tecedge"/>
+	    
     </LinearLayout>
     
     <LinearLayout
