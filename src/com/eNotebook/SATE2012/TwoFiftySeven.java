@@ -25,7 +25,7 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 		myVideo.getSettings().setJavaScriptEnabled(true);
 		myVideo.getSettings().setPluginsEnabled(true);
 		
-		String video= "<html><iframe width=\"140\" height=\"105\" src=\"" + "http://www.youtube.com/" 
+		String video= "<html><iframe width=\"140\" height=\"105\" src=\"" + "http://www.youtube.com/embed/" 
 						+ extras.getString("videoID") + "\" frameborder=\"0\" allowfullscreen></iframe></html>";
 		myVideo.loadData(video, "text/html", "utf-8");
 	}

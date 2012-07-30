@@ -57,14 +57,26 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		
 		setContentView(R.layout.twofiftysevenmenu);
 		assignobjects();
+		setVideoUrls();
 		addLink.setOnClickListener(this);
 		back.setOnClickListener(this);
-		ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		
+		// Check wifi
+		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-		if (mWifi.isConnected()) {			   
-			setVideoUrls();
-			
+		
+		
+		if (!wifi.isConnected()) {			   
+			empty.setVisibility(TextView.VISIBLE);
+			empty.setText("Please connect to WiFi to view your videos.");
+		}
+		else if (ids == null)
+		{
+			empty.setVisibility(TextView.VISIBLE);
+			empty.setText("You have no videos. Press the plus to add one.");
+		}
+		else {		
 			VideoListAdapter adapter = new VideoListAdapter(this, thumbnailurls);
 			videoMenu.setAdapter(adapter);
 			// Set on click listener (when an item on the list is pressed, go to preview)
@@ -78,11 +90,6 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	    			startActivity(previewIntent);
 	        	}
 	        });
-		}
-		else 
-		{
-			empty.setVisibility(TextView.VISIBLE);
-			empty.setText("Please connect to WiFi to view your videos.");
 		}
 	}
 	
@@ -98,50 +105,14 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 
 	public void onClick(View view)
 	{
+		Intent ourIntent;
 		if(view.getId() == R.id.bBack257Menu)
-		{
-			Intent menu = new Intent("com.eNotebook.SATE2012." + "MENU");
-			startActivity(menu);
-		}
+			ourIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
 		else
-		{
-	        try
-	        {
-	            // Find url text
-	            String newid = linkbox.getText().toString();
-	            
-	            errormessage = Toast.makeText(getApplicationContext(),
-        				"Name: " + names[0], 
-        				Toast.LENGTH_LONG);
-	            errormessage.show();
-	            // Check for blank url
-	            if (newid.length() == 0)
-	            {
-	            	errormessage = Toast.makeText(getApplicationContext(),
-	            				"Please enter a valid video ID.", 
-	            				Toast.LENGTH_LONG);
-	            	errormessage.show();
-	            	return;
-	            }
-	            
-	            // Finds the text directory and creates one if none exists
-		        File urlpath = new File(getFilesDir(), "TwoFiftySeven");
-		        if (!urlpath.exists())
-		        	urlpath.mkdir();
-	        	// Create a new file for the new eDaily
-	            File newtext = new File(urlpath, newid);
-	            try 
-	            { newtext.createNewFile(); }
-	            catch(IOException e) 
-	            { e.printStackTrace(); } 
-	                        
-	            // Start the preview activity
-	            Intent restartMenu = new Intent("com.eNotebook.SATE2012." + "TwoFiftySevenMenu");
-	            startActivity(restartMenu);
-	        }
-	        catch (Exception e)
-	        { e.printStackTrace(); }
-		}
+			ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENADD");
+		
+		startActivity(ourIntent);
+		
 	}
 	
 	public void setVideoUrls()
@@ -196,10 +167,10 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 			}
 		}
 		
-		String begin = "<meta name=\"title\" content=\"";
-		String end = "\">";
+		String begin = "SATE2012";
+		String end = "</div>";
 		String part = builder.substring(builder.indexOf(begin) + begin.length());
-	    return builder.toString();//part.substring(0, part.indexOf(end));
+	    return part.substring(0, part.indexOf(end));
 	}
 	
 	// Adapter for listview
@@ -235,7 +206,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	        TextView text=(TextView)vi.findViewById(R.id.tvList257Text);;
 	        ImageView image=(ImageView)vi.findViewById(R.id.ivList257Image);
 	        
-	        text.setText("item "+position);
+	        text.setText(ids[position]);
 	        image.setImageDrawable(getDrawablefromWeb(data[position]));
 	        return vi;
 	    }
