@@ -12,6 +12,8 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	WebView myVideo;
 	Button back;
 	
+	Bundle extras;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,12 +25,14 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 		myVideo.getSettings().setJavaScriptEnabled(true);
 		myVideo.getSettings().setPluginsEnabled(true);
 		
-		String video= "<html><iframe width=\"140\" height=\"105\" src=\"" + "http://www.youtube.com/embed/Bvu6xVUE9lM" + "\" frameborder=\"0\" allowfullscreen></iframe></html>";
+		String video= "<html><iframe width=\"140\" height=\"105\" src=\"" + "http://www.youtube.com/" 
+						+ extras.getString("videoID") + "\" frameborder=\"0\" allowfullscreen></iframe></html>";
 		myVideo.loadData(video, "text/html", "utf-8");
 	}
 	
 	protected void assignobjects()
 	{	
+		extras = getIntent().getExtras();
 		myVideo = (WebView) findViewById(R.id.wvVideo);
 		back = (Button) findViewById(R.id.b257Back);
 	}
