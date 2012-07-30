@@ -3,15 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/bg_menuh"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/bg_menuh">
 
-    <TextView
-        android:id="@+id/tvMenuIntro"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Horizontal"/>
+	<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+  		android:layout_width="wrap_content"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical"
+    	android:gravity = "center"
+    	android:paddingRight="20dp">
+    	
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:src="@drawable/b_red" />
+	    
+	    <TextView
+	        android:id="@+id/tvMenuIntro"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center" 
+	        android:textSize="70dp"
+	        android:text="@string/app_name"
+	        android:typeface="serif" />
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center" 
+	        android:textSize="16dp"
+	        android:text="@string/sNames"
+	    	android:typeface="serif" />
+    
+    </LinearLayout>
     
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,8 +54,8 @@
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
 	    android:text="@string/sDaily"
-	    android:typeface="serif"
-	    android:background="@drawable/b_red"/>
+	    android:background="@drawable/b_red"
+	    android:typeface="serif" />
 
 
     <Button
@@ -50,8 +76,8 @@
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
 	    android:text="@string/s257"
-	    android:typeface="serif"
-	    android:background="@drawable/b_green"/>
+	    android:background="@drawable/b_green"
+	    android:typeface="serif" />
 
     
     <Button
@@ -61,8 +87,8 @@
 	    android:layout_gravity="center"
 	    android:textSize="20dp" 
 	    android:text="@string/sOption"
-	    android:typeface="serif"
-	    android:background="@drawable/b_orange"/>
+	    android:background="@drawable/b_orange"
+	    android:typeface="serif" />
 
     </LinearLayout>
 
