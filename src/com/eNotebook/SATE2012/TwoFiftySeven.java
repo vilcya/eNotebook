@@ -1,6 +1,7 @@
 package com.eNotebook.SATE2012;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -17,6 +18,7 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	
 		setContentView(R.layout.twofiftyseven);
 		assignobjects();
+		back.setOnClickListener(this);
 		
 		myVideo.getSettings().setJavaScriptEnabled(true);
 		myVideo.getSettings().setPluginsEnabled(true);
@@ -29,6 +31,12 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	{	
 		myVideo = (WebView) findViewById(R.id.wvVideo);
 		back = (Button) findViewById(R.id.b257Back);
+	}
+	
+	public void onClick(View v)
+	{
+		Intent menu = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENMENU");
+		startActivity(menu);
 	}
 		
 }

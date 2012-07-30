@@ -23,17 +23,25 @@ import android.widget.Toast;
 
 public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 
+	// Navigation buttons 
 	Button addLink;
 	Button back;
+	// For adding a new video
 	EditText linkbox;
 	
+	// For error messages
 	Toast errormessage;
 	
+	// For displaying the videos
 	ListView videoMenu;
 	
+	// When there are no videos
 	TextView empty;
-	String[] thumbnailurls;
 	
+	// Thumbnail urls of all youtube videos
+	String[] thumbnailurls;
+	String[] urls;
+	String[] ids;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +50,12 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		setContentView(R.layout.twofiftysevenmenu);
 		assignobjects();
 		addLink.setOnClickListener(this);
-		displayVideos();
+		back.setOnClickListener(this);
 		
-		VideoListAdapter adapter = new VideoListAdapter(this, thumbnailurls);
-		videoMenu.setAdapter(adapter);
+		setVideoUrls();
+		
+		//VideoListAdapter adapter = new VideoListAdapter(this, thumbnailurls);
+		//videoMenu.setAdapter(adapter);
 	}
 	
 	protected void assignobjects()
@@ -60,44 +70,55 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 
 	public void onClick(View view)
 	{
-        try
-        {
-            // Find url text
-            String newid = linkbox.getText().toString();
-            
-            // Check for blank url
-            if (newid.length() == 0)
-            {
-            	errormessage = Toast.makeText(getApplicationContext(),
-            				"Please enter a valid video ID.", 
-            				Toast.LENGTH_LONG);
-            	errormessage.show();
-            	return;
-            }
-            
-            // Finds the text directory and creates one if none exists
-	        File urlpath = new File(getFilesDir(), "TwoFiftySeven");
-	        if (!urlpath.exists())
-	        	urlpath.mkdir();
-        	// Create a new file for the new eDaily
-            File newtext = new File(urlpath, newid);
-            try 
-            { newtext.createNewFile(); }
-            catch(IOException e) 
-            { e.printStackTrace(); } 
-                        
-            // Start the preview activity
-            Intent restartMenu = new Intent("com.eNotebook.SATE2012." + "TwoFiftySevenMenu");
-            startActivity(restartMenu);
-        }
-        catch (Exception e)
-        { e.printStackTrace(); }
+		if(view.getId() == R.id.bBack257Menu)
+		{
+			Intent menu = new Intent("com.eNotebook.SATE2012." + "MENU");
+			startActivity(menu);
+		}
+		else
+		{
+	        try
+	        {
+	            // Find url text
+	            String newid = linkbox.getText().toString();
+	            
+	            errormessage = Toast.makeText(getApplicationContext(),
+        				"Saving the text: " + newid, 
+        				Toast.LENGTH_LONG);
+	            errormessage.show();
+	            // Check for blank url
+	            if (newid.length() == 0)
+	            {
+	            	errormessage = Toast.makeText(getApplicationContext(),
+	            				"Please enter a valid video ID.", 
+	            				Toast.LENGTH_LONG);
+	            	errormessage.show();
+	            	return;
+	            }
+	            
+	            // Finds the text directory and creates one if none exists
+		        File urlpath = new File(getFilesDir(), "TwoFiftySeven");
+		        if (!urlpath.exists())
+		        	urlpath.mkdir();
+	        	// Create a new file for the new eDaily
+	            File newtext = new File(urlpath, newid);
+	            try 
+	            { newtext.createNewFile(); }
+	            catch(IOException e) 
+	            { e.printStackTrace(); } 
+	                        
+	            // Start the preview activity
+	            Intent restartMenu = new Intent("com.eNotebook.SATE2012." + "TwoFiftySevenMenu");
+	            startActivity(restartMenu);
+	        }
+	        catch (Exception e)
+	        { e.printStackTrace(); }
+		}
 	}
 	
-	public void displayVideos()
+	public void setVideoUrls()
 	{
 		File idpath = new File(getFilesDir(), "TwoFiftySeven");
-		String[] ids = {};
 		
 		if (!idpath.exists())
 			return;
@@ -108,7 +129,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 			/* declare: urls.length() != 0*/
 		
 			thumbnailurls = new String[ids.length];
-			String[] urls = new String[ids.length];
+			urls = new String[ids.length];
 			for (int i = 0; i < ids.length; i++)
 			{
 				urls[i] = "http://youtu.be/" + ids[i];
@@ -122,7 +143,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	    
 	    private Activity activity;
 	    private String[] data;
-	    private static LayoutInflater inflater=null;
+	    private LayoutInflater inflater=null;
 	    
 	    public VideoListAdapter(Activity a, String[] d) {
 	        activity = a;
@@ -145,10 +166,10 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	    public View getView(int position, View convertView, ViewGroup parent) {
 	        View vi=convertView;
 	        if(convertView==null)
-	            vi = inflater.inflate(R.layout.item, null);
+	            vi = inflater.inflate(R.layout.listview257, null);
 
-	        TextView text=(TextView)vi.findViewById(R.id.text);;
-	        ImageView image=(ImageView)vi.findViewById(R.id.image);
+	        TextView text=(TextView)vi.findViewById(R.id.tvList257Text);;
+	        ImageView image=(ImageView)vi.findViewById(R.id.ivList257Image);
 	        
 	        text.setText("item "+position);
 	        image.setImageDrawable(getDrawablefromWeb(data[position]));
