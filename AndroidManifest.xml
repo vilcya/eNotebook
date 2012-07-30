@@ -7,6 +7,9 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -75,6 +78,16 @@
             android:label="@string/sOption" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.OPTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
+        <activity
+            android:name=".TwoFiftySevenMenu"
+            android:label="@string/sTwoFiftySeven" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.TWOFIFTYSEVENMENU" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             

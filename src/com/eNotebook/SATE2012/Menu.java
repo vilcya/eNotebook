@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class Menu extends Activity implements View.OnClickListener{
     
 	// Different options of the menu
-	String documents[] = {"eDailyMenu", "eTecNote", "257", "Option"}; 
+	String documents[] = {"eDailyMenu", "eTecNote", "TwoFiftySevenMenu", "Option"}; 
     
 	// Title
     TextView intro;
@@ -39,7 +39,7 @@ public class Menu extends Activity implements View.OnClickListener{
         	Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "OPTION");
             startActivity(ourIntent);
         }
-        	
+        
         // Set the layout and assign views
         setContentView(R.layout.menu);
         assignedObjects();
@@ -49,7 +49,6 @@ public class Menu extends Activity implements View.OnClickListener{
         eTecNote.setOnClickListener(this);
         twofiftyseven.setOnClickListener(this);
         option.setOnClickListener(this);
-            
     } 
 
     /* Assign layout objects to respective variables  */
