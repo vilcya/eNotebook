@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical"
+	    android:background="@drawable/bg_green"
+	    android:padding="5dp">    
+
+   	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="@string/s257"
+	    android:textColor="@android:color/black"
+	    android:textSize="20dp"
+	    android:typeface="serif" 
+	    android:layout_marginTop="10dp"/>
+   	
+   	
+   	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp" >
+   	    
+   	    <EditText android:id="@+id/etAddLink"
+		    android:layout_width="200dp"
+		    android:layout_height="30dp"
+		    android:ems="10"
+		    android:hint="@string/setSearch"
+		    android:textSize="10dp"
+		    android:paddingLeft="8dp"
+		    android:background="@drawable/outline2" />
+
+   	    <Button
+   	        android:id="@+id/bAddLink"
+   	        android:layout_width="30dp"
+   	        android:layout_height="30dp"
+   	        android:textSize="18dp"
+   	        android:typeface="serif" 
+   	        android:layout_marginLeft="10dp"
+   	        android:background="@drawable/b_add"/>
+   	    <Button
+   	        android:id="@+id/bBack257Menu"
+   	        android:layout_width="30dp"
+   	        android:layout_height="30dp"
+   	        android:textSize="18dp"
+   	        android:typeface="serif" 
+   	        android:layout_marginLeft="10dp"
+   	        android:background="@drawable/b_back"/>
+   	    
+   	</LinearLayout>
+    
+	    <ListView
+	        android:id="@+id/lvVideoMenu"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/transparent"
+	        android:cacheColorHint="@android:color/transparent" />
+	     <TextView
+	         android:id="@+id/tvEmpty257" 
+	         android:layout_width="fill_parent"
+	         android:layout_height="wrap_content"
+	         android:visibility="invisible"
+	         android:gravity="center"
+	         android:text="@string/sNoEDailies"  />
+
+</LinearLayout>
