@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_green"
+    android:padding="5dp">
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/sVideoIDIn"
+	    android:layout_gravity="center"
+	    android:textSize="20dp"
+	    android:textColor="#000000"
+	    android:typeface="serif"
+	    android:layout_margin="5dp"/>
+
+	<ImageView
+	    android:layout_width="fill_parent"
+	    android:layout_height="100dp"
+	    android:src="@drawable/b_green" 
+	    android:padding="5dp"
+	    android:layout_margin="5dp"/>
+	
+	<EditText
+	    android:id="@+id/etAddLink"
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:layout_gravity="center"
+	    android:ems="10"
+	    android:padding="5dp"
+	    android:hint="@string/sVideoID"
+	    android:textColorHint="#000000"
+	    android:typeface="serif"
+	    android:background="@drawable/outlinegreen" />
+	
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:orientation="horizontal"
+	    android:gravity="center"
+	    android:layout_margin="5dp">
+		<Button
+		    android:id="@+id/bAddLink257"
+		    android:layout_width="150dp"
+		    android:layout_height="50dp"
+		    android:layout_gravity="center"
+		    android:background="@drawable/b_green"
+		    android:text="@string/sAddLink"
+		    android:textSize="18dp"
+		    android:typeface="serif"/>
+		<Button
+		    android:id="@+id/bBack257"
+		    android:layout_width="150dp"
+		    android:layout_height="50dp"
+		    android:layout_gravity="center"
+		    android:background="@drawable/b_green"
+		    android:text="@string/sBack"
+		    android:textSize="18dp"
+		    android:typeface="serif"/>
+	</LinearLayout>
+</LinearLayout>

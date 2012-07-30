@@ -16,6 +16,9 @@
 	<string name="sToday">Accomplishments Today:</string>
 	<string name="sTmrw">Plans for Tomorrow:</string>
 	<string name="sSave">Save</string>
+	<string name="sAddLink">Add Link</string>
+	<string name="sVideoIDIn">Finding Your Video ID</string>
+	<string name="sVideoID">Input Your Video ID</string>
 	<string name="sDelete">Delete</string>
 	<string name="sBack">Back</string>
 	<string name="sEdit">Edit</string>
