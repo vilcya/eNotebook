@@ -93,6 +93,16 @@
             </intent-filter>
             
         </activity>
+
+        <activity
+            android:name=".TwoFiftySevenAdd"
+            android:label="@string/sTwoFiftySeven" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.TWOFIFTYSEVENADD" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
         
         <activity
             android:name=".TwoFiftySeven"
