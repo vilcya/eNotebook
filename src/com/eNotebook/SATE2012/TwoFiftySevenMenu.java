@@ -36,9 +36,6 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	// For adding a new video
 	EditText linkbox;
 	
-	// For error messages
-	Toast errormessage;
-	
 	// For displaying the videos
 	ListView videoMenu;
 	
@@ -86,7 +83,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	        	{
 	        		// Start the preview page with the corresponding filename
 	    			Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVEN");
-	    			previewIntent.putExtra("videoID", "item " + ids[position]);
+	    			previewIntent.putExtra("videoID", "" + ids[(int)id]);
 	    			startActivity(previewIntent);
 	        	}
 	        });
@@ -206,7 +203,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	        TextView text=(TextView)vi.findViewById(R.id.tvList257Text);;
 	        ImageView image=(ImageView)vi.findViewById(R.id.ivList257Image);
 	        
-	        text.setText(ids[position]);
+	        text.setText(names[position]);
 	        image.setImageDrawable(getDrawablefromWeb(data[position]));
 	        return vi;
 	    }

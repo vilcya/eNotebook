@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
     
-	String documents[] = {"TwoFiftySeven", "TwoFiftySevenMenu"}; 
-    
     // Navigation buttons
     Button add;
     Button back;
@@ -26,7 +24,7 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         
         // Set the layout and assign views
-        setContentView(R.layout.menu);
+        setContentView(R.layout.twofiftysevenadd);
         assignedObjects();
         
         // Set the onclick listeners
@@ -46,16 +44,11 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
     
     /* Triggered when user clicks a view */
     public void onClick(View view) {
-    	
-    	String name = "";
-    	
     	// Checks which button was clicked
         
         if(view.getId() == R.id.bAddLink257) 
         {
-        	
-        	name = documents[0];
-        	
+ 
 	        try
 	        {
 	            // Find url text
@@ -80,25 +73,21 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
 	            try 
 	            { newtext.createNewFile(); }
 	            catch(IOException e) 
-	            { e.printStackTrace(); } 
-	                        
-	            // Start the preview activity
-	            Intent restartMenu = new Intent("com.eNotebook.SATE2012." + "TwoFiftySevenMenu");
-	            startActivity(restartMenu);
+	            { e.printStackTrace(); }
+	            
+	            Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVEN");
+		        ourIntent.putExtra("videoID", newid);
+	            startActivity(ourIntent);
 	        }
 	        catch (Exception e)
 	        { e.printStackTrace(); }
-        
-        
+	    
         } else {
-        	
-        	name = documents[1];
-        	
+        	Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENMENU");
+            startActivity(ourIntent);
         }
-    
-     // Start intent for the corresponding button being clicked
-        Intent ourIntent = new Intent("com.eNotebook.SATE2012." + name.toUpperCase());
-        startActivity(ourIntent);
+
+        
         
     }
 }
