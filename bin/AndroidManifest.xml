@@ -8,7 +8,8 @@
         android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
     <application
         android:icon="@drawable/ic_launcher"
@@ -88,6 +89,16 @@
             android:label="@string/sTwoFiftySeven" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.TWOFIFTYSEVENMENU" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
+        <activity
+            android:name=".TwoFiftySeven"
+            android:label="@string/sTwoFiftySeven" >
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.TWOFIFTYSEVEN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             
