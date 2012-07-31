@@ -15,11 +15,14 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +37,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	Button addLink;
 	Button back;
 	// For adding a new video
-	EditText linkbox;
+	EditText searchbar;
 	
 	// For displaying the videos
 	ListView videoMenu;
@@ -47,6 +50,8 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	String[] urls;
 	String[] ids;
 	String[] names;
+	
+	Toast notify;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +93,14 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	        	}
 	        });
 		}
+
 	}
 	
 	protected void assignobjects()
 	{
 		addLink = (Button) findViewById(R.id.bAddLink);
 		back = (Button) findViewById(R.id.bBack257Menu);
-		linkbox = (EditText) findViewById(R.id.etAddLink);
+		searchbar = (EditText) findViewById(R.id.etAddLink);
 		
 		videoMenu = (ListView) findViewById(R.id.lvVideoMenu);
 		empty = (TextView) findViewById(R.id.tvEmpty257);
@@ -164,7 +170,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 			}
 		}
 		
-		String begin = "SATE2012";
+		String begin = "<div class=\"title\">";
 		String end = "</div>";
 		String part = builder.substring(builder.indexOf(begin) + begin.length());
 	    return part.substring(0, part.indexOf(end));

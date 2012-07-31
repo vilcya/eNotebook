@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	
@@ -15,7 +14,6 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	
 	Bundle extras;
 	
-	Toast notify;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +30,6 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 						+ extras.getString("videoID") + "\" frameborder=\"0\" allowfullscreen></iframe></html>";
 		myVideo.loadData(video, "text/html", "utf-8");
 		
-		notify = Toast.makeText(getApplicationContext(),
-				extras.getString("videoID"), 
-				Toast.LENGTH_LONG);
-		notify.show();
 	}
 	
 	protected void assignobjects()
