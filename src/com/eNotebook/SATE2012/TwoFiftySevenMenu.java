@@ -16,6 +16,8 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +38,11 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	Button back;
 	// For searching
 	EditText searchbar;
+	
 	ArrayList<String> arraysort;
 	ArrayList<String> namestmp;
 	
-	
+	VideoListAdapter adapter;
 	// For displaying the videos
 	ListView videoMenu;
 	
@@ -48,6 +51,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	
 	// Thumbnail urls of all youtube videos
 	String[] thumbnailurls;
+	String[] thumbnailurlstmp;
 	String[] urls;
 	String[] ids;
 	String[] names;
@@ -79,7 +83,9 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 			empty.setText("You have no videos. Press the plus to add one.");
 		}
 		else {		
-			VideoListAdapter adapter = new VideoListAdapter(this, thumbnailurls);
+			//arraysort = new ArrayList<String>(Arrays.asList(thumbnailurls));
+			
+			adapter = new VideoListAdapter(this, thumbnailurlstmp);
 			videoMenu.setAdapter(adapter);
 			// Set on click listener (when an item on the list is pressed, go to preview)
 	        videoMenu.setOnItemClickListener(new OnItemClickListener()
@@ -92,35 +98,39 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	    			startActivity(previewIntent);
 	        	}
 	        });
+	        
+	        /*
+	        // For the search bar
+	        searchbar.addTextChangedListener(new TextWatcher() {
+	        	public void afterTextChanged(Editable s) {}
+	        	
+	        	public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+	        	
+	        	// Reset the adapter to the sorted list if the user searches for something  
+	        	public void onTextChanged(CharSequence s, int start, int before, int count) {
+	        		
+	        		// Clear the new array
+	        		arraysort.clear();
+	        		namestmp.clear();
+	        		
+	        		// Create the new array filtered through the searchbar
+	        		for(int i =0; i < names.length; i++)
+	        		{
+	        			if((names[i].toLowerCase()).contains(
+	        					(searchbar.getText().toString().toLowerCase())))
+	        				arraysort.add(thumbnailurls[i]);
+	        				namestmp.add(names[i]);
+	        		}
+	        		
+	        		// Set the adapter to the new list that contains filtered material 
+	        		thumbnailurlstmp = (String[]) arraysort.toArray();
+	        		adapter.notifyDataSetChanged();
+	        	}
+	        });*/
+     
 		}
 		
-		// For the search bar
-        /*searchbar.addTextChangedListener(new TextWatcher() {
-        	public void afterTextChanged(Editable s) {}
-        	
-        	public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-        	
-        	// Reset the adapter to the sorted list if the user searches for something  
-        	public void onTextChanged(CharSequence s, int start, int before, int count) {
-        		
-        		// Clear the new array
-        		arraysort.clear();
-        		
-        		// Create the new array filtered through the searchbar
-        		for(int i =0; i < names.length; i++)
-        		{
-        			if((names[i].toLowerCase()).contains(
-        					(searchbar.getText().toString().toLowerCase())))
-        				arraysort.add(thumbnailurls[i]);
-        		}
-        		
-        		// Set the adapter to the new list that contains filtered material 
-        		.setAdapter(new ArrayAdapter<String>(TwoFiftySevenMenu.this, 
-        												 R.layout.simple_list, arraysort));        	
-        	}
-        	
-        	
-        });*/
+		
 
 	}
 	
@@ -164,16 +174,15 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 			{
 				urls[i] = "http://youtu.be/" + ids[i];
 				thumbnailurls[i] = "http://img.youtube.com/vi/" + ids[i] + "/default.jpg";
+				thumbnailurlstmp[i] = thumbnailurls[i];
 			}
 		}
 		
 		names = new String[urls.length];
-		namestmp = new String[urls.length];
+
 		for (int i = 0; i < urls.length; i++)
-		{
 			names[i] = getNamefromUrl(urls[i]);
-			namestmp[i] = names[i];
-		}
+
 	}
 	
 	public String getNamefromUrl(String url)
@@ -238,10 +247,10 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	        if(convertView==null)
 	            vi = inflater.inflate(R.layout.listview257, null);
 
-	        TextView text=(TextView)vi.findViewById(R.id.tvList257Text);;
+	        TextView text=(TextView)vi.findViewById(R.id.tvList257Text);
 	        ImageView image=(ImageView)vi.findViewById(R.id.ivList257Image);
 	        
-	        text.setText(names[position]);
+	        text.setText(namestmp.get(position));
 	        image.setImageDrawable(getDrawablefromWeb(data[position]));
 	        return vi;
 	    }

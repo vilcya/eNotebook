@@ -2,6 +2,7 @@ package com.eNotebook.SATE2012;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -36,6 +37,8 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	{	
 		extras = getIntent().getExtras();
 		myVideo = (WebView) findViewById(R.id.wvVideo);
+		
+		myVideo.setBackgroundColor(Color.TRANSPARENT);
 		back = (Button) findViewById(R.id.b257Back);
 	}
 	
