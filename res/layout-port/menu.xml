@@ -5,13 +5,6 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/bg_menu">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:src="@drawable/tecedge" 
-        android:layout_marginBottom="10dp"/>
     
     <TextView
         android:id="@+id/tvMenuIntro"
@@ -31,6 +24,13 @@
         android:typeface="serif" 
         android:paddingBottom="30dp"/>
         
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@drawable/tecedge" 
+        android:layout_marginBottom="10dp"/>
+    
     <Button
         android:id="@+id/bEDaily"
 	    android:layout_width="250dp"

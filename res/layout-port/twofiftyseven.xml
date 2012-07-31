@@ -9,7 +9,9 @@
         android:id="@+id/wvVideo"
         android:layout_width="match_parent"
         android:layout_height="228dp" 
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent"
+	    android:cacheColorHint="@android:color/transparent"/>
 
    	<Button
 	    android:id="@+id/b257Back"
