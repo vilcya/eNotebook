@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,8 +37,11 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	// Navigation buttons 
 	Button addLink;
 	Button back;
-	// For adding a new video
+	// For searching
 	EditText searchbar;
+	ArrayList<String> arraysort;
+	ArrayList<String> namestmp;
+	
 	
 	// For displaying the videos
 	ListView videoMenu;
@@ -60,6 +64,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		setContentView(R.layout.twofiftysevenmenu);
 		assignobjects();
 		setVideoUrls();
+		
 		addLink.setOnClickListener(this);
 		back.setOnClickListener(this);
 		
@@ -67,8 +72,6 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-		
-		
 		if (!wifi.isConnected()) {			   
 			empty.setVisibility(TextView.VISIBLE);
 			empty.setText("Please connect to WiFi to view your videos.");
@@ -93,6 +96,34 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	        	}
 	        });
 		}
+		
+		// For the search bar
+        /*searchbar.addTextChangedListener(new TextWatcher() {
+        	public void afterTextChanged(Editable s) {}
+        	
+        	public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        	
+        	// Reset the adapter to the sorted list if the user searches for something  
+        	public void onTextChanged(CharSequence s, int start, int before, int count) {
+        		
+        		// Clear the new array
+        		arraysort.clear();
+        		
+        		// Create the new array filtered through the searchbar
+        		for(int i =0; i < names.length; i++)
+        		{
+        			if((names[i].toLowerCase()).contains(
+        					(searchbar.getText().toString().toLowerCase())))
+        				arraysort.add(thumbnailurls[i]);
+        		}
+        		
+        		// Set the adapter to the new list that contains filtered material 
+        		.setAdapter(new ArrayAdapter<String>(TwoFiftySevenMenu.this, 
+        												 R.layout.simple_list, arraysort));        	
+        	}
+        	
+        	
+        });*/
 
 	}
 	
@@ -140,8 +171,12 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		}
 		
 		names = new String[urls.length];
+		namestmp = new String[urls.length];
 		for (int i = 0; i < urls.length; i++)
+		{
 			names[i] = getNamefromUrl(urls[i]);
+			namestmp[i] = names[i];
+		}
 	}
 	
 	public String getNamefromUrl(String url)
