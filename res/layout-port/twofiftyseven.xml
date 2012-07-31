@@ -11,7 +11,8 @@
         android:layout_height="228dp" 
         android:layout_margin="20dp"
         android:background="@android:color/transparent"
-	    android:cacheColorHint="@android:color/transparent"/>
+	    android:cacheColorHint="@android:color/transparent"
+	    android:gravity="center" />
 
    	<Button
 	    android:id="@+id/b257Back"
