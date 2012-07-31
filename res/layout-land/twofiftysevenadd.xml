@@ -9,17 +9,17 @@
 	<TextView
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/sVideoIDIn"
+	    android:text="@string/sVideoIDDis"
 	    android:layout_gravity="center"
-	    android:textSize="20dp"
+	    android:textSize="14dp"
 	    android:textColor="#000000"
 	    android:typeface="serif"
-	    android:layout_margin="5dp"/>
+	    android:layout_marginTop="10dp"/>
 
 	<ImageView
 	    android:layout_width="fill_parent"
-	    android:layout_height="100dp"
-	    android:src="@drawable/b_green" 
+	    android:layout_height="40dp"
+	    android:src="@drawable/videoid" 
 	    android:padding="5dp"
 	    android:layout_margin="5dp"/>
 	
@@ -29,7 +29,10 @@
 	    android:layout_height="50dp"
 	    android:layout_gravity="center"
 	    android:ems="10"
-	    android:padding="5dp"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp"
+	    android:padding="15dp"
+	    android:textSize="14dp"
 	    android:hint="@string/sVideoID"
 	    android:textColorHint="#000000"
 	    android:typeface="serif"

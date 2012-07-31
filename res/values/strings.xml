@@ -18,6 +18,7 @@
 	<string name="sSave">Save</string>
 	<string name="sAddLink">Add Link</string>
 	<string name="sVideoIDIn">Finding Your Video ID</string>
+	<string name="sVideoIDDis">Video IDs are case sensitive </string>
 	<string name="sVideoID">Input Your Video ID</string>
 	<string name="sDelete">Delete</string>
 	<string name="sBack">Back</string>
