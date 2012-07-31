@@ -16,14 +16,6 @@
 	    android:typeface="serif" 
 	    android:layout_marginTop="10dp"/>
    	
-   	
-   	<LinearLayout
-   	    android:focusable="true"
-		android:focusableInTouchMode="true"
-		android:layout_width="0dp"
-		android:layout_height="0dp"
-   	    />
-   	
    	<LinearLayout android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"

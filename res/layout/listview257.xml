@@ -13,7 +13,9 @@
   	  android:layout_width="wrap_content"
 	  android:layout_height="wrap_content"
 	  android:layout_gravity="left|center_vertical" 
-	  android:textSize="20dp"
+	  android:textSize="16dp"
 	  android:text="@string/hello_world"
-	  android:layout_marginLeft="10dp"/>
+	  android:layout_marginLeft="10dp"
+	  android:typeface="serif" />
+	  
 </LinearLayout>
