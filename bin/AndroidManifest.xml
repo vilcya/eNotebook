@@ -106,7 +106,8 @@
         
         <activity
             android:name=".TwoFiftySeven"
-            android:label="@string/sTwoFiftySeven" >
+            android:label="@string/sTwoFiftySeven" 
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.TWOFIFTYSEVEN" />
                 <category android:name="android.intent.category.DEFAULT" />

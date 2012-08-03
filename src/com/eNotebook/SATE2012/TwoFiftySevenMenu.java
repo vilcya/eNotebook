@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -49,6 +50,10 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	
 	// Thumbnail urls, id, and name of youtube videos
 	String[] thumbnailurls, ids, names;
+	
+	
+	// For loading page
+	private ProgressDialog progressDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -289,5 +294,6 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	    	}
 	    }
 	}
+	
 	
 }
