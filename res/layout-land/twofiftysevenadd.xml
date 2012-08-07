@@ -52,14 +52,5 @@
 		    android:text="@string/sAddLink"
 		    android:textSize="18dp"
 		    android:typeface="serif"/>
-		<Button
-		    android:id="@+id/bBack257"
-		    android:layout_width="150dp"
-		    android:layout_height="50dp"
-		    android:layout_gravity="center"
-		    android:background="@drawable/b_green"
-		    android:text="@string/sBack"
-		    android:textSize="18dp"
-		    android:typeface="serif"/>
 	</LinearLayout>
 </LinearLayout>

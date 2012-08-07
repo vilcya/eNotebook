@@ -15,7 +15,6 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
     
     // Navigation buttons
     Button add;
-    Button back;
     EditText link;
     Toast errormessage;
     
@@ -29,7 +28,6 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
         
         // Set the onclick listeners
         add.setOnClickListener(this);
-        back.setOnClickListener(this);
     } 
 
     /* Assign layout objects to respective variables  */
@@ -37,7 +35,6 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
         
         // Navigation
         add = (Button) findViewById(R.id.bAddLink257);
-        back = (Button) findViewById(R.id.bBack257);
         link = (EditText) findViewById(R.id.etAddLink);
     }
     
@@ -45,49 +42,40 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
     /* Triggered when user clicks a view */
     public void onClick(View view) {
     	// Checks which button was clicked
-        
-        if(view.getId() == R.id.bAddLink257) 
+
+        try
         {
- 
-	        try
-	        {
-	            // Find url text
-	            String newid = link.getText().toString();
-	            
-	            // Check for blank url
-	            if (newid.length() == 0)
-	            {
-	            	errormessage = Toast.makeText(getApplicationContext(),
-	            				"Please enter a valid video ID.", 
-	            				Toast.LENGTH_LONG);
-	            	errormessage.show();
-	            	return;
-	            }
-	            
-	            // Finds the text directory and creates one if none exists
-		        File urlpath = new File(getFilesDir(), "TwoFiftySeven");
-		        if (!urlpath.exists())
-		        	urlpath.mkdir();
-	        	// Create a new file for the new eDaily
-	            File newtext = new File(urlpath, newid);
-	            try 
-	            { newtext.createNewFile(); }
-	            catch(IOException e) 
-	            { e.printStackTrace(); }
-	            
-	            Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVEN");
-		        ourIntent.putExtra("videoID", newid);
-	            startActivity(ourIntent);
-	        }
-	        catch (Exception e)
-	        { e.printStackTrace(); }
-	    
-        } else {
-        	Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENMENU");
+            // Find url text
+            String newid = link.getText().toString();
+            
+            // Check for blank url
+            if (newid.length() == 0)
+            {
+            	errormessage = Toast.makeText(getApplicationContext(),
+            				"Please enter a valid video ID.", 
+            				Toast.LENGTH_LONG);
+            	errormessage.show();
+            	return;
+            }
+            
+            // Finds the text directory and creates one if none exists
+	        File urlpath = new File(getFilesDir(), "TwoFiftySeven");
+	        if (!urlpath.exists())
+	        	urlpath.mkdir();
+        	// Create a new file for the new eDaily
+            File newtext = new File(urlpath, newid);
+            try 
+            { newtext.createNewFile(); }
+            catch(IOException e) 
+            { e.printStackTrace(); }
+            
+            Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENMENU");
+	        //ourIntent.putExtra("videoID", newid);
             startActivity(ourIntent);
         }
-
-        
+        catch (Exception e)
+        { e.printStackTrace(); }
+   
         
     }
 }

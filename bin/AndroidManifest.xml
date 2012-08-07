@@ -115,6 +115,17 @@
             
         </activity>
         
+        <activity
+            android:name=".eTecNoteMenu"
+            android:label="@string/sTwoFiftySeven" 
+            android:configChanges="orientation">
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.ETECNOTEMENU" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
     </application>
 
 </manifest>

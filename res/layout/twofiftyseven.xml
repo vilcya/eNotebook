@@ -3,26 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@drawable/bg_green">
-	
+    android:background="@drawable/bg_green"
+    android:gravity="center" 
+    android:layout_gravity="center">
+
     <WebView
         android:id="@+id/wvVideo"
         android:layout_width="150px"
-        android:layout_height="100px" 
+        android:layout_height="100px"
         android:layout_margin="20dp"
         android:background="@android:color/transparent"
-	    android:cacheColorHint="@android:color/transparent"
-	    android:gravity="center" 
-	    android:layout_gravity="center"/>
-
-   	<Button
-	    android:id="@+id/b257Back"
-	    android:layout_width="150dp"
-	    android:layout_height="50dp"
-	    android:layout_gravity="center"
-	    android:background="@drawable/b_green"
-	    android:text="@string/sBack"
-	    android:textSize="18dp"
-	    android:typeface="serif"/>
+        android:cacheColorHint="@android:color/transparent" />
    	
 </LinearLayout>

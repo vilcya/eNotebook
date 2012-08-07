@@ -1,17 +1,13 @@
 package com.eNotebook.SATE2012;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
 
-public class TwoFiftySeven extends Activity implements View.OnClickListener{
+public class TwoFiftySeven extends Activity {
 	
 	WebView myVideo;
-	Button back;
 	
 	Bundle extras;
 	
@@ -22,7 +18,6 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 	
 		setContentView(R.layout.twofiftyseven);
 		assignobjects();
-		back.setOnClickListener(this);
 		
 		myVideo.getSettings().setJavaScriptEnabled(true);
 		myVideo.getSettings().setPluginsEnabled(true);
@@ -42,13 +37,6 @@ public class TwoFiftySeven extends Activity implements View.OnClickListener{
 		myVideo = (WebView) findViewById(R.id.wvVideo);
 		
 		myVideo.setBackgroundColor(Color.TRANSPARENT);
-		back = (Button) findViewById(R.id.b257Back);
 	}
 	
-	public void onClick(View v)
-	{
-		Intent menu = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENMENU");
-		startActivity(menu);
-	}
-		
 }
