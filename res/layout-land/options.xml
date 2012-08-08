@@ -47,21 +47,27 @@
 	    android:ems="10" 
 	    android:hint="@string/setPassword"
 		android:password="true"/>
-	<Button
-	    android:id="@+id/bLogin"
-	    android:layout_width="260dp"
-	    android:layout_height="40dp"
-	    android:layout_gravity="center"
-	    android:background="@drawable/b_orange"
-	    android:text="@string/sLogin"
-	    android:textSize="18dp"
-	    android:layout_marginTop="10dp"/>
-	<Button
-	    android:id="@+id/bLogout"
-	    android:layout_width="260dp"
-	    android:layout_height="40dp"
-	    android:layout_gravity="center"
-	    android:background="@drawable/b_orange"
-	    android:text="@string/sLogout"
-	    android:textSize="18dp"/>
+
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:orientation="horizontal"
+	    android:gravity="center" >
+
+		<Button
+		    android:id="@+id/bLogin"
+		    android:layout_width="125dp"
+		    android:layout_height="50dp"
+		    android:background="@drawable/b_orange"
+		    android:text="@string/sLogin"
+		    android:textSize="18dp" />
+
+		<Button
+		    android:id="@+id/bLogout"
+		    android:layout_width="125dp"
+		    android:layout_height="50dp"
+		    android:background="@drawable/b_orange"
+		    android:text="@string/sLogout"
+		    android:textSize="18dp" />
+		
+		</LinearLayout>
 </LinearLayout>
