@@ -155,7 +155,7 @@ public class Option extends Activity implements View.OnClickListener {
 		        }
 		        
 		        
-		        // Access the database
+		        // Access the database and connect through a post
 		        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		        
 		        parameters.add(new BasicNameValuePair("username", fullname));
