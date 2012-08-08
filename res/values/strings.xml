@@ -26,8 +26,8 @@
 	<string name="setSearch">Search</string>
 	<string name="sName">Name:</string>
 	<string name="sDone">Done</string>
-	<string name="setNameFirst">First Name</string>
-	<string name="setNameLast">Last Name</string>
+	<string name="setUsername">Username</string>
+	<string name="setPassword">Password</string>
 	<string name="sPreviewToday">What I Accomplished today: </string>
 	<string name="sPreviewTmrw">What I Plan to Accomplish Tomorrow: </string>
 	<string name="sNoEDailies">You have no eDailies.</string>

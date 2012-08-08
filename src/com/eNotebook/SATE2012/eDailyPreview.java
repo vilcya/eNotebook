@@ -160,11 +160,11 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     private void parseText(String textfromfile, String name)
     {
     	// Split the string given the regular expression
-    	String[] components = textfromfile.split("\\|\\|\\|");
+    	String[] components = textfromfile.split("*****");
     	
     	// Make sure that the split has not failed
     	//  problem with code if this happens
-    	if (components.length == 0 || components.length > 2)
+    	if (components.length == 0 || components.length > 3)
     	{
     		errormessage = Toast.makeText(getApplicationContext(),
     				"FATAL: Nothing was inputted.", 
@@ -175,8 +175,8 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	
     	// Set the respective views on the eDaily
     	tvname.setText("Student's Name: " + name);
-    	tvacctoday.setText(components[0]);
-    	tvacctom.setText(components[1]);
+    	tvacctoday.setText(components[1]);
+    	tvacctom.setText(components[2]);
     }
     
     public void onClick(View view)

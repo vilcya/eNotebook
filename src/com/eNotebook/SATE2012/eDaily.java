@@ -6,9 +6,13 @@
 
 package com.eNotebook.SATE2012;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -119,7 +123,7 @@ public class eDaily extends Activity implements View.OnClickListener{
 	            { e.printStackTrace(); } 
                 
                 // Create the string for going into the file
-                String edailytext = myacctoday + "|||" + myacctom;
+                String edailytext = getName() + "*****" + myacctoday + "*****" + myacctom;
 
                 // Open the file stream and copy the text into the file
                 FileOutputStream ostream = new FileOutputStream(newtext);
@@ -135,6 +139,64 @@ public class eDaily extends Activity implements View.OnClickListener{
             { e.printStackTrace(); }
     	}
     }
+    
+    /* Retrieves user's name */
+    public String getName()
+    {
+    	File namepath = new File(getFilesDir(), "UserInformation/name");
+    	
+    	// Error handling for non-existent paths 
+    	//  problem with code if this occurs
+    	if (!namepath.exists())
+    	{
+    		errormessage = Toast.makeText(getApplicationContext(),
+    				"FATAL: I could not find the path", 
+    				Toast.LENGTH_LONG);
+    		errormessage.show();
+            return null;
+    	}
+    	
+    	// Read the file, parse the string, and set the correct views
+    	return readTextfromFile(namepath.toString());
+    }
+    
+    /* Takes in a file path name and returns the text
+     *  read in from that file 
+     */
+    private String readTextfromFile(String path)
+    {
+    	File edailyfile = new File(path);	// create the file
+        FileInputStream instream;			// input stream to read file
+        InputStreamReader instreamread; 	// reader for stream
+        BufferedReader buf;					// buffer for reader
+        
+        String lineofdata = "";				// a line of the file
+        String data = "";					// will contain complete string
+       
+        try 
+        {
+        	// Begin creating the instream buffer
+            instream = new FileInputStream(edailyfile);
+            instreamread = new InputStreamReader (instream);
+            buf = new BufferedReader(instreamread);
+            
+            try
+            {
+            	// Read the line until end of file and add to data
+                while((lineofdata = buf.readLine()) != null)
+                    data += lineofdata + "\n";
+            }
+            catch(IOException e)
+            { e.printStackTrace(); }
+            
+        }
+        catch(FileNotFoundException e)
+        { e.printStackTrace(); }
+        
+        // Return final result
+        return data;
+    }
+    
     
     /* Return today's date in string format MM.dd.yyyy */
     private String getDateToday()
