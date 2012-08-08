@@ -12,6 +12,9 @@
     <string name="sTecNote">eTecNote</string>
     <string name="s257">2 5 7</string>
     <string name="sOption">Options</string>
+    <string name="sLogScreen">User Options</string>
+    <string name="sLogin">Login</string>
+    <string name="sLogout">Logout</string>
     <string name="sDate">Date:</string>
 	<string name="sToday">Accomplishments Today:</string>
 	<string name="sTmrw">Plans for Tomorrow:</string>
@@ -25,6 +28,8 @@
 	<string name="sEdit">Edit</string>
 	<string name="setSearch">Search</string>
 	<string name="sName">Name:</string>
+	<string name="sFirst">First Name</string>
+	<string name="sLast">Last Name</string>
 	<string name="sDone">Done</string>
 	<string name="setUsername">Username</string>
 	<string name="setPassword">Password</string>
