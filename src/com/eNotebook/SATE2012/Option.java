@@ -37,11 +37,10 @@ import android.widget.Toast;
 public class Option extends Activity implements View.OnClickListener {
 	
 	// Button view
-	Button login, back;
+	Button login, logout;
 	
 	// Edittext views for inputting name
-	EditText username;
-	EditText password;
+	EditText firstname, lastname, password;
 	
 	// TextView for showing the currently stored name
 	TextView CurName;
@@ -57,16 +56,17 @@ public class Option extends Activity implements View.OnClickListener {
 		assignObjects();
 		CurrentName();
 		login.setOnClickListener(this);
-		back.setOnClickListener(this);
+		logout.setOnClickListener(this);
 	}
 
 	// Assigns globals
 	protected void assignObjects()
 	{
-		login = (Button) findViewById(R.id.bdoneButton);
-		back = (Button) findViewById(R.id.bOptionBack);
+		login = (Button) findViewById(R.id.bLogin);
+		logout = (Button) findViewById(R.id.bLogout);
 		CurName = (TextView) findViewById(R.id.tvCurrentName);
-		username = (EditText) findViewById(R.id.etUsername);
+		firstname = (EditText) findViewById(R.id.etFirstName);
+		lastname = (EditText) findViewById(R.id.etLastName);
 		password = (EditText) findViewById(R.id.etPassword);
 	}
 	
@@ -124,13 +124,33 @@ public class Option extends Activity implements View.OnClickListener {
         return data;
     }
     
+    static public boolean deleteDirectory(File path) {
+        if( path.exists() ) {
+          File[] files = path.listFiles();
+          for(int i=0; i<files.length; i++) {
+             if(files[i].isDirectory()) {
+               deleteDirectory(files[i]);
+             }
+             else {
+               files[i].delete();
+             }
+          }
+        }
+        return( path.delete() );
+      }
+    
     // On click function
     public void onClick(View v){
 		
     	// If back is pressed
-    	if(v.getId() == R.id.bOptionBack)
+    	if(v.getId() == R.id.bLogout)
     	{
-    		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+    		
+    		deleteDirectory(new File(getFilesDir(),"UserInformation"));
+    		deleteDirectory(new File(getFilesDir(),"Text"));
+    		deleteDirectory(new File(getFilesDir(),"TwoFiftySeven"));
+    		
+    		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "OPTION");
             startActivity(backIntent);
     	}
     	
@@ -141,11 +161,14 @@ public class Option extends Activity implements View.OnClickListener {
 		    try
 		    {
 		    	// Gets the new names
-		    	String fullname = username.getText().toString();
+		    	String lname = lastname.getText().toString();
+		    	String fname = firstname.getText().toString();
 		    	String pwd = password.getText().toString();
 		    	
+		    	saveName(fname + " " + lname);
+		    	
 		        // Check that none of the fields are empty
-		        if (fullname.length() == 0 || pwd.length() == 0)
+		        if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0)
 		        {
 		        	errormessage = Toast.makeText(getApplicationContext(),
 	        				"One or more fields are blank. Please provide your information.", 
@@ -158,7 +181,8 @@ public class Option extends Activity implements View.OnClickListener {
 		        // Access the database
 		        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		        
-		        parameters.add(new BasicNameValuePair("username", fullname));
+		        parameters.add(new BasicNameValuePair("firstname", fname));
+		        parameters.add(new BasicNameValuePair("lastname", lname));
 		        parameters.add(new BasicNameValuePair("password", pwd));
 		        
 		        HttpClient client = new DefaultHttpClient();

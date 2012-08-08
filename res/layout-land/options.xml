@@ -8,9 +8,10 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
-	    android:text="@string/sOption"
+	    android:text="@string/sLogScreen"
 	    android:textColor="@android:color/black"
 	    android:textSize="20dp" 
+	    android:typeface="serif" 
 	    android:layout_marginTop="10dp"
 	    android:layout_marginBottom="10dp"/>
 	<TextView
@@ -23,12 +24,20 @@
 	    android:typeface="serif" 
 	    android:layout_marginBottom="10dp"/>
 	<EditText
-	    android:id="@+id/etUsername"
+	    android:id="@+id/etFirstName"
 	    android:layout_width="260dp"
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
 	    android:ems="10" 
-	    android:hint="@string/setUsername"
+	    android:hint="@string/sFirst"
+	    android:inputType="textCapWords" />
+	<EditText
+	    android:id="@+id/etLastName"
+	    android:layout_width="260dp"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:ems="10" 
+	    android:hint="@string/sLast"
 	    android:inputType="textCapWords" />
 	<EditText
 	    android:id="@+id/etPassword"
@@ -39,20 +48,20 @@
 	    android:hint="@string/setPassword"
 		android:password="true"/>
 	<Button
-	    android:id="@+id/bdoneButton"
+	    android:id="@+id/bLogin"
 	    android:layout_width="260dp"
 	    android:layout_height="40dp"
 	    android:layout_gravity="center"
 	    android:background="@drawable/b_orange"
-	    android:text="@string/sDone"
+	    android:text="@string/sLogin"
 	    android:textSize="18dp"
 	    android:layout_marginTop="10dp"/>
 	<Button
-	    android:id="@+id/bOptionBack"
+	    android:id="@+id/bLogout"
 	    android:layout_width="260dp"
 	    android:layout_height="40dp"
 	    android:layout_gravity="center"
 	    android:background="@drawable/b_orange"
-	    android:text="@string/sBack"
+	    android:text="@string/sLogout"
 	    android:textSize="18dp"/>
 </LinearLayout>
