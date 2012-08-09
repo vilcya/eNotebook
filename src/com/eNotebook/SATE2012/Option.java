@@ -37,7 +37,7 @@ import android.widget.Toast;
 public class Option extends Activity implements View.OnClickListener {
 	
 	// Button view
-	Button login, logout;
+	Button login, logout, create;
 	
 	// Edittext views for inputting name
 	EditText firstname, lastname, password;
@@ -57,6 +57,7 @@ public class Option extends Activity implements View.OnClickListener {
 		CurrentName();
 		login.setOnClickListener(this);
 		logout.setOnClickListener(this);
+		create.setOnClickListener(this);
 	}
 
 	// Assigns globals
@@ -64,6 +65,7 @@ public class Option extends Activity implements View.OnClickListener {
 	{
 		login = (Button) findViewById(R.id.bLogin);
 		logout = (Button) findViewById(R.id.bLogout);
+		create = (Button) findViewById(R.id.bCreate);
 		CurName = (TextView) findViewById(R.id.tvCurrentName);
 		firstname = (EditText) findViewById(R.id.etFirstName);
 		lastname = (EditText) findViewById(R.id.etLastName);
@@ -78,13 +80,17 @@ public class Option extends Activity implements View.OnClickListener {
 		if ( !namepath.exists())
     	{
             CurName.setText("You are not logged in!" );
-            logout.setVisibility(Button.INVISIBLE);
+            logout.setVisibility(Button.GONE);
             return;
     	}
 		else 
 		{
 			String myname = readTextfromFile(namepath.toString());
-			login.setVisibility(Button.INVISIBLE);
+			login.setVisibility(Button.GONE);
+			firstname.setVisibility(EditText.GONE);
+			lastname.setVisibility(EditText.GONE);
+			password.setVisibility(EditText.GONE);
+			create.setVisibility(Button.GONE);
 			CurName.setText("Current User: " + myname);
 		}
 	}
@@ -156,6 +162,12 @@ public class Option extends Activity implements View.OnClickListener {
             startActivity(backIntent);
     	}
     	
+    	else if(v.getId() == R.id.bCreate)
+    	{
+    		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "NEWUSER");
+            startActivity(backIntent);
+    	}
+    		
     	// If submit is pressed 
     	else
     	{	
