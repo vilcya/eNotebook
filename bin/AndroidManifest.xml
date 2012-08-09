@@ -126,6 +126,17 @@
             
         </activity>
         
+        <activity
+            android:name=".NewUser"
+            android:label="@string/sOption" 
+            android:configChanges="orientation">
+            <intent-filter>
+                <action android:name="com.eNotebook.SATE2012.NEWUSER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
+        </activity>
+        
     </application>
 
 </manifest>

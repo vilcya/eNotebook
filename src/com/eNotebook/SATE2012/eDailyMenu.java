@@ -116,6 +116,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         // Get the file path of the edailies
         File edailytextpath = new File(getFilesDir(), "Text");
         
+
         // Check if directory exists
         if(!edailytextpath.exists())
             return;
