@@ -92,7 +92,6 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     		return;
     	
     	File textpath = new File(getFilesDir(), "Text/" + date);
-    	File namepath = new File(getFilesDir(), "UserInformation/name");
     	
     	// Check if the edaily is today's, and hide the edit button if it is not
     	if(!date.equalsIgnoreCase(getDateToday()))
@@ -101,7 +100,7 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	
     	// Error handling for non-existent paths 
     	//  problem with code if this occurs
-    	if (!textpath.exists() || !namepath.exists())
+    	if (!textpath.exists())
     	{
     		errormessage = Toast.makeText(getApplicationContext(),
     				"FATAL: I could not find the path", 
@@ -112,8 +111,7 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     	
     	// Read the file, parse the string, and set the correct views
     	String mystring = readTextfromFile(textpath.toString());
-    	String myname = readTextfromFile(namepath.toString());
-    	parseText(mystring, myname);
+    	parseText(mystring);
     	
     }    
     
@@ -157,14 +155,14 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     /* Parses a given string read from a text file into 
      *  components and sets the correct views
      */
-    private void parseText(String textfromfile, String name)
+    private void parseText(String textfromfile)
     {
     	// Split the string given the regular expression
-    	String[] components = textfromfile.split("*****");
+    	String[] components = textfromfile.split("\\*\\*\\*\\*\\*");
     	
     	// Make sure that the split has not failed
     	//  problem with code if this happens
-    	if (components.length == 0 || components.length > 3)
+    	if (components.length == 0)
     	{
     		errormessage = Toast.makeText(getApplicationContext(),
     				"FATAL: Nothing was inputted.", 
@@ -172,11 +170,11 @@ public class eDailyPreview extends Activity implements View.OnClickListener{
     		errormessage.show();
     		return;
     	}
-    	
     	// Set the respective views on the eDaily
-    	tvname.setText("Student's Name: " + name);
+    	tvname.setText("Student's Name: " + components[0]);
     	tvacctoday.setText(components[1]);
     	tvacctom.setText(components[2]);
+	
     }
     
     public void onClick(View view)
