@@ -24,8 +24,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,7 +37,7 @@ import android.widget.Toast;
 public class Option extends Activity implements View.OnClickListener {
 	
 	// Button view
-	Button login, logout;
+	Button login, logout, create;
 	
 	// Edittext views for inputting name
 	EditText firstname, lastname, password;
@@ -59,6 +57,7 @@ public class Option extends Activity implements View.OnClickListener {
 		CurrentName();
 		login.setOnClickListener(this);
 		logout.setOnClickListener(this);
+		create.setOnClickListener(this);
 	}
 
 	// Assigns globals
@@ -66,6 +65,7 @@ public class Option extends Activity implements View.OnClickListener {
 	{
 		login = (Button) findViewById(R.id.bLogin);
 		logout = (Button) findViewById(R.id.bLogout);
+		create = (Button) findViewById(R.id.bCreate);
 		CurName = (TextView) findViewById(R.id.tvCurrentName);
 		firstname = (EditText) findViewById(R.id.etFirstName);
 		lastname = (EditText) findViewById(R.id.etLastName);
@@ -80,11 +80,17 @@ public class Option extends Activity implements View.OnClickListener {
 		if ( !namepath.exists())
     	{
             CurName.setText("You are not logged in!" );
+            logout.setVisibility(Button.GONE);
             return;
     	}
 		else 
 		{
 			String myname = readTextfromFile(namepath.toString());
+			login.setVisibility(Button.GONE);
+			firstname.setVisibility(EditText.GONE);
+			lastname.setVisibility(EditText.GONE);
+			password.setVisibility(EditText.GONE);
+			create.setVisibility(Button.GONE);
 			CurName.setText("Current User: " + myname);
 		}
 	}
@@ -156,6 +162,12 @@ public class Option extends Activity implements View.OnClickListener {
             startActivity(backIntent);
     	}
     	
+    	else if(v.getId() == R.id.bCreate)
+    	{
+    		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "NEWUSER");
+            startActivity(backIntent);
+    	}
+    		
     	// If submit is pressed 
     	else
     	{	
@@ -179,9 +191,9 @@ public class Option extends Activity implements View.OnClickListener {
 		        }
 		        
 		        
-		     // Access the database and connect through a post
+		        // Access the database and connect through a post
 		        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
-
+		        
 		        parameters.add(new BasicNameValuePair("first_name", fname));
 		        parameters.add(new BasicNameValuePair("last_name", lname));
 		        parameters.add(new BasicNameValuePair("password", pwd));
@@ -195,7 +207,6 @@ public class Option extends Activity implements View.OnClickListener {
 		        HttpEntity entity = response.getEntity();
 		        InputStream instream = entity.getContent();
 
-
 		        // Convert buffer to string
 		        BufferedReader bufreader = new BufferedReader(new InputStreamReader(instream, "iso-8859-1"), 8);
 		        StringBuilder sbuilder = new StringBuilder();
@@ -208,6 +219,7 @@ public class Option extends Activity implements View.OnClickListener {
 
 		        finalresult = sbuilder.toString();
 
+
 		        if (finalresult.contains("false"))
 		        {
 		        	errormessage = Toast.makeText(getApplicationContext(), "Login failed, please try again.", Toast.LENGTH_LONG);
@@ -215,6 +227,7 @@ public class Option extends Activity implements View.OnClickListener {
 		        }
 
 		        else
+
 		        {
 		        	saveName(fname + " " + lname);
 			        // Get to other webpage
@@ -262,17 +275,20 @@ public class Option extends Activity implements View.OnClickListener {
 			        
 			        
 
+
 		        }
+
 		        
+		        
+		        // Start the preview activity
+		        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+		        startActivity(previewIntent);
 		    }
 		    catch (Exception e)
 		    { 
 		    	e.printStackTrace();
 		    }
-		   
-		    // Start the preview activity
-	        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
-	        startActivity(previewIntent);
+
     	}
 	}
     
