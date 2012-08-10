@@ -117,8 +117,7 @@
         
         <activity
             android:name=".eTecNoteMenu"
-            android:label="@string/sTwoFiftySeven" 
-            android:configChanges="orientation">
+            android:label="@string/sTwoFiftySeven" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.ETECNOTEMENU" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -128,8 +127,7 @@
         
         <activity
             android:name=".NewUser"
-            android:label="@string/sOption" 
-            android:configChanges="orientation">
+            android:label="@string/sOption" >
             <intent-filter>
                 <action android:name="com.eNotebook.SATE2012.NEWUSER" />
                 <category android:name="android.intent.category.DEFAULT" />
