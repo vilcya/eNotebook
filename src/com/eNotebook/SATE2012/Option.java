@@ -19,7 +19,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -186,11 +185,10 @@ public class Option extends Activity implements View.OnClickListener {
 		        	
 			        for(int j=0; j<jarray.length(); j++)
 			        {
-			        	
-			        	JSONObject jsondata = jarray.getJSONObject(j);
+			        	JSONObject jsondata = jarray.getJSONObject(i);
 			        	
 			        	// Create a new file for the new eDaily
-			            File newtext = new File(textpath, jsondata.getString("Date"));
+			            File newtext = new File(textpath, "August 9, 2012");
 			            try 
 			            { newtext.createNewFile(); }
 			            catch(IOException e) 
@@ -200,26 +198,29 @@ public class Option extends Activity implements View.OnClickListener {
 		                String edailytext = fname + " " + lname + "*****" 
 		                					+ jsondata.getString("Today") + "*****" 
 		                					+ jsondata.getString("Tomorrow");
-		
+
 		                // Open the file stream and copy the text into the file
 		                FileOutputStream ostream = new FileOutputStream(newtext);
 		                ostream.write(edailytext.getBytes());
 		                ostream.close();
 			        }
+			        
+			        
+
+
 		        }
-        	}
-        	catch(Exception e)
-        	{ 
-        		Log.w("log_cat", "JSON Parsing error " + e.toString());
-        		e.printStackTrace(); 
-        	}
-
+		    }
+		    catch (Exception e)
+		    { 
+		    	e.printStackTrace();
+		    }
+        
         }
-
         // Start the preview activity
         Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
         startActivity(previewIntent);
     }
+
     
     public void saveName(String fullname)
     {
