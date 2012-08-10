@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -172,93 +173,122 @@ public class Option extends Activity implements View.OnClickListener {
     		
     	// If submit is pressed 
     	else
-    	{	
-    		String finalresult;
-		    try
-		    {
-		    	// Gets the new names
-		    	String lname = lastname.getText().toString();
-		    	String fname = firstname.getText().toString();
-		    	String pwd = password.getText().toString();
-		    	
-		    	
-		        // Check that none of the fields are empty
-		        if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0)
-		        {
-		        	errormessage = Toast.makeText(getApplicationContext(),
-	        				"One or more fields are blank. Please provide your information.", 
-	        				Toast.LENGTH_LONG);
-		        	errormessage.show();
-		        	return;
-		        }
-		        
-		        
-		        // Access the database and connect through a post
-		        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
-		        
-		        parameters.add(new BasicNameValuePair("first_name", fname));
-		        parameters.add(new BasicNameValuePair("last_name", lname));
-		        parameters.add(new BasicNameValuePair("password", pwd));
+    		serverInteraction();
+	}
+    
+    
+    public void serverInteraction()
+    {
+    	String finalresult = "", lname = "", fname = "", pwd = "";
+		
+    	// Gets the new names
+    	lname = lastname.getText().toString();
+    	fname = firstname.getText().toString();
+    	pwd = password.getText().toString();
+    
+        // Check that none of the fields are empty
+        if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0)
+        {
+        	errormessage = Toast.makeText(getApplicationContext(),
+    				"One or more fields are blank. Please provide your information.", 
+    				Toast.LENGTH_LONG);
+        	errormessage.show();
+        	return;
+        }
+	        
+        HttpClient client = new DefaultHttpClient();
 
-		        HttpClient client = new DefaultHttpClient();
-		        client.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
-		        HttpPost post = new HttpPost("http://virtualdiscoverycenter.net/login/PHP/login.php");
-		        post.setEntity(new UrlEncodedFormEntity(parameters));
-		        HttpResponse response = client.execute(post);
-
-		        HttpEntity entity = response.getEntity();
-		        InputStream instream = entity.getContent();
-
-		        // Convert buffer to string
-		        BufferedReader bufreader = new BufferedReader(new InputStreamReader(instream, "iso-8859-1"), 8);
-		        StringBuilder sbuilder = new StringBuilder();
-		        String line = null;
-		        while((line = bufreader.readLine()) != null)
-		        {
-		        	sbuilder.append(line + "\n");
-		        }
-		        instream.close();
-
-		        finalresult = sbuilder.toString();
-
-
-		        if (finalresult.contains("false"))
-		        {
-		        	errormessage = Toast.makeText(getApplicationContext(), "Login failed, please try again.", Toast.LENGTH_LONG);
-		        	errormessage.show();
-		        }
-
-		        else
-
-		        {
-		        	saveName(fname + " " + lname);
-			        // Get to other webpage
-			        HttpGet submitedaily = new HttpGet("http://virtualdiscoverycenter.net/login/PHP/getEDaily.php");
-			        HttpResponse response2 = client.execute(submitedaily);
-			        HttpEntity entity2 = response2.getEntity();
+        try
+	    {
+	        // Access the database and connect through a post
+	        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
+	        
+	        parameters.add(new BasicNameValuePair("first_name", fname));
+	        parameters.add(new BasicNameValuePair("last_name", lname));
+	        parameters.add(new BasicNameValuePair("password", pwd));
 	
-			        InputStream instream2 = entity2.getContent();
+	        client.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
+	        HttpPost post = new HttpPost("http://virtualdiscoverycenter.net/login/PHP/login.php");
+	        post.setEntity(new UrlEncodedFormEntity(parameters));
+	        HttpResponse response = client.execute(post);
 	
-			        BufferedReader bufreader2 = new BufferedReader(new InputStreamReader(instream2, "iso-8859-1"), 8);
-			        StringBuilder sbuilder2 = new StringBuilder();
-			        String line2 = null;
-			        while((line2 = bufreader2.readLine()) != null)
-			        	sbuilder2.append(line2 + "\n");
-			        instream2.close();
-			        
-			        // Finds the text directory and creates one if none exists
-			        File textpath = new File(getFilesDir(), "Text");
-			        if (!textpath.exists())
-			            textpath.mkdir();
-			        
-			        // Parse the JSON data
-			        JSONArray jarray = new JSONArray(finalresult);
-			        for(int i=0; i<jarray.length(); i++)
+	        HttpEntity entity = response.getEntity();
+	        InputStream instream = entity.getContent();
+	
+	        // Convert buffer to string
+	        BufferedReader bufreader = new BufferedReader(new InputStreamReader(instream, "iso-8859-1"), 8);
+	        StringBuilder sbuilder = new StringBuilder();
+	        String line = null;
+	        while((line = bufreader.readLine()) != null)
+	        {
+	        	sbuilder.append(line + "\n");
+	        }
+	        instream.close();
+	
+	        finalresult = sbuilder.toString();
+	    }
+        catch(Exception e)
+        { 
+        	Log.e("log_cat", "HTTP Connection Error Login " + e.toString());
+        	e.printStackTrace(); 
+        }
+        
+        if (finalresult.contains("false"))
+        {
+        	errormessage = Toast.makeText(getApplicationContext(), "Login failed, please try again.", Toast.LENGTH_LONG);
+        	errormessage.show();
+        }
+	 
+        else
+        {
+        	// Save the username in internal storage
+        	saveName(fname + " " + lname);
+
+        	try
+        	{
+		        // Get to other webpage
+		        HttpGet submitedaily = new HttpGet("http://virtualdiscoverycenter.net/login/PHP/getEDaily.php");
+		        HttpResponse response2 = client.execute(submitedaily);
+		        HttpEntity entity2 = response2.getEntity();
+	
+		        InputStream instream2 = entity2.getContent();
+	
+		        BufferedReader bufreader2 = new BufferedReader(new InputStreamReader(instream2, "iso-8859-1"), 8);
+		        StringBuilder sbuilder2 = new StringBuilder();
+		        String line2 = null;
+		        while((line2 = bufreader2.readLine()) != null)
+		        	sbuilder2.append(line2 + "\n");
+		        instream2.close();
+		        finalresult = sbuilder2.toString();
+        	}
+        	catch(Exception e)
+        	{ 
+        		Log.e("log_cat", "HTTP Connection Error EDaily-Grab " + e.toString());
+        		e.printStackTrace(); 
+        	}
+        	
+        	
+        	// Finds the text directory and creates one if none exists
+	        File textpath = new File(getFilesDir(), "Text");
+	        if (!textpath.exists())
+	            textpath.mkdir();
+	        
+        	try
+        	{
+		        // Parse the JSON data
+		        JSONArray fulljarray = new JSONArray(finalresult);
+		        
+		        for (int i = 0; i < fulljarray.length(); i++)
+		        {
+		        	JSONArray jarray = fulljarray.getJSONArray(i);
+		        	
+			        for(int j=0; j<jarray.length(); j++)
 			        {
-			        	JSONObject jsondata = jarray.getJSONObject(i);
+			        	
+			        	JSONObject jsondata = jarray.getJSONObject(j);
 			        	
 			        	// Create a new file for the new eDaily
-			            File newtext = new File(textpath, "August 9, 2012");
+			            File newtext = new File(textpath, jsondata.getString("Date"));
 			            try 
 			            { newtext.createNewFile(); }
 			            catch(IOException e) 
@@ -268,31 +298,28 @@ public class Option extends Activity implements View.OnClickListener {
 		                String edailytext = fname + " " + lname + "*****" 
 		                					+ jsondata.getString("Today") + "*****" 
 		                					+ jsondata.getString("Tomorrow");
-
+		
 		                // Open the file stream and copy the text into the file
 		                FileOutputStream ostream = new FileOutputStream(newtext);
 		                ostream.write(edailytext.getBytes());
 		                ostream.close();
 			        }
-			        
-			        
-
-
 		        }
+        	}
+        	catch(Exception e)
+        	{ 
+        		Log.w("log_cat", "JSON Parsing error " + e.toString());
+        		e.printStackTrace(); 
+        	}
 
-		        
-		        
-		        // Start the preview activity
-		        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
-		        startActivity(previewIntent);
-		    }
-		    catch (Exception e)
-		    { 
-		    	e.printStackTrace();
-		    }
+        }
 
-    	}
-	}
+        
+        // Start the preview activity
+        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+        startActivity(previewIntent);
+    }
+    
     
     public void saveName(String fullname)
     {
