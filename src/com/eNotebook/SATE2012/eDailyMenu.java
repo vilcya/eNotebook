@@ -27,7 +27,7 @@ import android.widget.TextView;
 public class eDailyMenu extends Activity implements View.OnClickListener{
     
 	// Navigation buttons and the listview
-    Button newedaily, backtomenu;
+    Button newedaily, backtomenu, refresh;
     ListView list;
     
     // For Search bar
@@ -55,6 +55,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
         // Set on click listeners
         newedaily.setOnClickListener(this);
         backtomenu.setOnClickListener(this);
+        refresh.setOnClickListener(this);
        
         // Set the adapter for the listview
         if (edailytextpaths.length == 0)
@@ -128,6 +129,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     	// Navigation
         newedaily = (Button) findViewById(R.id.bAdd);
         backtomenu = (Button) findViewById(R.id.bBack);
+        refresh = (Button) findViewById(R.id.bRefresh);
         
         // The list display
         list = (ListView) findViewById(R.id.lvDaily);
@@ -141,16 +143,21 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     
     // If a button is pressed
     public void onClick(View view) {
-    	Intent ourIntent;
+    	Intent ourIntent = null;
     	
     	// Back button is pressed
     	if(view.getId() == R.id.bBack)    
     		ourIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
     	// New button is pressed
-    	else
+    	else if (view.getId() == R.id.bAdd)
     	{
 	        ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILY");
 	        ourIntent.putExtra("loadInitialText", false);
+    	}
+    	
+    	else
+    	{
+    		// Refresh thingy
     	}
     	
     	// Start the correct activity
