@@ -7,14 +7,10 @@
 package com.eNotebook.SATE2012;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -133,7 +129,8 @@ public class Option extends Activity implements View.OnClickListener {
     	String lname = lastname.getText().toString();
     	String fname = firstname.getText().toString();
     	String pwd = password.getText().toString();
-    
+    	String fullname = fname + " " + lname;
+    	
         // Check that none of the fields are empty
         if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0)
         {
@@ -164,58 +161,18 @@ public class Option extends Activity implements View.OnClickListener {
         else
         {
         	// Save the username in internal storage
-        	saveName(fname + " " + lname);
-	        finalresult = dp.performRequest(parameters, 
-		        		"http://virtualdiscoverycenter.net/login/PHP/getEDaily.php", 
-		        		"GET");        	
         	
+        	saveName(fullname);
         	// Finds the text directory and creates one if none exists
 	        File textpath = new File(getFilesDir(), "Text");
 	        if (!textpath.exists())
 	            textpath.mkdir();
 	        
-        	try
-        	{
-		        // Parse the JSON data
-		        JSONArray fulljarray = new JSONArray(finalresult);
-		        
-		        for (int i = 0; i < fulljarray.length(); i++)
-		        {
-		        	JSONArray jarray = fulljarray.getJSONArray(i);
-		        	
-			        for(int j=0; j<jarray.length(); j++)
-			        {
-			        	JSONObject jsondata = jarray.getJSONObject(i);
-			        	
-			        	// Create a new file for the new eDaily
-			            File newtext = new File(textpath, "August 9, 2012");
-			            try 
-			            { newtext.createNewFile(); }
-			            catch(IOException e) 
-			            { e.printStackTrace(); } 
-		                
-		                // Create the string for going into the file
-		                String edailytext = fname + " " + lname + "*****" 
-		                					+ jsondata.getString("Today") + "*****" 
-		                					+ jsondata.getString("Tomorrow");
-
-		                // Open the file stream and copy the text into the file
-		                FileOutputStream ostream = new FileOutputStream(newtext);
-		                ostream.write(edailytext.getBytes());
-		                ostream.close();
-			        }
-			        
-			        
-
-
-		        }
-		    }
-		    catch (Exception e)
-		    { 
-		    	e.printStackTrace();
-		    }
-        
+        	dp.downloadEDaily(textpath, fullname);
+        	errormessage = Toast.makeText(Menu.getContext(), "Login succesful!", Toast.LENGTH_LONG);
+        	errormessage.show();
         }
+        
         // Start the preview activity
         Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
         startActivity(previewIntent);
@@ -232,7 +189,6 @@ public class Option extends Activity implements View.OnClickListener {
         File newpath = new File(textpath, "name");
         
         dp.saveTexttoFile(fullname, newpath);
-     
     }
 	
 }

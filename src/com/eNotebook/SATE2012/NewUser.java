@@ -1,21 +1,9 @@
 package com.eNotebook.SATE2012;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.params.ClientPNames;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,6 +32,8 @@ public class NewUser extends Activity implements View.OnClickListener{
 	
 	// Pop up a toast if there is something wrong
     Toast errormessage;
+    
+    DataPassing dp = new DataPassing();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,37 +56,9 @@ public class NewUser extends Activity implements View.OnClickListener{
 		
 		List<String> teamlist = new ArrayList<String>();
 		
-		String finalresult = "";
-		
-		try
-    	{
-	        // Get to other webpage
-			HttpClient client = new DefaultHttpClient();
-	        HttpGet submitedaily = new HttpGet("http://virtualdiscoverycenter.net/login/PHP/getTeams.php");
-	        HttpResponse response2 = client.execute(submitedaily);
-	        HttpEntity entity2 = response2.getEntity();
-
-	        InputStream instream2 = entity2.getContent();
-
-	        BufferedReader bufreader2 = new BufferedReader(new InputStreamReader(instream2, "iso-8859-1"), 8);
-	        StringBuilder sbuilder2 = new StringBuilder();
-	        String line2 = null;
-	        while((line2 = bufreader2.readLine()) != null)
-	        	sbuilder2.append(line2 + "\n");
-	        instream2.close();
-	        finalresult = sbuilder2.toString();
-    	}
-    	catch(Exception e)
-    	{ 
-    		Log.e("log_cat", "HTTP Connection Error EDaily-Grab " + e.toString());
-    		e.printStackTrace(); 
-    	}
-    	
-    	
-    	// Finds the text directory and creates one if none exists
-        File textpath = new File(getFilesDir(), "Text");
-        if (!textpath.exists())
-            textpath.mkdir();
+		String finalresult = dp.performRequest(null, 
+				"http://virtualdiscoverycenter.net/login/PHP/getTeams.php", 
+				"GET");
         
     	try
     	{
@@ -176,14 +138,9 @@ public class NewUser extends Activity implements View.OnClickListener{
         }
 	    
         if (leadstat.equals("Yes"))
-        {
         	leadstat = "true";
-        } 
-        
         else
-        {
         	leadstat = "false";
-        }
         
         // Check that the passwords are the same
         if (!pwd.equals(pwdcon))
@@ -194,56 +151,44 @@ public class NewUser extends Activity implements View.OnClickListener{
         	errormessage.show();
         	return;
         }
-             
-        HttpClient client = new DefaultHttpClient();
 
-        try
-	    {
-	        // Access the database and connect through a post
-	        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
-	        
-	        parameters.add(new BasicNameValuePair("first_name", fname));
-	        parameters.add(new BasicNameValuePair("last_name", lname));
-	        parameters.add(new BasicNameValuePair("password", pwd));
-	        parameters.add(new BasicNameValuePair("team_name", teamname));
-	        parameters.add(new BasicNameValuePair("team_lead", leadstat));
-	        
-	        client.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
-	        HttpPost post = new HttpPost("virtualdiscoverycenter.net/login/PHP/createAccount.php");
-	        post.setEntity(new UrlEncodedFormEntity(parameters));
-	        HttpResponse response = client.execute(post);
-	
-	        HttpEntity entity = response.getEntity();
-	        InputStream instream = entity.getContent();
-	
-	        // Convert buffer to string
-	        BufferedReader bufreader = new BufferedReader(new InputStreamReader(instream, "iso-8859-1"), 8);
-	        StringBuilder sbuilder = new StringBuilder();
-	        String line = null;
-	        while((line = bufreader.readLine()) != null)
-	        {
-	        	sbuilder.append(line + "\n");
-	        }
-	        instream.close();
-	
-	        finalresult = sbuilder.toString();
-	    }
-        catch(Exception e)
-        { 
-        	Log.e("log_cat", "HTTP Connection Error Login " + e.toString());
-        	e.printStackTrace(); 
-        }
         
-        if (finalresult.contains("false"))
+        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        
+        parameters.add(new BasicNameValuePair("first_name", fname));
+        parameters.add(new BasicNameValuePair("last_name", lname));
+        parameters.add(new BasicNameValuePair("password", pwd));
+        parameters.add(new BasicNameValuePair("team_name", teamname));
+        parameters.add(new BasicNameValuePair("team_lead", leadstat));
+        
+        finalresult = dp.performRequest(parameters, 
+        		"http://virtualdiscoverycenter.net/login/PHP/createAccount.php", 
+        		"POST");
+        
+        if (finalresult.contains("false") )
         {
-        	errormessage = Toast.makeText(getApplicationContext(), "Create Account failed, please try again.", Toast.LENGTH_LONG);
+        	errormessage = Toast.makeText(getApplicationContext(), 
+        			"Create Account failed, please try again.", Toast.LENGTH_LONG);
+        	errormessage.show();
+        }
+        else if(finalresult.contains("Duplicate entry"))
+        {
+        	errormessage = Toast.makeText(getApplicationContext(), 
+        			"Account with name " + fname + " " + lname + " already exists", 
+        			Toast.LENGTH_LONG);
         	errormessage.show();
         }
         
-        errormessage = Toast.makeText(getApplicationContext(),
-				finalresult, 
-				Toast.LENGTH_LONG);
-    	errormessage.show();
+        else
+        {
+        	errormessage = Toast.makeText(getApplicationContext(), 
+        			finalresult, 
+        			Toast.LENGTH_LONG);
+        	errormessage.show();
+        	
+	        Intent loginpage = new Intent("com.eNotebook.SATE2012." + "OPTION");
+	        //startActivity(loginpage);
+        }
         
     	
 	}

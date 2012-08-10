@@ -7,6 +7,7 @@ package com.eNotebook.SATE2012;
 import java.io.File;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class Menu extends Activity implements View.OnClickListener{
     Button eTecNote;
     Button twofiftyseven;
     Button option;
+    
+    private static Menu instance;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,14 @@ public class Menu extends Activity implements View.OnClickListener{
         twofiftyseven.setOnClickListener(this);
         option.setOnClickListener(this);
     } 
+    
+    public Menu ()
+    { instance = this;}
+    
+    public static Context getContext()
+    {
+    	return instance;
+    }
 
     /* Assign layout objects to respective variables  */
     private void assignedObjects() {

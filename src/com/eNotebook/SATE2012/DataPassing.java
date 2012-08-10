@@ -10,7 +10,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,6 +23,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -142,14 +147,13 @@ public class DataPassing{
     {    	
     	HttpClient client = HttpClientFactory.getThreadSafeClient();
         client.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
-        HttpPost post = new HttpPost(url);
-	        
         HttpEntity entity = null;
 	    
         try
 	    {
         	if (postOrGet.equals("POST"))
         	{
+        		HttpPost post = new HttpPost(url);
 		        post.setEntity(new UrlEncodedFormEntity(parameters));
 		        HttpResponse response = client.execute(post);
 		        entity = response.getEntity();
@@ -192,4 +196,63 @@ public class DataPassing{
 	       
     }
     	
+    
+    
+    /* Return today's date in string format MM.dd.yyyy */
+    public String getDateToday()
+    {
+    	// Create the format and calendar instance
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//"MMMMMMMMM dd, yyyy");
+    	Calendar cal = Calendar.getInstance();
+    	
+    	// Set the format and return
+    	Date today = cal.getTime();
+    	return sdf.format(today);
+    }
+    
+    
+    public void downloadEDaily(File textpath, String fullname)
+    {
+
+        String finalresult = performRequest(null, 
+	        		"http://virtualdiscoverycenter.net/login/PHP/getEDaily.php", 
+	        		"GET");
+    	try
+    	{
+	        // Parse the JSON data
+	        JSONArray fulljarray = new JSONArray(finalresult);
+	        
+	        for (int i = 0; i < fulljarray.length(); i++)
+	        {
+	        	JSONArray jarray = fulljarray.getJSONArray(i);
+	        	
+		        for(int j=0; j<jarray.length(); j++)
+		        {
+		        	JSONObject jsondata = jarray.getJSONObject(i);
+		        	
+		        	// Create a new file for the new eDaily
+		            File newtext = new File(textpath, jsondata.getString("Date"));
+		            try 
+		            { newtext.createNewFile(); }
+		            catch(IOException e) 
+		            { e.printStackTrace(); } 
+	                
+	                // Create the string for going into the file
+	                String edailytext = fullname + "*****" 
+	                					+ jsondata.getString("Today") + "*****" 
+	                					+ jsondata.getString("Tomorrow");
+
+	                // Open the file stream and copy the text into the file
+	                FileOutputStream ostream = new FileOutputStream(newtext);
+	                ostream.write(edailytext.getBytes());
+	                ostream.close();
+		        }
+	        }
+	    }
+	    catch (Exception e)
+	    { 
+	    	e.printStackTrace();
+	    }
+    }
+    
 }

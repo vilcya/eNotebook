@@ -1,16 +1,14 @@
 /* 
  * eDaily.java
  * Activity for creating a new eDaily
+ *  updates the file and updates the edaily
  */
 
 
 package com.eNotebook.SATE2012;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -41,6 +39,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     // Get bundle of extras
     Bundle extras;
     
+    // Class which contains data passing classes 
     DataPassing dp = new DataPassing();
     
     @Override
@@ -51,8 +50,9 @@ public class eDaily extends Activity implements View.OnClickListener{
         setContentView(R.layout.edaily);
         
         // Assigns views and variables
-        assignedObjects();
+        assignObjects();
         
+        // Check if this is an edit or a new eDaily
         if(extras.getBoolean("loadInitialText"))
         {
         	accomplishedtoday.setText(extras.getString("acctoday"));
@@ -65,13 +65,13 @@ public class eDaily extends Activity implements View.OnClickListener{
     }
     
     /* Function that assigns views and variables */
-    private void assignedObjects()
+    private void assignObjects()
     {
     	// Button for saving
         save = (Button) findViewById(R.id.bPreview);
         back = (Button) findViewById(R.id.bDailyBack);
         // Find today's date
-        datetoday = getDateToday();
+        datetoday = dp.getDateToday();
         
         // Views for eDaily template
         accomplishedtoday = (EditText) findViewById(R.id.etToday);
@@ -85,14 +85,17 @@ public class eDaily extends Activity implements View.OnClickListener{
     public void onClick(View view)
     {
     	Intent myIntent;
+    	// Goes back to the menu
     	if(view.getId() == R.id.bDailyBack)
     		myIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
     	
+    	// Saves the eDaily and puts it into the database
     	else{
     		saveData();
     		
     		// Start the preview activity
             myIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
+            
             myIntent.putExtra("filename", datetoday);
     	}
     	startActivity(myIntent);
@@ -180,21 +183,7 @@ public class eDaily extends Activity implements View.OnClickListener{
     	// Returns text from the file
     	return dp.readTextfromFile(namepath.toString());
     }
-    
 
-    
-    
-    /* Return today's date in string format MM.dd.yyyy */
-    private String getDateToday()
-    {
-    	// Create the format and calendar instance
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    	Calendar cal = Calendar.getInstance();
-    	
-    	// Set the format and return
-    	Date today = cal.getTime();
-    	return sdf.format(today);
-    }
     
     
 }
