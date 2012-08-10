@@ -1,28 +1,17 @@
 /* Option.java
- * Class for changing your name. 
+ * Logs a person in, downloads all of the files from the database
+ * and saves them into internal storage as a "cache" - Deleted upon
+ * logout.
  */
 
 package com.eNotebook.SATE2012;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.params.ClientPNames;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,13 +39,19 @@ public class Option extends Activity implements View.OnClickListener {
     // Pop up a toast if there is something wrong
     Toast errormessage;
 	
+    DataPassing dp = new DataPassing();
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.options);
-		
+
+		// Assign globals and variables
 		assignObjects();
-		CurrentName();
+		// See if the person is logged in
+		checkLogin();
+		
+		// Set on click listeners
 		login.setOnClickListener(this);
 		logout.setOnClickListener(this);
 		create.setOnClickListener(this);
@@ -65,29 +60,36 @@ public class Option extends Activity implements View.OnClickListener {
 	// Assigns globals
 	protected void assignObjects()
 	{
+		// Buttons for navigation
 		login = (Button) findViewById(R.id.bLogin);
 		logout = (Button) findViewById(R.id.bLogout);
 		create = (Button) findViewById(R.id.bCreate);
+		
+		// Displays current user
 		CurName = (TextView) findViewById(R.id.tvCurrentName);
+		
+		// Views for input
 		firstname = (EditText) findViewById(R.id.etFirstName);
 		lastname = (EditText) findViewById(R.id.etLastName);
 		password = (EditText) findViewById(R.id.etPassword);
 	}
 	
-	// Sets the current name view if one exists
-	public void CurrentName(){
+	// Checks if the person is logged in or not
+	public void checkLogin(){
 		
 		File namepath = new File(getFilesDir(), "UserInformation/name");
 		
+		// If the user is not logged in
 		if ( !namepath.exists())
     	{
             CurName.setText("You are not logged in!" );
             logout.setVisibility(Button.GONE);
             return;
     	}
+		// If user is logged in
 		else 
 		{
-			String myname = readTextfromFile(namepath.toString());
+			String myname = dp.readTextfromFile(namepath.toString());
 			login.setVisibility(Button.GONE);
 			firstname.setVisibility(EditText.GONE);
 			lastname.setVisibility(EditText.GONE);
@@ -96,58 +98,8 @@ public class Option extends Activity implements View.OnClickListener {
 			CurName.setText("Current User: " + myname);
 		}
 	}
-
-	/* Takes in a file path name and returns the text
-     *  read in from that file 
-     */
-    private String readTextfromFile(String path)
-    {
-    	File edailyfile = new File(path);	// create the file
-        FileInputStream instream;			// input stream to read file
-        InputStreamReader instreamread; 	// reader for stream
-        BufferedReader buf;					// buffer for reader
-        
-        String lineofdata = "";				// a line of the file
-        String data = "";					// will contain complete string
-       
-        try 
-        {
-        	// Begin creating the instream buffer
-            instream = new FileInputStream(edailyfile);
-            instreamread = new InputStreamReader (instream);
-            buf = new BufferedReader(instreamread);
-            
-            try
-            {
-            	// Read the line until end of file and add to data
-                while((lineofdata = buf.readLine()) != null)
-                    data += lineofdata;
-            }
-            catch(IOException e)
-            { e.printStackTrace(); }
-            
-        }
-        catch(FileNotFoundException e)
-        { e.printStackTrace(); }
-        
-        // Return final result
-        return data;
-    }
     
-    static public boolean deleteDirectory(File path) {
-        if( path.exists() ) {
-          File[] files = path.listFiles();
-          for(int i=0; i<files.length; i++) {
-             if(files[i].isDirectory()) {
-               deleteDirectory(files[i]);
-             }
-             else {
-               files[i].delete();
-             }
-          }
-        }
-        return( path.delete() );
-      }
+    
     
     // On click function
     public void onClick(View v){
@@ -155,10 +107,9 @@ public class Option extends Activity implements View.OnClickListener {
     	// If back is pressed
     	if(v.getId() == R.id.bLogout)
     	{
-    		
-    		deleteDirectory(new File(getFilesDir(),"UserInformation"));
-    		deleteDirectory(new File(getFilesDir(),"Text"));
-    		deleteDirectory(new File(getFilesDir(),"TwoFiftySeven"));
+    		dp.deleteUserInfo(new File(getFilesDir(),"UserInformation"));
+    		dp.deleteUserInfo(new File(getFilesDir(),"Text"));
+    		dp.deleteUserInfo(new File(getFilesDir(),"TwoFiftySeven"));
     		
     		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "OPTION");
             startActivity(backIntent);
@@ -172,88 +123,67 @@ public class Option extends Activity implements View.OnClickListener {
     		
     	// If submit is pressed 
     	else
-    	{	
-    		String finalresult;
-		    try
-		    {
-		    	// Gets the new names
-		    	String lname = lastname.getText().toString();
-		    	String fname = firstname.getText().toString();
-		    	String pwd = password.getText().toString();
-		    	
-		    	
-		        // Check that none of the fields are empty
-		        if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0)
-		        {
-		        	errormessage = Toast.makeText(getApplicationContext(),
-	        				"One or more fields are blank. Please provide your information.", 
-	        				Toast.LENGTH_LONG);
-		        	errormessage.show();
-		        	return;
-		        }
+    		serverInteraction();
+	}
+    
+    
+    public void serverInteraction()
+    {
+    	// Gets the new names
+    	String lname = lastname.getText().toString();
+    	String fname = firstname.getText().toString();
+    	String pwd = password.getText().toString();
+    
+        // Check that none of the fields are empty
+        if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0)
+        {
+        	errormessage = Toast.makeText(getApplicationContext(),
+    				"One or more fields are blank. Please provide your information.", 
+    				Toast.LENGTH_LONG);
+        	errormessage.show();
+        	return;
+        }
+	  
+        // Access the database and connect through a post
+        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        
+        parameters.add(new BasicNameValuePair("first_name", fname));
+        parameters.add(new BasicNameValuePair("last_name", lname));
+        parameters.add(new BasicNameValuePair("password", pwd));
+                
+        String finalresult = dp.performRequest(parameters, 
+        			"http://virtualdiscoverycenter.net/login/PHP/login.php",
+        			"POST");
+        
+        if (finalresult.contains("false"))
+        {
+        	errormessage = Toast.makeText(getApplicationContext(), "Login failed, please try again.", Toast.LENGTH_LONG);
+        	errormessage.show();
+        }
+	 
+        else
+        {
+        	// Save the username in internal storage
+        	saveName(fname + " " + lname);
+	        finalresult = dp.performRequest(parameters, 
+		        		"http://virtualdiscoverycenter.net/login/PHP/getEDaily.php", 
+		        		"GET");        	
+        	
+        	// Finds the text directory and creates one if none exists
+	        File textpath = new File(getFilesDir(), "Text");
+	        if (!textpath.exists())
+	            textpath.mkdir();
+	        
+        	try
+        	{
+		        // Parse the JSON data
+		        JSONArray fulljarray = new JSONArray(finalresult);
 		        
-		        
-		        // Access the database and connect through a post
-		        ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
-		        
-		        parameters.add(new BasicNameValuePair("first_name", fname));
-		        parameters.add(new BasicNameValuePair("last_name", lname));
-		        parameters.add(new BasicNameValuePair("password", pwd));
-
-		        HttpClient client = new DefaultHttpClient();
-		        client.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
-		        HttpPost post = new HttpPost("http://virtualdiscoverycenter.net/login/PHP/login.php");
-		        post.setEntity(new UrlEncodedFormEntity(parameters));
-		        HttpResponse response = client.execute(post);
-
-		        HttpEntity entity = response.getEntity();
-		        InputStream instream = entity.getContent();
-
-		        // Convert buffer to string
-		        BufferedReader bufreader = new BufferedReader(new InputStreamReader(instream, "iso-8859-1"), 8);
-		        StringBuilder sbuilder = new StringBuilder();
-		        String line = null;
-		        while((line = bufreader.readLine()) != null)
+		        for (int i = 0; i < fulljarray.length(); i++)
 		        {
-		        	sbuilder.append(line + "\n");
-		        }
-		        instream.close();
-
-		        finalresult = sbuilder.toString();
-
-
-		        if (finalresult.contains("false"))
-		        {
-		        	errormessage = Toast.makeText(getApplicationContext(), "Login failed, please try again.", Toast.LENGTH_LONG);
-		        	errormessage.show();
-		        }
-
-		        else
-
-		        {
-		        	saveName(fname + " " + lname);
-			        // Get to other webpage
-			        HttpGet submitedaily = new HttpGet("http://virtualdiscoverycenter.net/login/PHP/getEDaily.php");
-			        HttpResponse response2 = client.execute(submitedaily);
-			        HttpEntity entity2 = response2.getEntity();
-	
-			        InputStream instream2 = entity2.getContent();
-	
-			        BufferedReader bufreader2 = new BufferedReader(new InputStreamReader(instream2, "iso-8859-1"), 8);
-			        StringBuilder sbuilder2 = new StringBuilder();
-			        String line2 = null;
-			        while((line2 = bufreader2.readLine()) != null)
-			        	sbuilder2.append(line2 + "\n");
-			        instream2.close();
-			        
-			        // Finds the text directory and creates one if none exists
-			        File textpath = new File(getFilesDir(), "Text");
-			        if (!textpath.exists())
-			            textpath.mkdir();
-			        
-			        // Parse the JSON data
-			        JSONArray jarray = new JSONArray(finalresult);
-			        for(int i=0; i<jarray.length(); i++)
+		        	JSONArray jarray = fulljarray.getJSONArray(i);
+		        	
+			        for(int j=0; j<jarray.length(); j++)
 			        {
 			        	JSONObject jsondata = jarray.getJSONObject(i);
 			        	
@@ -279,45 +209,30 @@ public class Option extends Activity implements View.OnClickListener {
 
 
 		        }
-
-		        
-		        
-		        // Start the preview activity
-		        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
-		        startActivity(previewIntent);
 		    }
 		    catch (Exception e)
 		    { 
 		    	e.printStackTrace();
 		    }
+        
+        }
+        // Start the preview activity
+        Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
+        startActivity(previewIntent);
+    }
 
-    	}
-	}
     
     public void saveName(String fullname)
     {
-    	try
-    	{
-    		// Finds the user information directory and creates one if none exists
-	    	
-			File textpath = new File(getFilesDir(), "UserInformation");
-	        if (!textpath.exists())
-	            textpath.mkdir();
-	        
-			// Create a new file for saving the user's name
-		    File newtext = new File(textpath, "name");
-		    try 
-		    { newtext.createNewFile(); }
-		    catch(IOException e)
-		    { e.printStackTrace(); } 
-	        		
-	        // Open the file stream and copy the text into the file
-	        FileOutputStream ostream = new FileOutputStream(newtext);
-	        ostream.write(fullname.getBytes());
-	        ostream.close();
-    	}
-    	catch(Exception e)
-    	{ e.printStackTrace(); }
+    		
+		File textpath = new File(getFilesDir(), "UserInformation");
+        if (!textpath.exists())
+            textpath.mkdir();
+        
+        File newpath = new File(textpath, "name");
+        
+        dp.saveTexttoFile(fullname, newpath);
+     
     }
 	
 }
