@@ -13,7 +13,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +39,17 @@ public class Option extends Activity implements View.OnClickListener {
     Toast errormessage;
 	
     DataPassing dp = new DataPassing();
+    
+    private static Option instance;
+    
+    public Option ()
+    { instance = this;}
+    
+    public static Context getContext()
+    {
+    	return instance;
+    }
+    
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +117,9 @@ public class Option extends Activity implements View.OnClickListener {
     	// If back is pressed
     	if(v.getId() == R.id.bLogout)
     	{
-    		dp.deleteUserInfo(new File(getFilesDir(),"UserInformation"));
-    		dp.deleteUserInfo(new File(getFilesDir(),"Text"));
-    		dp.deleteUserInfo(new File(getFilesDir(),"TwoFiftySeven"));
+    		dp.deleteFiles(new File(getFilesDir(),"UserInformation"));
+    		dp.deleteFiles(new File(getFilesDir(),"Text"));
+    		dp.deleteFiles(new File(getFilesDir(),"TwoFiftySeven"));
     		
     		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "OPTION");
             startActivity(backIntent);
@@ -119,7 +133,21 @@ public class Option extends Activity implements View.OnClickListener {
     		
     	// If submit is pressed 
     	else
-    		serverInteraction();
+    	{
+    		String url = "http://virtualdiscoverycenter.net/login/PHP/login.php";
+    		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+    		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    		
+    		if(!wifi.isConnected() || !dp.checkConnection(url))
+    		{
+    			errormessage = Toast.makeText(getApplicationContext(), 
+    					"Cannot login, please check your Wifi connection.", Toast.LENGTH_LONG);
+    			errormessage.show();
+    			return;
+    		}
+    		else
+    			serverInteraction();
+    	}
 	}
     
     

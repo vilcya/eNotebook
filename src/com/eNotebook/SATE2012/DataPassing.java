@@ -1,3 +1,8 @@
+/* DataPassing.java 
+ * Class which contains useful functions for data passing
+ * and HTTP connections.
+ */
+
 package com.eNotebook.SATE2012;
 
 import java.io.BufferedReader;
@@ -30,12 +35,15 @@ import android.util.Log;
 
 public class DataPassing{
 
+	// Constructor to initialize new instance
 	public DataPassing()
 	{}
 	
 	
-	/* HTTP DATA PASSING */
+	/* HTTP DATA PASSING */	
 	
+	/* Pings the urlstr and checks if wifi is strong enough for
+	 *  passing data.*/ 
 	public boolean checkConnection(String urlstr)
 	{
 		Boolean reachable = false;
@@ -64,8 +72,6 @@ public class DataPassing{
 	
 	
 	/* INTERNAL STORAGE FUNCTIONS*/
-	
-	
 	
 	/* Takes in a file path name and returns the text
      *  read in from that file 
@@ -125,14 +131,15 @@ public class DataPassing{
     	{ e.printStackTrace(); }
     }
 	
-    /* Deletes all user information - occurs when logged out */
-    public boolean deleteUserInfo(File path) 
+    /* Deletes directory/file and sub directories
+     *  as specified by path */
+    public boolean deleteFiles(File path) 
     {
         if( path.exists() ) {
           File[] files = path.listFiles();
           for(int i=0; i<files.length; i++) {
              if(files[i].isDirectory()) {
-            	 deleteUserInfo(files[i]);
+            	 deleteFiles(files[i]);
              }
              else {
                files[i].delete();
@@ -142,15 +149,23 @@ public class DataPassing{
         return( path.delete() );
     }
     
-    /* Returns null on error */
+    /* Performs an HTTP request
+     *  parameters: specifies variables for POST request 
+     *  url: specifies url involved in the request 
+     *  postOrGet: "POST" or "GET" - specifies which http request is occuring
+     *  
+     *  returns null on error
+     */
     public String performRequest(ArrayList<NameValuePair> parameters, String url, String postOrGet)
     {    	
+    	// Initializes client from the factory 
     	HttpClient client = HttpClientFactory.getThreadSafeClient();
         client.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
         HttpEntity entity = null;
 	    
         try
 	    {
+        	// If we want a POST request
         	if (postOrGet.equals("POST"))
         	{
         		HttpPost post = new HttpPost(url);
@@ -158,7 +173,7 @@ public class DataPassing{
 		        HttpResponse response = client.execute(post);
 		        entity = response.getEntity();
         	}
-        	else // "GET"
+        	else // GET request
         	{
         		HttpGet get = new HttpGet(url);
     	        HttpResponse response = client.execute(get);
@@ -172,6 +187,7 @@ public class DataPassing{
 	    	return null;
 	    }
 	    
+	    // Read in the response from the script
 	    try
 	    {
 	    	InputStream instream = entity.getContent();
@@ -185,6 +201,7 @@ public class DataPassing{
 	        }
 	        instream.close();
 	
+	        // Return in string form
 	        return sbuilder.toString();
 	    }
 	    catch(Exception e)
@@ -196,7 +213,6 @@ public class DataPassing{
 	       
     }
     	
-    
     
     /* Return today's date in string format MM.dd.yyyy */
     public String getDateToday()
@@ -211,9 +227,13 @@ public class DataPassing{
     }
     
     
+    /* Downloads all of the eDailies from the server
+     *  textpath: specifies the file/directory we want to delete
+     *  fullname: specifies the person's name  
+     */ 
     public void downloadEDaily(File textpath, String fullname)
     {
-
+    	// Perform GET request to grab all of the user's eDaily (they should already be logged in)
         String finalresult = performRequest(null, 
 	        		"http://virtualdiscoverycenter.net/login/PHP/getEDaily.php", 
 	        		"GET");

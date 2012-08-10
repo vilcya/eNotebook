@@ -9,6 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -89,8 +92,6 @@ public class NewUser extends Activity implements View.OnClickListener{
 	}
 
 	private void leadSpinnerAdaptor() {
-		// TODO Auto-generated method stub
-		
 		List<String> leadlist = new ArrayList<String>();
 		leadlist.add("No");
 		leadlist.add("Yes");
@@ -98,9 +99,9 @@ public class NewUser extends Activity implements View.OnClickListener{
 		ArrayAdapter<String> leadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leadlist);
 		leadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		lead.setAdapter(leadAdapter);
-		
-	
 	}
+	
+	
 	// Assigns globals
 	protected void assignObjects()
 	{
@@ -136,6 +137,7 @@ public class NewUser extends Activity implements View.OnClickListener{
         	return;
         }
 	    
+        // Checks the leadership status
         if (leadstat.equals("Yes"))
         	leadstat = "true";
         else
@@ -151,7 +153,7 @@ public class NewUser extends Activity implements View.OnClickListener{
         	return;
         }
 
-        
+        // Create parameters for POST request
         ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
         
         parameters.add(new BasicNameValuePair("first_name", fname));
@@ -160,17 +162,14 @@ public class NewUser extends Activity implements View.OnClickListener{
         parameters.add(new BasicNameValuePair("team_name", teamname));
         parameters.add(new BasicNameValuePair("team_lead", leadstat));
         
+        // Perform POST request
         finalresult = dp.performRequest(parameters, 
         		"http://virtualdiscoverycenter.net/login/PHP/createAccount.php", 
         		"POST");
         
-        if (finalresult.contains("false") )
-        {
-        	errormessage = Toast.makeText(getApplicationContext(), 
-        			"Create Account failed, please try again.", Toast.LENGTH_LONG);
-        	errormessage.show();
-        }
-        else if(finalresult.contains("Duplicate entry"))
+        // Check for errors given back by PHP script 
+        // If the name is already taken
+        if(finalresult.contains("Duplicate entry"))
         {
         	errormessage = Toast.makeText(getApplicationContext(), 
         			"Account with name " + fname + " " + lname + " already exists", 
@@ -178,23 +177,41 @@ public class NewUser extends Activity implements View.OnClickListener{
         	errormessage.show();
         }
         
-        else
+        // Other errors server side
+        else if (finalresult.contains("false") || finalresult.contains("ERROR"))
         {
         	errormessage = Toast.makeText(getApplicationContext(), 
-        			finalresult, 
+        			"Create Account failed, please try again.", Toast.LENGTH_LONG);
+        	errormessage.show();
+        }
+                
+        // If the account was successfully created
+        else
+        {
+        	errormessage = Toast.makeText(Menu.getContext(), 
+        			"Account successfully made. Please log in to continue.", 
         			Toast.LENGTH_LONG);
         	errormessage.show();
         	
 	        Intent loginpage = new Intent("com.eNotebook.SATE2012." + "OPTION");
-	        //startActivity(loginpage);
+	        startActivity(loginpage);
         }
-        
-    	
 	}
 	
 	 public void onClick(View v){ 
-	 
-		 createAccount();
+		String url = "http://virtualdiscoverycenter.net/login/PHP/createAccount.php";
+ 		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+ 		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+ 		
+ 		if(!wifi.isConnected() || !dp.checkConnection(url))
+ 		{
+ 			errormessage = Toast.makeText(getApplicationContext(), 
+ 					"Cannot login, please check your Wifi connection.", Toast.LENGTH_LONG);
+ 			errormessage.show();
+ 			return;
+ 		}
+ 		else
+ 			createAccount();
 	 }
 	
 }

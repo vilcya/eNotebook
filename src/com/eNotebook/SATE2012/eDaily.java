@@ -15,6 +15,8 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -91,13 +93,31 @@ public class eDaily extends Activity implements View.OnClickListener{
     	
     	// Saves the eDaily and puts it into the database
     	else{
-    		saveData();
+    		// Checks the state of wifi
+    		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+    		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
     		
-    		// Start the preview activity
-            myIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
-            
-            myIntent.putExtra("filename", datetoday);
+    		String url = "http://virtualdiscoverycenter.net/login/PHP/submitEDaily.php";
+    		
+    		// If wifi is not strong enough for data transfer, notifies user
+    		if(!wifi.isConnected() || !dp.checkConnection(url))
+    		{
+    			errormessage = Toast.makeText(getApplicationContext(), 
+    					"Cannot save, please check your Wifi connection.", Toast.LENGTH_LONG);
+    			errormessage.show();
+    			return;
+    		}
+    		else // wifi is fine
+    		{
+    			// Saves the data in internal and performs POST into database
+	    		saveData();
+	    		
+	    		// Start the preview activity
+	            myIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
+	            myIntent.putExtra("filename", datetoday);
+    		}
     	}
+    	// Switch intents
     	startActivity(myIntent);
     }
     
@@ -139,7 +159,6 @@ public class eDaily extends Activity implements View.OnClickListener{
             // Create the string for going into the file
             dp.saveTexttoFile(edailytext, newtext);
             
-            
             // Send to database
             errormessage = Toast.makeText(getApplicationContext(), postData(myacctoday, myacctom), Toast.LENGTH_LONG);
             errormessage.show();
@@ -159,9 +178,9 @@ public class eDaily extends Activity implements View.OnClickListener{
     	parameters.add(new BasicNameValuePair("today", today));
         parameters.add(new BasicNameValuePair("tomorrow", tomorrow));
 
-        return dp.performRequest(parameters, 
-        		"http://virtualdiscoverycenter.net/login/PHP/submitEDaily.php",
-        		"POST");
+       	return dp.performRequest(parameters, 
+        			"http://virtualdiscoverycenter.net/login/PHP/submitEDaily.php",
+        			"POST");
     }
     
     /* Retrieves user's name */

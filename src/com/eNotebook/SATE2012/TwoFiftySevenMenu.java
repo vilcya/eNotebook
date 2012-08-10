@@ -50,7 +50,6 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 	// Thumbnail urls, id, and name of youtube videos
 	String[] thumbnailurls, ids, names;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		addLink.setOnClickListener(this);
 		back.setOnClickListener(this);
 		
-		// Check wifi
 		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 

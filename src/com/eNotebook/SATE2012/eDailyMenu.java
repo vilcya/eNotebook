@@ -12,6 +12,8 @@ import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class eDailyMenu extends Activity implements View.OnClickListener{
     
@@ -39,6 +42,10 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     
     // List of all the edaily text files
     String[] edailytextpaths = {};
+    
+    DataPassing dp = new DataPassing();
+    
+    Toast errormessage;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +164,32 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     	
     	else
     	{
-    		// Refresh thingy
+    		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+    		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    		
+    		if(!wifi.isConnected())
+    		{
+    			errormessage = Toast.makeText(getApplicationContext(), 
+    					"Cannot refresh, please check your Wifi connection.", Toast.LENGTH_LONG);
+    			errormessage.show();
+    			return;
+    		}
+    		else
+    		{
+	    		File textpath = new File(getFilesDir(), "Text");
+	    		dp.deleteFiles(textpath);
+	    		textpath.mkdir();
+	    		
+	    		File namepath = new File(getFilesDir(), "UserInformation/name");
+	    		
+	    		if(!namepath.exists()) // SHOULD NEVER OCCUR
+	    			return;
+	    		
+	    		dp.downloadEDaily(textpath,
+	    				 dp.readTextfromFile(namepath.toString()));
+	    		
+	    		ourIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
+    		}
     	}
     	
     	// Start the correct activity

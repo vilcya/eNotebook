@@ -31,6 +31,14 @@ public class Menu extends Activity implements View.OnClickListener{
     
     private static Menu instance;
     
+    public Menu ()
+    { instance = this;}
+    
+    public static Context getContext()
+    {
+    	return instance;
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +62,7 @@ public class Menu extends Activity implements View.OnClickListener{
         option.setOnClickListener(this);
     } 
     
-    public Menu ()
-    { instance = this;}
     
-    public static Context getContext()
-    {
-    	return instance;
-    }
 
     /* Assign layout objects to respective variables  */
     private void assignedObjects() {
