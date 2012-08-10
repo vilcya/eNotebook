@@ -6,20 +6,19 @@
 
 package com.eNotebook.SATE2012;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +40,8 @@ public class eDaily extends Activity implements View.OnClickListener{
 
     // Get bundle of extras
     Bundle extras;
+    
+    DataPassing dp = new DataPassing();
     
     @Override
     /* Called when the activity begins */
@@ -83,61 +84,81 @@ public class eDaily extends Activity implements View.OnClickListener{
     /* Event triggered on a button click */
     public void onClick(View view)
     {
+    	Intent myIntent;
     	if(view.getId() == R.id.bDailyBack)
-    	{
-    		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
-            startActivity(backIntent);
-    	}
+    		myIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYMENU");
     	
     	else{
+    		saveData();
     		
-	        // Check if the calendar returned correctly
-	        if (datetoday.length() == 0)
-	        	return;
-
-            try
-            {
-                // Find all of the text from the views
-                String myacctoday = accomplishedtoday.getText().toString();
-                String myacctom = accomplishedtomorrow.getText().toString();
-
-                // Check that none of the fields are empty
-                if (myacctoday.length() == 0 || myacctom.length() == 0)
-                {
-                	errormessage = Toast.makeText(getApplicationContext(),
-                				"Please fill in all the blanks or Dr. Williams will hunt you down!!! (with three exclamation marks)", 
-                				Toast.LENGTH_LONG);
-                	errormessage.show();
-                	return;
-                }
-                
-                // Finds the text directory and creates one if none exists
-		        File textpath = new File(getFilesDir(), "Text");
-		        if (!textpath.exists())
-		            textpath.mkdir();
-	        	// Create a new file for the new eDaily
-	            File newtext = new File(textpath, datetoday);
-	            try 
-	            { newtext.createNewFile(); }
-	            catch(IOException e) 
-	            { e.printStackTrace(); } 
-                
-                // Create the string for going into the file
-                String edailytext = getName() + "*****" + myacctoday + "*****" + myacctom;
-
-                // Open the file stream and copy the text into the file
-                FileOutputStream ostream = new FileOutputStream(newtext);
-                ostream.write(edailytext.getBytes());
-                ostream.close();
-                
-                // Start the preview activity
-                Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
-                previewIntent.putExtra("filename", datetoday);
-                startActivity(previewIntent);
-            }
-            catch (Exception e)
-            { e.printStackTrace(); }
+    		// Start the preview activity
+            myIntent = new Intent("com.eNotebook.SATE2012." + "EDAILYPREVIEW");
+            myIntent.putExtra("filename", datetoday);
     	}
+    	startActivity(myIntent);
+    }
+    
+    
+    /* Function that adds the file into internal storage
+     * We do not update from the database because this will
+     * take significantly longer depending on internet 
+     * connections and amount of data passed back */
+    public void saveData()
+    {
+    	// Check if the calendar returned correctly
+        if (datetoday.length() == 0)
+        	return;
+
+        try
+        {
+            // Find all of the text from the views
+            String myacctoday = accomplishedtoday.getText().toString();
+            String myacctom = accomplishedtomorrow.getText().toString();
+            String edailytext = getName() + "*****" + myacctoday + "*****" + myacctom;
+            
+            // Check that none of the fields are empty
+            if (myacctoday.length() == 0 || myacctom.length() == 0)
+            {
+            	errormessage = Toast.makeText(getApplicationContext(),
+            				"Please fill in all the blanks or Dr. Williams will hunt you down!!! (with three exclamation marks)", 
+            				Toast.LENGTH_LONG);
+            	errormessage.show();
+            	return;
+            }
+            
+            // Finds the text directory and creates one if none exists
+	        File textpath = new File(getFilesDir(), "Text");
+	        if (!textpath.exists())
+	            textpath.mkdir();
+        	// Create a new file for the new eDaily
+            File newtext = new File(textpath, datetoday);
+            
+            // Create the string for going into the file
+            dp.saveTexttoFile(edailytext, newtext);
+            
+            
+            // Send to database
+            errormessage = Toast.makeText(getApplicationContext(), postData(myacctoday, myacctom), Toast.LENGTH_LONG);
+            errormessage.show();
+                       
+        }
+        catch (Exception e)
+        { 
+        	Log.e("log_cat", "Saving ERROR " + e.toString());
+        	e.printStackTrace(); 
+        }
+    }
+    
+    /* Posts the data into the PHP script - stores it in database */
+    public String postData(String today, String tomorrow)
+    {
+    	ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
+    	parameters.add(new BasicNameValuePair("today", today));
+        parameters.add(new BasicNameValuePair("tomorrow", tomorrow));
+
+        return dp.performRequest(parameters, 
+        		"http://virtualdiscoverycenter.net/login/PHP/submitEDaily.php",
+        		"POST");
     }
     
     /* Retrieves user's name */
@@ -156,53 +177,18 @@ public class eDaily extends Activity implements View.OnClickListener{
             return null;
     	}
     	
-    	// Read the file, parse the string, and set the correct views
-    	return readTextfromFile(namepath.toString());
+    	// Returns text from the file
+    	return dp.readTextfromFile(namepath.toString());
     }
     
-    /* Takes in a file path name and returns the text
-     *  read in from that file 
-     */
-    private String readTextfromFile(String path)
-    {
-    	File edailyfile = new File(path);	// create the file
-        FileInputStream instream;			// input stream to read file
-        InputStreamReader instreamread; 	// reader for stream
-        BufferedReader buf;					// buffer for reader
-        
-        String lineofdata = "";				// a line of the file
-        String data = "";					// will contain complete string
-       
-        try 
-        {
-        	// Begin creating the instream buffer
-            instream = new FileInputStream(edailyfile);
-            instreamread = new InputStreamReader (instream);
-            buf = new BufferedReader(instreamread);
-            
-            try
-            {
-            	// Read the line until end of file and add to data
-                while((lineofdata = buf.readLine()) != null)
-                    data += lineofdata + "\n";
-            }
-            catch(IOException e)
-            { e.printStackTrace(); }
-            
-        }
-        catch(FileNotFoundException e)
-        { e.printStackTrace(); }
-        
-        // Return final result
-        return data;
-    }
+
     
     
     /* Return today's date in string format MM.dd.yyyy */
     private String getDateToday()
     {
     	// Create the format and calendar instance
-    	SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMM dd, yyyy");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     	Calendar cal = Calendar.getInstance();
     	
     	// Set the format and return
