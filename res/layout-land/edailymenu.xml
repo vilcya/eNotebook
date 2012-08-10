@@ -63,6 +63,15 @@
                 android:background="@drawable/b_back"
                 android:textSize="18dp"
                 android:typeface="serif" />
+            
+             <Button
+                android:id="@+id/bRefresh"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/b_add"
+                android:textSize="18dp"
+                android:typeface="serif" />
 
         </LinearLayout>
 
