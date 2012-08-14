@@ -1,3 +1,10 @@
+/* TwoFiftySevenMenu.java
+ * 
+ * Activity for displaying 257's - grabs
+ *  thumbnail and title from the webpage
+ * 
+ */
+
 package com.eNotebook.SATE2012;
 
 import java.io.BufferedReader;
@@ -63,6 +70,7 @@ public class TwoFiftySevenMenu extends Activity implements View.OnClickListener{
 		addLink.setOnClickListener(this);
 		back.setOnClickListener(this);
 		
+		// Check for wifi connection
 		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 

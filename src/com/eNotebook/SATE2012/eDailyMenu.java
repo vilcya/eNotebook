@@ -43,6 +43,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     // List of all the edaily text files
     String[] edailytextpaths = {};
     
+    // For data passing between database-app and internal storage-app
     DataPassing dp = new DataPassing();
     
     Toast errormessage;
@@ -164,6 +165,7 @@ public class eDailyMenu extends Activity implements View.OnClickListener{
     	
     	else
     	{
+    		// Check if wifi is connected
     		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
     		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
     		

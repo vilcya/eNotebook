@@ -1,3 +1,10 @@
+/* TwoFiftySevenAdd.java 
+ *
+ * Activity for adding a new 257 url - user
+ *  inputs the ID.
+ * 
+ */
+
 package com.eNotebook.SATE2012;
 
 import java.io.File;
@@ -32,16 +39,13 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
 
     /* Assign layout objects to respective variables  */
     private void assignedObjects() {
-        
         // Navigation
         add = (Button) findViewById(R.id.bAddLink257);
         link = (EditText) findViewById(R.id.etAddLink);
     }
     
-    
     /* Triggered when user clicks a view */
     public void onClick(View view) {
-    	// Checks which button was clicked
 
         try
         {
@@ -62,6 +66,7 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
 	        File urlpath = new File(getFilesDir(), "TwoFiftySeven");
 	        if (!urlpath.exists())
 	        	urlpath.mkdir();
+	        
         	// Create a new file for the new eDaily
             File newtext = new File(urlpath, newid);
             try 
@@ -69,8 +74,8 @@ public class TwoFiftySevenAdd extends Activity implements View.OnClickListener{
             catch(IOException e) 
             { e.printStackTrace(); }
             
+            // Go back to the menu
             Intent ourIntent = new Intent("com.eNotebook.SATE2012." + "TWOFIFTYSEVENMENU");
-	        //ourIntent.putExtra("videoID", newid);
             startActivity(ourIntent);
         }
         catch (Exception e)

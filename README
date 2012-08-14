@@ -2,5 +2,19 @@
  by Maulik Patel and Vilcya Wirantana
  
  Organizes a student's eDailies, eTecnotes, and 257's. 
- The student can create a new eDaily and browse their old ones,
- as well as e-mail the eDaily within the application.
+ The student can create a new eDaily and browse their old ones using
+ the server database as a middle-man. 
+ 
+ 
+ TO DO LIST: 
+ High Priority:
+ - Threading or AsyncTask for loading pages 
+ 	- Especially when connecting to the internet (257's, downloading eDailies, etc.)
+ - Finish eTecNotes - figure out how to pass PDF and display them
+ - Database Interaction for 257's
+ 
+ Low Priority:
+ - Finish or delete the Splash page
+ 
+ 
+ 

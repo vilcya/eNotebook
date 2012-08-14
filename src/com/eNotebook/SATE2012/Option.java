@@ -134,6 +134,7 @@ public class Option extends Activity implements View.OnClickListener {
     	// If submit is pressed 
     	else
     	{
+    		// Check for wifi connection
     		String url = "http://virtualdiscoverycenter.net/login/PHP/login.php";
     		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
     		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -150,7 +151,8 @@ public class Option extends Activity implements View.OnClickListener {
     	}
 	}
     
-    
+    /* Function that retrieves data from the database and downloads
+     *  all user data. */
     public void serverInteraction()
     {
     	// Gets the new names
@@ -176,10 +178,12 @@ public class Option extends Activity implements View.OnClickListener {
         parameters.add(new BasicNameValuePair("last_name", lname));
         parameters.add(new BasicNameValuePair("password", pwd));
                 
+        // Performs POST
         String finalresult = dp.performRequest(parameters, 
         			"http://virtualdiscoverycenter.net/login/PHP/login.php",
         			"POST");
         
+        // Check the returned message to make sure no errors are encountered 
         if (finalresult.contains("false"))
         {
         	errormessage = Toast.makeText(getApplicationContext(), "Login failed, please try again.", Toast.LENGTH_LONG);
@@ -196,20 +200,20 @@ public class Option extends Activity implements View.OnClickListener {
 	        if (!textpath.exists())
 	            textpath.mkdir();
 	        
+	        // Downloads all eDailies - function in dp class because it is called multiple times
         	dp.downloadEDaily(textpath, fullname);
         	errormessage = Toast.makeText(Menu.getContext(), "Login succesful!", Toast.LENGTH_LONG);
         	errormessage.show();
         }
         
-        // Start the preview activity
+        // Starts menu activity (if there is an error, the program will go back to option)
         Intent previewIntent = new Intent("com.eNotebook.SATE2012." + "MENU");
         startActivity(previewIntent);
     }
 
-    
+    /* Saves "fullname" in the correct directory/file */
     public void saveName(String fullname)
     {
-    		
 		File textpath = new File(getFilesDir(), "UserInformation");
         if (!textpath.exists())
             textpath.mkdir();

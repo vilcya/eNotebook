@@ -1,3 +1,10 @@
+/* NewUser.java
+ * 
+ * Class for creating an account -
+ *  Connected to database, and performs a POST
+ *  request to PHP script online.
+ * */
+
 package com.eNotebook.SATE2012;
 
 import java.util.ArrayList;
@@ -43,21 +50,23 @@ public class NewUser extends Activity implements View.OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.newuser);
 	
+		// Assign globals 
 		assignObjects();
 		
-		teamSpinnerAdaptor();
-		leadSpinnerAdaptor();
+		// For Drop downs
+		teamSpinnerAdapter();
+		leadSpinnerAdapter();
 		
 		create.setOnClickListener(this);
-		
 	}
 	
 	
-	private void teamSpinnerAdaptor() {
-		// TODO Auto-generated method stub
+	/* Adapter for Team name drop down - grabs from database */
+	private void teamSpinnerAdapter() {
 		
 		List<String> teamlist = new ArrayList<String>();
 		
+		// Performs the GET request for grabbing team names
 		String finalresult = dp.performRequest(null, 
 				"http://virtualdiscoverycenter.net/login/PHP/getTeams.php", 
 				"GET");
@@ -73,7 +82,7 @@ public class NewUser extends Activity implements View.OnClickListener{
 	        	
 		        for(int j=0; j<jarray.length(); j++)
 		        {
-		        	
+		        	// Add JSON object to displayed spinner
 		        	JSONObject jsondata = jarray.getJSONObject(j);
 		        	teamlist.add(jsondata.getString("team_name"));
 		        }
@@ -85,17 +94,21 @@ public class NewUser extends Activity implements View.OnClickListener{
     		e.printStackTrace(); 
     	}
 		
+    	// Set spinner adapter
 		ArrayAdapter<String> teamAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, teamlist);
 		teamAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		team.setAdapter(teamAdapter);
 		
 	}
 
-	private void leadSpinnerAdaptor() {
+	/* Adapter for yes/no spinner for checking team lead status */
+	private void leadSpinnerAdapter() {
 		List<String> leadlist = new ArrayList<String>();
+		// Add choices in
 		leadlist.add("No");
 		leadlist.add("Yes");
 		
+		// Set adapter
 		ArrayAdapter<String> leadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leadlist);
 		leadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		lead.setAdapter(leadAdapter);
@@ -106,20 +119,23 @@ public class NewUser extends Activity implements View.OnClickListener{
 	protected void assignObjects()
 	{
 		create = (Button) findViewById(R.id.bCreateAcc);
+		
 		firstname = (EditText) findViewById(R.id.etCFirstName);
 		lastname = (EditText) findViewById(R.id.etCLastName);
 		password = (EditText) findViewById(R.id.etCPassword);
 		passwordCon = (EditText) findViewById(R.id.etCPasswordCon);
+		
 		lead = (Spinner) findViewById(R.id.dbLead);
 		team = (Spinner) findViewById(R.id.dbTeam);
 		
 	}
 
+	/* Function to perform a POST request for creating a new account */
 	public void createAccount()
 	{
 		String finalresult = "", lname, fname, pwd, pwdcon, teamname, leadstat;
 		
-    	// Gets the new names
+    	// Retrieves the inputted text
     	lname = lastname.getText().toString();
     	fname = firstname.getText().toString();
     	pwd = password.getText().toString();
@@ -131,7 +147,7 @@ public class NewUser extends Activity implements View.OnClickListener{
         if (lname.length() == 0 || fname.length() == 0 || pwd.length() == 0 || pwdcon.length() == 0)
         {
         	errormessage = Toast.makeText(getApplicationContext(),
-    				"One or more fields are blank. Please provide your information.", 
+    				"One or more mandatory fields are blank. Please provide your information.", 
     				Toast.LENGTH_LONG);
         	errormessage.show();
         	return;
@@ -198,7 +214,10 @@ public class NewUser extends Activity implements View.OnClickListener{
         }
 	}
 	
+	/* Called when a button is clicked - in this case, when "Create Account" is pressed */ 
 	 public void onClick(View v){ 
+
+		// Check the wifi connection
 		String url = "http://virtualdiscoverycenter.net/login/PHP/createAccount.php";
  		ConnectivityManager connection = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
  		NetworkInfo wifi = connection.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

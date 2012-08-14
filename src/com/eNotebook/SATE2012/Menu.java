@@ -29,6 +29,7 @@ public class Menu extends Activity implements View.OnClickListener{
     Button twofiftyseven;
     Button option;
     
+    // To create a Menu context for passing across activities
     private static Menu instance;
     
     public Menu ()

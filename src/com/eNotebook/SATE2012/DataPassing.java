@@ -35,10 +35,9 @@ import android.util.Log;
 
 public class DataPassing{
 
-	// Constructor to initialize new instance
+	// Dummy Constructor to initialize new instance
 	public DataPassing()
 	{}
-	
 	
 	/* HTTP DATA PASSING */	
 	

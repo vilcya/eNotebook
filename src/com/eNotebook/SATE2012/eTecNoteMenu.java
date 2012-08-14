@@ -1,3 +1,11 @@
+/* eTecNoteMenu.java
+ *  
+ *  Not implemented yet - Created for browsing eTecNotes.
+ *  Idea is to pull eTecNotes from the database (pdf or text),
+ *  and allow for browsing. 
+ *  
+ */
+
 package com.eNotebook.SATE2012;
 
 import android.app.Activity;

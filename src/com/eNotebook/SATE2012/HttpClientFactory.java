@@ -18,6 +18,7 @@ public class HttpClientFactory {
 	
 	private static DefaultHttpClient client;
 	
+	// Checks if the client is already set - if not, then create a new one
 	public synchronized static DefaultHttpClient getThreadSafeClient()
 	{
 		
@@ -34,6 +35,7 @@ public class HttpClientFactory {
 		return client;
 	}
 	
+	// Called when we want to initialize a user
 	public synchronized static void resetClient()
 	{
 		client = null;
