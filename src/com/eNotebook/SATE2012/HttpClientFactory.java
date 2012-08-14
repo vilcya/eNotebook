@@ -34,5 +34,10 @@ public class HttpClientFactory {
 		return client;
 	}
 	
+	public synchronized static void resetClient()
+	{
+		client = null;
+	}
+	
 
 }

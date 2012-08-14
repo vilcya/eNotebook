@@ -120,7 +120,7 @@ public class Option extends Activity implements View.OnClickListener {
     		dp.deleteFiles(new File(getFilesDir(),"UserInformation"));
     		dp.deleteFiles(new File(getFilesDir(),"Text"));
     		dp.deleteFiles(new File(getFilesDir(),"TwoFiftySeven"));
-    		
+    		HttpClientFactory.resetClient();
     		Intent backIntent = new Intent("com.eNotebook.SATE2012." + "OPTION");
             startActivity(backIntent);
     	}
