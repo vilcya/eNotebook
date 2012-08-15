@@ -14,7 +14,10 @@
  - Database Interaction for 257's
  
  Low Priority:
+ - Currently, as a quick fix, the user is logged out when the Splash page starts 
+ 	(Fix this to make the user log out when the entire application is closed)
  - Finish or delete the Splash page
+ 
  
  
  

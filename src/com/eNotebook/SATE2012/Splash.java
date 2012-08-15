@@ -6,6 +6,8 @@
 
 package com.eNotebook.SATE2012;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Intent;
 //import android.media.MediaPlayer;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 
 public class Splash extends Activity {
 	
+	DataPassing dp = new DataPassing();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -25,6 +28,10 @@ public class Splash extends Activity {
 			public void run(){
 				try{
 					sleep(1000);
+					dp.deleteFiles(new File(getFilesDir(),"UserInformation"));
+		    		dp.deleteFiles(new File(getFilesDir(),"Text"));
+		    		dp.deleteFiles(new File(getFilesDir(),"TwoFiftySeven"));
+		    		HttpClientFactory.resetClient();
 				} 
 				catch (InterruptedException e){	
 					e.printStackTrace();
@@ -42,7 +49,6 @@ public class Splash extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		//ourSong.release();
 		finish();
